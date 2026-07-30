@@ -1,0 +1,12 @@
+{
+  "name": "bkm-industries-limited",
+  "version": "1.0.0",
+  "description": "BKM Industries Limited Website",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx serve ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
