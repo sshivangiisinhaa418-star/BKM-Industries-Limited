@@ -2133,4 +2133,302 @@ section {
     }
 }
 
+/* ==========================================================================
+   LEADERSHIP & GOVERNANCE STYLES
+   ========================================================================== */
+
+/* --- THREE-TIER GOVERNANCE FRAMEWORK --- */
+.governance-framework-section {
+    padding: 80px 0;
+    background-color: var(--light-bg);
+}
+
+.tier-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.tier-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    background-color: var(--white);
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+}
+
+.tier-num {
+    background-color: rgba(19, 101, 196, 0.1);
+    color: var(--secondary-color);
+    font-weight: 800;
+    font-size: 1.2rem;
+    width: 46px;
+    height: 46px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.tier-content h3 {
+    font-size: 1.15rem;
+    color: var(--primary-color);
+    margin-bottom: 4px;
+}
+
+.tier-content p {
+    color: var(--muted-text);
+    font-size: 0.92rem;
+    line-height: 1.5;
+}
+
+.governance-card-box {
+    background: linear-gradient(135deg, var(--primary-color), #1b1b5e);
+    color: var(--white);
+    padding: 50px 40px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.governance-icon {
+    font-size: 3rem;
+    color: var(--accent-color);
+    margin-bottom: 20px;
+}
+
+.governance-card-box h3 {
+    font-size: 1.8rem;
+    color: var(--white);
+    margin-bottom: 14px;
+}
+
+.governance-card-box p {
+    color: rgba(255, 255, 255, 0.88);
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+/* --- LEADERSHIP TABS & GRID --- */
+.leadership-grid-section {
+    padding: 90px 0;
+    background-color: var(--white);
+}
+
+.leadership-tabs-wrapper {
+    margin-bottom: 50px;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+}
+
+.leadership-tab-btn {
+    background-color: var(--light-bg);
+    color: var(--primary-color);
+    border: 1px solid var(--border-color);
+    padding: 14px 32px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.leadership-tab-btn.active, .leadership-tab-btn:hover {
+    background-color: var(--primary-color);
+    color: var(--white);
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow-md);
+}
+
+.leadership-tab-content {
+    display: none;
+}
+
+.leadership-tab-content.active {
+    display: block;
+}
+
+.executive-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.exec-card {
+    background-color: var(--white);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.exec-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--secondary-color);
+}
+
+.exec-img-box {
+    height: 280px;
+    overflow: hidden;
+    background-color: var(--light-bg);
+}
+
+.exec-img-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition-smooth);
+}
+
+.exec-card:hover .exec-img-box img {
+    transform: scale(1.06);
+}
+
+.exec-details {
+    padding: 24px;
+}
+
+.exec-details h3 {
+    font-size: 1.25rem;
+    color: var(--primary-color);
+    margin-bottom: 4px;
+}
+
+.exec-details p {
+    color: var(--secondary-color);
+    font-weight: 600;
+    font-size: 0.92rem;
+    margin-bottom: 14px;
+}
+
+.bio-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    color: var(--muted-text);
+    font-weight: 600;
+    transition: var(--transition-fast);
+}
+
+.exec-card:hover .bio-link {
+    color: var(--secondary-color);
+}
+
+/* --- BIOGRAPHY MODAL --- */
+.bio-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+    align-items: center;
+    justify-content: center;
+}
+
+.bio-modal.open {
+    display: flex;
+}
+
+.bio-modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(13, 13, 57, 0.7);
+    backdrop-filter: blur(6px);
+}
+
+.bio-modal-content {
+    position: relative;
+    background-color: var(--white);
+    width: 90%;
+    max-width: 550px;
+    border-radius: 12px;
+    padding: 35px;
+    box-shadow: var(--shadow-lg);
+    z-index: 10001;
+    animation: modalPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes modalPop {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.bio-modal-close {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    background-color: var(--light-bg);
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.1rem;
+    color: var(--primary-color);
+    transition: var(--transition-fast);
+}
+
+.bio-modal-close:hover {
+    background-color: var(--secondary-color);
+    color: var(--white);
+}
+
+.modal-exec-img {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.modal-exec-role {
+    color: var(--secondary-color);
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.modal-exec-bio {
+    color: var(--muted-text);
+    line-height: 1.7;
+    font-size: 0.98rem;
+}
+
+/* --- RESPONSIVE ADJUSTMENTS FOR LEADERSHIP --- */
+@media (max-width: 992px) {
+    .executive-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .executive-grid {
+        grid-template-columns: 1fr;
+    }
+    .leadership-tabs-wrapper {
+        flex-direction: column;
+    }
+}
+
+
 
