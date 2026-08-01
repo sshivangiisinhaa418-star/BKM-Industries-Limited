@@ -2573,6 +2573,185 @@ section {
     }
 }
 
+/* ==========================================================================
+   SIMPLE DROPDOWN MENU FOR OUR BUSINESSES
+   ========================================================================== */
+.dropdown-grid-simple {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 10px 5px;
+    min-width: 220px;
+}
+
+.dropdown-grid-simple a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.98rem;
+    font-weight: 600;
+    color: var(--primary-color) !important;
+    padding: 10px 16px;
+    border-radius: 6px;
+    transition: var(--transition-fast);
+}
+
+.dropdown-grid-simple a i {
+    color: var(--secondary-color);
+    font-size: 1.1rem;
+    width: 20px;
+    text-align: center;
+}
+
+.dropdown-grid-simple a:hover {
+    background-color: var(--light-bg);
+    color: var(--secondary-color) !important;
+    transform: translateX(4px);
+}
+
+/* ==========================================================================
+   BUSINESSES OVERVIEW PAGE STYLES
+   ========================================================================== */
+.biz-highlights-section {
+    padding: 60px 0;
+    background-color: var(--white);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.biz-metric-card {
+    padding: 20px;
+}
+
+.biz-metric-num {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--secondary-color);
+    margin-bottom: 6px;
+    font-family: var(--font-heading);
+}
+
+.biz-metric-label {
+    color: var(--muted-text);
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.biz-portfolio-section {
+    padding: 90px 0;
+    background-color: var(--light-bg);
+}
+
+.biz-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 45px;
+}
+
+.biz-card {
+    background-color: var(--white);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    transition: var(--transition-smooth);
+}
+
+.biz-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--secondary-color);
+}
+
+.biz-card-img-box {
+    position: relative;
+    height: 220px;
+    overflow: hidden;
+}
+
+.biz-card-img-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition-smooth);
+}
+
+.biz-card:hover .biz-card-img-box img {
+    transform: scale(1.06);
+}
+
+.biz-badge {
+    position: absolute;
+    top: 18px;
+    left: 18px;
+    background-color: var(--primary-color);
+    color: var(--white);
+    font-size: 0.78rem;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 50px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.biz-card-body {
+    padding: 30px 24px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.biz-card-body h3 {
+    font-size: 1.35rem;
+    color: var(--primary-color);
+    margin-bottom: 12px;
+}
+
+.biz-card-body p {
+    color: var(--muted-text);
+    font-size: 0.94rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.biz-feature-list {
+    margin-bottom: 25px;
+    margin-top: auto;
+}
+
+.biz-feature-list li {
+    font-size: 0.88rem;
+    color: var(--primary-color);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.biz-feature-list li i {
+    color: var(--accent-color);
+}
+
+.biz-detail-content {
+    padding: 90px 0;
+    background-color: var(--white);
+}
+
+@media (max-width: 992px) {
+    .biz-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .biz-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
 
 
 
