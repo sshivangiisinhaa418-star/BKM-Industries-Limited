@@ -303,32 +303,33 @@ section {
 }
 
 .logo {
-    display: flex;
-    flex-direction: column;
+    display: inline-flex;
+    align-items: center;
 }
 
-.logo-bold {
-    font-family: var(--font-heading);
-    font-weight: 850;
-    font-size: 1.8rem;
-    color: var(--primary-color);
-    letter-spacing: -1px;
+.logo-img {
+    height: 52px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    transition: var(--transition-fast);
 }
 
-.logo-light {
-    font-family: var(--font-heading);
-    font-weight: 300;
-    font-size: 1.4rem;
-    color: var(--secondary-color);
-    margin-top: -10px;
+.logo:hover .logo-img {
+    transform: scale(1.02);
 }
 
-.logo-tagline {
-    font-size: 0.55rem;
-    letter-spacing: 5px;
-    color: var(--accent-color);
-    font-weight: 750;
-    margin-top: -2px;
+.footer-logo {
+    display: inline-block;
+    background-color: var(--white);
+    padding: 6px 14px;
+    border-radius: 8px;
+    margin-bottom: 18px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.footer-logo .logo-img {
+    height: 42px;
 }
 
 /* --- NAVIGATION MENU --- */
