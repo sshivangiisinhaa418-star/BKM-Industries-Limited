@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investor Relations | BKM Industries Limited</title>
+    <meta name="description" content="BKM Industries Limited Investor Relations - Annual Reports, Quarterly Financial Results, Corporate Governance, Shareholder Information & SEBI Filings.">
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts & Font Awesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Investor Page Custom Styling */
+        .ir-sub-header {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 14px 0;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        .ir-sh-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .ir-sh-title h2 {
+            color: var(--white);
+            font-size: 1.3rem;
+            margin: 0;
+        }
+        .ir-sh-menu {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+        }
+        .ir-sh-menu a {
+            color: rgba(255,255,255,0.8);
+            font-size: 0.9rem;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+        .ir-sh-menu a:hover, .ir-sh-menu a.active {
+            color: var(--accent-color);
+        }
+
+        .pdf-quick-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .pdf-card {
+            background: var(--light-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition-smooth);
+        }
+        .pdf-card:hover {
+            border-color: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+        .pdf-card-title {
+            font-weight: 600;
+            color: var(--primary-color);
+            font-size: 0.95rem;
+        }
+        .pdf-icon-btn {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(19, 101, 196, 0.1);
+            color: var(--secondary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            transition: var(--transition-fast);
+        }
+        .pdf-card:hover .pdf-icon-btn {
+            background-color: var(--secondary-color);
+            color: var(--white);
+        }
+
+        /* Investment Case Grid */
+        .ic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+        }
+        .ic-card {
+            background: var(--white);
+            border-radius: 10px;
+            padding: 28px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            display: flex;
+            gap: 20px;
+            transition: var(--transition-smooth);
+        }
+        .ic-card:hover {
+            border-color: var(--secondary-color);
+            box-shadow: var(--shadow-md);
+        }
+        .ic-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(19, 101, 196, 0.08);
+            color: var(--secondary-color);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            flex-shrink: 0;
+        }
+        .ic-card h3 {
+            font-size: 1.05rem;
+            margin-bottom: 8px;
+            color: var(--primary-color);
+        }
+        .ic-card p {
+            font-size: 0.9rem;
+            color: var(--muted-text);
+            line-height: 1.5;
+        }
+
+        /* Filter Tabs & Controls */
+        .ir-filter-section {
+            background: var(--light-bg);
+            border-radius: 12px;
+            padding: 35px;
+            border: 1px solid var(--border-color);
+            margin-top: 30px;
+        }
+        .ir-controls-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 20px;
+        }
+        .year-select-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .year-select-box label {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--primary-color);
+        }
+        .select-custom {
+            padding: 10px 18px;
+            font-family: var(--font-primary);
+            font-weight: 600;
+            font-size: 0.95rem;
+            border-radius: 6px;
+            border: 2px solid var(--secondary-color);
+            background: var(--white);
+            color: var(--primary-color);
+            cursor: pointer;
+            outline: none;
+        }
+
+        .tab-buttons-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .tab-btn {
+            padding: 10px 22px;
+            font-family: var(--font-heading);
+            font-weight: 600;
+            font-size: 0.9rem;
+            border-radius: 6px;
+            background: var(--white);
+            border: 1px solid var(--border-color);
+            color: var(--muted-text);
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+        .tab-btn.active, .tab-btn:hover {
+            background: var(--secondary-color);
+            color: var(--white);
+            border-color: var(--secondary-color);
+        }
+
+        .quarter-btns-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+        .q-btn {
+            padding: 6px 18px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            border-radius: 20px;
+            background: var(--white);
+            border: 1px solid var(--border-color);
+            color: var(--primary-color);
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+        .q-btn.active, .q-btn:hover {
+            background: var(--primary-color);
+            color: var(--white);
+            border-color: var(--primary-color);
+        }
+
+        /* Download Tables */
+        .ir-data-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        .ir-data-table th {
+            background-color: var(--primary-color);
+            color: var(--white);
+            text-align: left;
+            padding: 14px 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        .ir-data-table td {
+            padding: 16px 20px;
+            border-bottom: 1px solid #edf2f7;
+            font-size: 0.9rem;
+            color: var(--dark-text);
+        }
+        .ir-data-table tr:hover {
+            background-color: #f8fafc;
+        }
+        .btn-pdf-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 16px;
+            background: #eef6ff;
+            color: var(--secondary-color);
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            border: 1px solid rgba(19, 101, 196, 0.2);
+            transition: var(--transition-fast);
+        }
+        .btn-pdf-download:hover {
+            background: var(--secondary-color);
+            color: var(--white);
+        }
+
+        /* Contact & Share Transfer Box */
+        .contact-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        .contact-info-card {
+            background: var(--light-bg);
+            border-radius: 10px;
+            padding: 30px;
+            border-left: 4px solid var(--secondary-color);
+        }
+        .contact-info-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        .contact-info-card p {
+            font-size: 0.9rem;
+            color: var(--muted-text);
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TOP BAR -->
+    <div class="top-bar">
+        <div class="container top-bar-container">
+            <div class="stock-ticker">
+                <span class="ticker-label">NSE: BKMIND</span>
+                <span class="ticker-price">₹12.45 <i class="fas fa-caret-up"></i> (+1.8%)</span>
+                <span class="ticker-sep">|</span>
+                <span class="ticker-label">BSE: 539097</span>
+                <span class="ticker-price">₹12.40 <i class="fas fa-caret-up"></i> (+1.5%)</span>
+            </div>
+            <div class="top-nav-links">
+                <a href="investors.html">Investors</a>
+                <a href="index.html#media">Media</a>
+                <a href="index.html#contact">Contact</a>
+                <div class="lang-selector">
+                    <i class="fas fa-globe"></i> English <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN HEADER -->
+    <header class="main-header">
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <img src="assets/logo.png" alt="BKM Industries Limited" class="logo-img">
+            </a>
+            
+            <nav class="nav-menu" id="navMenu">
+                <ul>
+                    <li class="dropdown">
+                        <a href="about.html" class="nav-link">Who We Are <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-content">
+                            <div class="dropdown-grid">
+                                <div>
+                                    <h4>WHO WE ARE</h4>
+                                    <a href="about.html">About Us</a>
+                                    <a href="founders-journey.html">Our Journey & History</a>
+                                </div>
+                                <div>
+                                    <h4>GOVERNANCE & ACCOLADES</h4>
+                                    <a href="leadership.html">Leadership</a>
+                                    <a href="awards-recognition.html">Awards & Recognition</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="businesses-overview.html" class="nav-link">Our Businesses <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-content">
+                            <div class="dropdown-grid">
+                                <div>
+                                    <h4>OUR BUSINESSES</h4>
+                                    <a href="businesses-overview.html">Overview</a>
+                                    <a href="tin-cans.html">Tin Cans</a>
+                                </div>
+                                <div>
+                                    <h4>SPECIALTY CLOSURES</h4>
+                                    <a href="ropp-closures.html">ROPP Caps</a>
+                                    <a href="crown-caps.html">Metal Crown Caps</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li><a href="index.html#esg" class="nav-link">ESG & Sustainability</a></li>
+                    <li><a href="investors.html" class="nav-link active">Investors</a></li>
+                    <li><a href="index.html#careers" class="nav-link">Careers</a></li>
+                    <li><a href="index.html#media" class="nav-link">Media</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-right">
+                <a href="index.html#contact" class="btn btn-primary btn-header">Get In Touch</a>
+                <button class="mobile-toggle" id="mobileToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- SUB-HEADER NAVIGATION FOR INVESTOR RELATIONS -->
+    <div class="ir-sub-header">
+        <div class="container">
+            <div class="ir-sh-flex">
+                <div class="ir-sh-title">
+                    <h2>Investor Relations</h2>
+                </div>
+                <div class="ir-sh-menu">
+                    <a href="investors.html" class="active">Overview</a>
+                    <a href="#resultsReports">Results & Reports</a>
+                    <a href="#investmentCase">Investment Case</a>
+                    <a href="#governance">Corporate Governance</a>
+                    <a href="#shareholderServices">Shareholder Services</a>
+                    <a href="#investorContact">IR Contact</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BREADCRUMB SECTION -->
+    <div class="breadcrumb-section">
+        <div class="container">
+            <div class="breadcrumb-links">
+                <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                <i class="fas fa-chevron-right breadcrumb-separator"></i>
+                <a href="investors.html">Investor Relations</a>
+                <i class="fas fa-chevron-right breadcrumb-separator"></i>
+                <span class="active">Overview</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- HERO OVERVIEW SECTION -->
+    <section class="about-hero-info">
+        <div class="container">
+            <div class="about-head-content">
+                <span class="about-pill">FINANCIAL & OPERATIONAL DISCLOSURES</span>
+                <h1 class="about-main-title">Delivering Sustainable Value for Our Shareholders</h1>
+                <p class="about-lead-text">
+                    BKM Industries Limited is committed to maintaining high standards of corporate governance, transparent financial reporting, and disciplined capital allocation to create long-term value for all stakeholders.
+                </p>
+
+                <!-- QUICK PDF DOWNLOAD CARDS -->
+                <div class="pdf-quick-grid">
+                    <a href="assets/pdf_placeholder.pdf" target="_blank" download class="pdf-card">
+                        <div>
+                            <div class="pdf-card-title">Earnings Presentation Q4 FY26</div>
+                            <small style="color: var(--muted-text);">PDF Download | Financial Performance</small>
+                        </div>
+                        <div class="pdf-icon-btn"><i class="fas fa-file-pdf"></i></div>
+                    </a>
+                    <a href="assets/pdf_placeholder.pdf" target="_blank" download class="pdf-card">
+                        <div>
+                            <div class="pdf-card-title">Integrated Annual Report FY26</div>
+                            <small style="color: var(--muted-text);">PDF Download | Complete Report & Audited Accounts</small>
+                        </div>
+                        <div class="pdf-icon-btn"><i class="fas fa-file-pdf"></i></div>
+                    </a>
+                    <a href="assets/pdf_placeholder.pdf" target="_blank" download class="pdf-card">
+                        <div>
+                            <div class="pdf-card-title">Sustainability Report FY26</div>
+                            <small style="color: var(--muted-text);">PDF Download | ESG & Governance Performance</small>
+                        </div>
+                        <div class="pdf-icon-btn"><i class="fas fa-file-pdf"></i></div>
+                    </a>
+                    <a href="assets/pdf_placeholder.pdf" target="_blank" download class="pdf-card">
+                        <div>
+                            <div class="pdf-card-title">Shareholder Notice & Proxy Form</div>
+                            <small style="color: var(--muted-text);">PDF Download | Annual General Meeting</small>
+                        </div>
+                        <div class="pdf-icon-btn"><i class="fas fa-file-pdf"></i></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FULL-WIDTH HERO BANNER -->
+    <section class="about-banner-container">
+        <img src="assets/leadership_banner.png" alt="BKM Industries Investor Relations" class="about-hero-img">
+    </section>
+
+    <!-- INVESTMENT CASE SECTION -->
+    <section class="biz-portfolio-section" id="investmentCase">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-subtitle">STRATEGIC VALUE CREATION</span>
+                <h2 class="section-title">Investment Case</h2>
+                <p class="section-desc">BKM Industries Limited is uniquely positioned with an extensive metal packaging manufacturing footprint, robust balance sheet, and strong customer partnerships.</p>
+            </div>
+
+            <div class="ic-grid">
+                <div class="ic-card">
+                    <div class="ic-icon"><i class="fas fa-industry"></i></div>
+                    <div>
+                        <h3>World-Class Manufacturing Footprint</h3>
+                        <p>High-speed automated production lines delivering 2.5 Billion+ closures and general line packaging containers annually across India.</p>
+                    </div>
+                </div>
+
+                <div class="ic-card">
+                    <div class="ic-icon"><i class="fas fa-chart-line"></i></div>
+                    <div>
+                        <h3>Market Leadership in FMCG & Alcobev</h3>
+                        <p>Preferred packaging supplier to top Fortune 500 paint, chemical, pharmaceutical, and beverage brand leaders.</p>
+                    </div>
+                </div>
+
+                <div class="ic-card">
+                    <div class="ic-icon"><i class="fas fa-cogs"></i></div>
+                    <div>
+                        <h3>Operational Excellence & Technology</h3>
+                        <p>Advanced double-seam technology, 6-color metal offset printing, and zero-defect quality control protocols.</p>
+                    </div>
+                </div>
+
+                <div class="ic-card">
+                    <div class="ic-icon"><i class="fas fa-coins"></i></div>
+                    <div>
+                        <h3>Disciplined Capital Allocation</h3>
+                        <p>Strong capital framework focusing on high ROCE investments, balance sheet strength, and consistent shareholder returns.</p>
+                    </div>
+                </div>
+
+                <div class="ic-card">
+                    <div class="ic-icon"><i class="fas fa-shield-alt"></i></div>
+                    <div>
+                        <h3>Robust Corporate Governance</h3>
+                        <p>Experienced independent board oversight, comprehensive audit mechanisms, and strict SEBI & regulatory compliance.</p>
+                    </div>
+                </div>
+
+                <div class="ic-card">
+                    <div class="ic-icon"><i class="fas fa-leaf"></i></div>
+                    <div>
+                        <h3>ESG Leadership & Sustainability</h3>
+                        <p>100% recyclable tinplate and aluminum packaging solutions driving green circular economy initiatives.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RESULTS & REPORTS INTERACTIVE SECTION (VEDANTA FORMAT) -->
+    <section class="biz-highlights-section" id="resultsReports" style="background-color: var(--white);">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-subtitle">FINANCIAL FILINGS & DISCLOSURES</span>
+                <h2 class="section-title">Results and Reports</h2>
+                <p class="section-desc">Access financial statements, annual reports, subsidiary accounts, shareholder forms, and regulatory announcements by financial year.</p>
+            </div>
+
+            <div class="ir-filter-section">
+                <!-- CONTROLS BAR: YEAR SELECTOR AND TABS -->
+                <div class="ir-controls-bar">
+                    <div class="year-select-box">
+                        <label for="yearFilter"><i class="fas fa-calendar-alt" style="color: var(--secondary-color);"></i> Select Financial Year:</label>
+                        <select id="yearFilter" class="select-custom" onchange="filterReports()">
+                            <option value="FY26" selected>FY 2025 - 2026</option>
+                            <option value="FY25">FY 2024 - 2025</option>
+                            <option value="FY24">FY 2023 - 2024</option>
+                            <option value="FY23">FY 2022 - 2023</option>
+                            <option value="FY22">FY 2021 - 2022</option>
+                        </select>
+                    </div>
+
+                    <div class="tab-buttons-row">
+                        <button class="tab-btn active" onclick="switchTab('financial-results', this)">Financial Results</button>
+                        <button class="tab-btn" onclick="switchTab('annual-reports', this)">Annual Reports</button>
+                        <button class="tab-btn" onclick="switchTab('governance-filings', this)">Governance & Shareholder Forms</button>
+                    </div>
+                </div>
+
+                <!-- TAB 1: FINANCIAL RESULTS -->
+                <div id="tab-financial-results" class="ir-tab-content">
+                    <div class="quarter-btns-row">
+                        <button class="q-btn active" onclick="switchQuarter('all', this)">All Quarters</button>
+                        <button class="q-btn" onclick="switchQuarter('Q4', this)">Q4 / Full Year</button>
+                        <button class="q-btn" onclick="switchQuarter('Q3', this)">Q3</button>
+                        <button class="q-btn" onclick="switchQuarter('Q2', this)">Q2</button>
+                        <button class="q-btn" onclick="switchQuarter('Q1', this)">Q1</button>
+                    </div>
+
+                    <table class="ir-data-table">
+                        <thead>
+                            <tr>
+                                <th>Document Description</th>
+                                <th>Period / Quarter</th>
+                                <th>Financial Year</th>
+                                <th>Download Format</th>
+                            </tr>
+                        </thead>
+                        <tbody id="financialResultsBody">
+                            <tr data-year="FY26" data-quarter="Q4">
+                                <td>Consolidated Audited Financial Results</td>
+                                <td>Q4 / FY26 Full Year</td>
+                                <td>FY 2025-26</td>
+                                <td><a href="assets/pdf_placeholder.pdf" download class="btn-pdf-download"><i class="fas fa-file-pdf"></i> PDF Download</a></td>
+                            </tr>
+                            <tr data-year="FY26" data-quarter="Q4">
+                                <td>Standalone Audited Financial Statements</td>
+                                <td>Q4 / FY26 Full Year</td>
+                                <td>FY 2025-26</td>
+                                <td><a href="assets/pdf_placeholder.pdf" download class="btn-pdf-download"><i class="fas fa-file-pdf"></i> PDF Download</a></td>
+                            </tr>
+                            <tr data-year="FY26" data-quarter="Q4">
+                                <td>Investor Earnings Presentation & Transcript</td>
+                                <td>Q4 / FY26 Full Year</td>
+                                <td>FY 2025-26</td>
+                                <td><a href="assets/pdf_placeholder.pdf" download class="btn-pdf-download"><i class="fas fa-file-pdf"></i> PDF Download</a></td>
+                            </tr>
+                            <tr data-year="FY26" data-quarter="Q3">
+                                <td>Unaudited Financial Results & Segment Report</td>
+                                <td>Q3 FY26</td>
+                                <td>FY 2025-26</td>
+                                <td><a href="assets/pdf_placeholder.pdf" download class="btn-pdf-download"><i class="fas fa-file-pdf"></i> PDF Download</a></td>
+                            </tr>
+                            <tr data-year="FY26" data-quarter="Q2">
+                                <td>Unaudited Financial Results & Limited Review Report</td>
+                                <td>Q2 FY26</td>
+                                <td>FY 2025-26</td>
+                                <td><a href="assets/pdf_placeholder.pdf" download class="btn-pdf-download"><i class="fas fa-file-pdf"></i> PDF Download</a></td>
+                            </tr>
+                            <tr data-year="FY26" data-quarter="Q1">
+                                <td>Unaudited Financial Results Q1</td>
+                                <td>Q1 FY26</td>
+                                <td>FY 2025-26</td>
+                                <td><a href="assets/pdf_placeholder.pdf" download class="btn-pdf-download"><i class="fas fa-file-pdf"></i> PDF Download</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- TAB 2: ANNUAL REPORTS -->
+                <div id="tab-annual-reports" class="ir-tab-content" style="display: none;">
+                    <table class="ir-data-table">
+                        <thead>
+                            <tr>
+                                <th>Report Title</th>
+                                <th>Category</th>
+                                <th>Financial Year</th>
+                                <th>Download Format</th>
+                            </tr>
+                        </thead>
+                        <tbody id="annualReportsBody">
+                            <tr data-year="FY26">
+                                <td>Integrated Annual Report & Audited Accounts 2026</td>
+                                <td>Annual Report</td>
+                                <td>FY 2025-26</td>
+                                <td><a href="assets/pdf_placeholder.pdf" download class="btn-pdf-download"><i class="fas fa-file-pdf"></i> PDF Download</a></td>
+                            </tr>
+                            <tr data-year="FY26">
+                                <td>Business Responsibility & Sustainability Report (BRSR)</td>
+                                <td>ESG Report</td>
+                                <td>FY 2025-26</td>
+                                <td><a href="assets/pdf_placeholder.pdf" download class="btn-pdf-download"><i class="fas fa-file-pdf"></i> PDF Download</a></td>
+                            </tr>
+                            <tr data-year="FY25">
+                                <td>Integrated Annual Report & Audited Accounts 2025</td>
+                                <td>Annual Report</td>
+                                <td>FY 2024-25</td>
+                                <td><a href="assets/pdf_placeholder.pdf" download class="btn-pdf-download"><i class="fas fa-file-pdf"></i> PDF Download</a></td>
+                            </tr>
+                            <tr data-year="FY24">
+                                <td>Integrated Annual Report & Financial Statements 2024</td>
+                                <td>Annual Report</td>
+                                <td>FY 2023-24</td>
+                                <td><a href="assets/pdf_placeholder.pdf" download class="btn-pdf-download"><i class="fas fa-file-pdf"></i> PDF Download</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- TAB 3: GOVERNANCE & SHAREHOLDER FORMS -->
+                <div id="tab-governance-filings" class="ir-tab-content" style="display: none;">
+                    <table class="ir-data-table">
+                        <thead>
+                            <tr>
+                                <th>Form / Document Title</th>
+                                <th>Purpose / Description</th>
+                                <th>Category</th>
+                                <th>Download Format</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Form SH-13 (Nomination Form)</td>
+                                <td>Nomination of shares by individual equity holders</td>
+                                <td>Shareholder Form</td>
+                                <td><a href="assets/pdf_placeholder.pdf" download class="btn-pdf-download"><i class="fas fa-file-pdf"></i> PDF Download</a></td>
+                            </tr>
+                            <tr>
+                                <td>Form ISR-1 (KYC Update Details)</td>
+                                <td>Updation of PAN, KYC, Bank Account & Demat details</td>
+                                <td>SEBI Mandate Form</td>
+                                <td><a href="assets/pdf_placeholder.pdf" download class="btn-pdf-download"><i class="fas fa-file-pdf"></i> PDF Download</a></td>
+                            </tr>
+                            <tr>
+                                <td>Form ISR-2 (Signature Attestation)</td>
+                                <td>Confirmation of signature by banker</td>
+                                <td>Shareholder Form</td>
+                                <td><a href="assets/pdf_placeholder.pdf" download class="btn-pdf-download"><i class="fas fa-file-pdf"></i> PDF Download</a></td>
+                            </tr>
+                            <tr>
+                                <td>Form SH-14 (Cancellation / Variation of Nomination)</td>
+                                <td>Cancellation or change of nomination details</td>
+                                <td>Shareholder Form</td>
+                                <td><a href="assets/pdf_placeholder.pdf" download class="btn-pdf-download"><i class="fas fa-file-pdf"></i> PDF Download</a></td>
+                            </tr>
+                            <tr>
+                                <td>Loss of Share Certificate Application Format</td>
+                                <td>Procedure & affidavit formats for duplicate shares issue</td>
+                                <td>Shareholder Service</td>
+                                <td><a href="assets/pdf_placeholder.pdf" download class="btn-pdf-download"><i class="fas fa-file-pdf"></i> PDF Download</a></td>
+                            </tr>
+                            <tr>
+                                <td>Code of Fair Disclosure & Conduct</td>
+                                <td>SEBI Insider Trading Regulations Governance Code</td>
+                                <td>Policy Document</td>
+                                <td><a href="assets/pdf_placeholder.pdf" download class="btn-pdf-download"><i class="fas fa-file-pdf"></i> PDF Download</a></td>
+                            </tr>
+                            <tr>
+                                <td>Policy on Materiality of Related Party Transactions</td>
+                                <td>Governance policy on RPT disclosures</td>
+                                <td>Policy Document</td>
+                                <td><a href="assets/pdf_placeholder.pdf" download class="btn-pdf-download"><i class="fas fa-file-pdf"></i> PDF Download</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SHAREHOLDER SERVICES & CONTACT INFORMATION -->
+    <section class="biz-portfolio-section" id="shareholderServices">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-subtitle">INVESTOR HELPDESK & REGISTRAR</span>
+                <h2 class="section-title">Shareholder Contact & Assistance</h2>
+                <p class="section-desc">For inquiries regarding share transfers, dividend status, dematerialization, or financial reporting, reach out to our dedicated Investor Relations team.</p>
+            </div>
+
+            <div class="contact-info-grid" id="investorContact">
+                <div class="contact-info-card">
+                    <h4><i class="fas fa-building" style="color: var(--secondary-color);"></i> Company Nodal / Grievance Officer</h4>
+                    <p><strong>Company Secretary & Compliance Officer:</strong></p>
+                    <p>BKM Industries Limited</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Registered Office: BKM House, Kolkata, West Bengal, India</p>
+                    <p><i class="fas fa-envelope"></i> Email: <a href="mailto:investor@bkmindustries.in">investor@bkmindustries.in</a></p>
+                    <p><i class="fas fa-phone"></i> Direct Line: +91 33 2289 0000 / 0055</p>
+                </div>
+
+                <div class="contact-info-card">
+                    <h4><i class="fas fa-users-cog" style="color: var(--secondary-color);"></i> Registrar & Share Transfer Agent (RTA)</h4>
+                    <p><strong>Maheshwari Datamatics Pvt. Ltd. / Link Intime India</strong></p>
+                    <p><i class="fas fa-map-marker-alt"></i> 23, R.N. Mukherjee Road, 5th Floor, Kolkata - 700 001</p>
+                    <p><i class="fas fa-envelope"></i> Email: <a href="mailto:mdpldc@yahoo.com">mdpldc@yahoo.com</a></p>
+                    <p><i class="fas fa-phone"></i> Phone: +91 33 2248 2248 / 2243 5029</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-top grid grid-4">
+                <div class="footer-col">
+                    <a href="index.html" class="logo footer-logo">
+                        <img src="assets/logo.png" alt="BKM Industries Limited" class="logo-img">
+                    </a>
+                    <p class="footer-about">BKM Industries Limited (formerly Manaksia Industries Limited) is India's premier industrial metal packaging and closure manufacturing company.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="about.html">Who We Are</a></li>
+                        <li><a href="founders-journey.html">Our Journey & History</a></li>
+                        <li><a href="leadership.html">Leadership</a></li>
+                        <li><a href="awards-recognition.html">Awards & Recognition</a></li>
+                        <li><a href="businesses-overview.html">Our Businesses</a></li>
+                        <li><a href="investors.html">Investor Relations</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Our Businesses</h4>
+                    <ul>
+                        <li><a href="tin-cans.html">Tin Cans</a></li>
+                        <li><a href="ropp-closures.html">ROPP Caps</a></li>
+                        <li><a href="crown-caps.html">Metal Crown Caps</a></li>
+                        <li><a href="businesses-overview.html">Packaging Overview</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Registered Office</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> BKM Industries Limited<br>Kolkata, West Bengal, India</p>
+                    <p><i class="fas fa-envelope"></i> info@bkmindustries.in</p>
+                    <p><i class="fas fa-phone"></i> +91 33 2289 0000</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 BKM Industries Limited. All Rights Reserved.</p>
+                <div class="footer-legal-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Use</a>
+                    <a href="#">Disclaimer</a>
+                    <a href="#">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE JAVASCRIPT FOR TABS & FILTERS -->
+    <script>
+        function switchTab(tabId, element) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            element.classList.add('active');
+
+            document.querySelectorAll('.ir-tab-content').forEach(content => content.style.display = 'none');
+            document.getElementById('tab-' + tabId).style.display = 'block';
+        }
+
+        function switchQuarter(quarter, element) {
+            document.querySelectorAll('.q-btn').forEach(btn => btn.classList.remove('active'));
+            element.classList.add('active');
+
+            const selectedYear = document.getElementById('yearFilter').value;
+            const rows = document.querySelectorAll('#financialResultsBody tr');
+
+            rows.forEach(row => {
+                const rowYear = row.getAttribute('data-year');
+                const rowQuarter = row.getAttribute('data-quarter');
+
+                const matchesYear = (selectedYear === 'all' || rowYear === selectedYear);
+                const matchesQuarter = (quarter === 'all' || rowQuarter === quarter);
+
+                if (matchesYear && matchesQuarter) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+        function filterReports() {
+            const selectedYear = document.getElementById('yearFilter').value;
+            
+            // Filter Financial Results Table
+            const financialRows = document.querySelectorAll('#financialResultsBody tr');
+            financialRows.forEach(row => {
+                const rowYear = row.getAttribute('data-year');
+                if (rowYear === selectedYear || selectedYear === 'all') {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+
+            // Filter Annual Reports Table
+            const annualRows = document.querySelectorAll('#annualReportsBody tr');
+            annualRows.forEach(row => {
+                const rowYear = row.getAttribute('data-year');
+                if (rowYear === selectedYear || selectedYear === 'all') {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+        // Mobile Menu Toggle
+        document.getElementById('mobileToggle').addEventListener('click', function() {
+            document.getElementById('navMenu').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
