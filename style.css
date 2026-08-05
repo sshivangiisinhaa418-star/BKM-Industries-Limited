@@ -288,7 +288,7 @@ section {
 /* --- STICKY HEADER --- */
 .main-header {
     background-color: var(--white);
-    padding: 18px 0;
+    padding: 12px 0;
     box-shadow: var(--shadow-sm);
     position: sticky;
     top: 0;
@@ -308,7 +308,7 @@ section {
 }
 
 .logo-img {
-    height: 52px;
+    height: 75px;
     width: auto;
     object-fit: contain;
     display: block;
@@ -322,14 +322,14 @@ section {
 .footer-logo {
     display: inline-block;
     background-color: var(--white);
-    padding: 6px 14px;
+    padding: 8px 16px;
     border-radius: 8px;
     margin-bottom: 18px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
 .footer-logo .logo-img {
-    height: 42px;
+    height: 60px;
 }
 
 /* --- NAVIGATION MENU --- */
