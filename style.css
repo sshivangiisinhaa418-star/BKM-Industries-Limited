@@ -3220,18 +3220,265 @@ section {
     }
 }
 
-@media (max-width: 576px) {
-    .esg-hero-content h1 {
-        font-size: 2rem;
-    }
-    .esg-metrics-bar {
-        grid-template-columns: 1fr;
-    }
-    .aims-grid, .goals-grid, .case-grid, .downloads-grid {
-        grid-template-columns: 1fr;
-    }
-    .pillar-header {
-        flex-direction: column;
-        align-items: flex-start;
+
+/* ==========================================================================
+   DEDICATED CAREERS OVERVIEW PAGE STYLES
+   ========================================================================== */
+
+/* Careers Hero Section */
+.careers-hero-banner {
+    background: linear-gradient(135deg, rgba(13, 13, 57, 0.92) 0%, rgba(19, 101, 196, 0.85) 100%), url('assets/careers_bg.png');
+    background-size: cover;
+    background-position: center;
+    color: var(--white);
+    padding: 100px 0 80px;
+    position: relative;
+}
+
+.careers-hero-content h1 {
+    color: var(--white);
+    font-size: 2.8rem;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+.careers-hero-content p {
+    font-size: 1.15rem;
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 800px;
+    margin-bottom: 30px;
+}
+
+/* Accolades Bar */
+.accolades-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.accolade-card {
+    background: var(--white);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 35px 30px;
+    transition: var(--transition-smooth);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    box-shadow: var(--shadow-sm);
+}
+
+.accolade-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--secondary-color);
+}
+
+.accolade-badge {
+    display: inline-block;
+    background-color: rgba(229, 169, 59, 0.15);
+    color: var(--accent-color);
+    font-weight: 700;
+    font-size: 0.82rem;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+    align-self: flex-start;
+    text-transform: uppercase;
+}
+
+.accolade-card h3 {
+    font-size: 1.3rem;
+    color: var(--primary-color);
+    margin-bottom: 12px;
+}
+
+.accolade-card p {
+    font-size: 0.93rem;
+    color: var(--muted-text);
+    line-height: 1.6;
+}
+
+/* Leadership Vision Quote */
+.careers-quote-section {
+    padding: 80px 0;
+    background-color: var(--light-bg);
+}
+
+.quote-box-inner {
+    background: var(--white);
+    border-left: 5px solid var(--accent-color);
+    border-radius: 8px;
+    padding: 40px 50px;
+    box-shadow: var(--shadow-sm);
+    position: relative;
+}
+
+.quote-box-inner i.quote-icon {
+    font-size: 2.5rem;
+    color: rgba(19, 101, 196, 0.15);
+    position: absolute;
+    top: 25px;
+    right: 35px;
+}
+
+.quote-box-inner blockquote {
+    font-size: 1.15rem;
+    color: var(--primary-color);
+    font-weight: 500;
+    line-height: 1.7;
+    margin-bottom: 20px;
+    font-style: italic;
+}
+
+.quote-author {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.quote-author-info h4 {
+    font-size: 1.1rem;
+    color: var(--primary-color);
+    margin: 0;
+}
+
+.quote-author-info p {
+    font-size: 0.88rem;
+    color: var(--muted-text);
+    margin: 0;
+}
+
+/* Employee Value Proposition (EVP) Section */
+.careers-evp-section {
+    padding: 90px 0;
+    background-color: var(--white);
+}
+
+.evp-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.evp-card {
+    background: var(--light-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 32px 26px;
+    transition: var(--transition-smooth);
+    display: flex;
+    flex-direction: column;
+}
+
+.evp-card:hover {
+    background: var(--white);
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--secondary-color);
+}
+
+.evp-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    background: rgba(19, 101, 196, 0.1);
+    color: var(--secondary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.evp-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 14px;
+    color: var(--primary-color);
+}
+
+.evp-list {
+    margin-top: 10px;
+}
+
+.evp-list li {
+    font-size: 0.92rem;
+    color: var(--muted-text);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    line-height: 1.5;
+}
+
+.evp-list li i {
+    color: var(--success-color);
+    font-size: 0.85rem;
+    margin-top: 4px;
+}
+
+/* Diversity & Safety Section */
+.careers-diversity-section {
+    padding: 90px 0;
+    background-color: var(--light-bg);
+}
+
+.diversity-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.diversity-card {
+    background: var(--white);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: var(--transition-smooth);
+    display: flex;
+    flex-direction: column;
+}
+
+.diversity-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+}
+
+.diversity-card-body {
+    padding: 26px;
+}
+
+.diversity-card-body h4 {
+    font-size: 1.15rem;
+    margin-bottom: 10px;
+    color: var(--primary-color);
+}
+
+.diversity-card-body p {
+    font-size: 0.9rem;
+    color: var(--muted-text);
+    line-height: 1.5;
+}
+
+/* Responsive Rules for Careers Page */
+@media (max-width: 992px) {
+    .accolades-grid, .evp-grid, .diversity-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
+
+@media (max-width: 576px) {
+    .careers-hero-content h1 {
+        font-size: 2rem;
+    }
+    .accolades-grid, .evp-grid, .diversity-grid {
+        grid-template-columns: 1fr;
+    }
+    .quote-box-inner {
+        padding: 25px;
+    }
+}
+
