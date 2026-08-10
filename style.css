@@ -3123,67 +3123,73 @@ section {
 /* Downloads & Governance Section */
 .esg-downloads-section {
     padding: 90px 0;
-    background-color: var(--primary-color);
-    color: var(--white);
+    background-color: var(--white);
+    color: var(--dark-text);
 }
 
-.esg-downloads-section h2, .esg-downloads-section p {
-    color: var(--white);
+.esg-downloads-section h2 {
+    color: var(--primary-color);
+}
+
+.esg-downloads-section .section-desc {
+    color: var(--muted-text);
 }
 
 .downloads-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
+    gap: 24px;
     margin-top: 40px;
 }
 
 .download-card {
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: var(--light-bg);
+    border: 1px solid var(--border-color);
     border-radius: 8px;
-    padding: 24px;
+    padding: 28px 24px;
     transition: var(--transition-smooth);
     display: flex;
     flex-direction: column;
 }
 
 .download-card:hover {
-    background: rgba(255, 255, 255, 0.12);
-    border-color: var(--accent-color);
+    background: var(--white);
+    border-color: var(--secondary-color);
+    box-shadow: var(--shadow-md);
     transform: translateY(-4px);
 }
 
 .doc-icon {
-    font-size: 2.2rem;
-    color: var(--accent-color);
+    font-size: 2.4rem;
+    color: var(--secondary-color);
     margin-bottom: 16px;
 }
 
 .download-card h4 {
-    color: var(--white);
-    font-size: 1.05rem;
+    color: var(--primary-color);
+    font-size: 1.1rem;
     margin-bottom: 8px;
 }
 
 .download-card p {
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.88rem;
+    color: var(--muted-text);
     margin-bottom: 20px;
     flex-grow: 1;
+    line-height: 1.5;
 }
 
 .download-card .btn-dl {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    color: var(--accent-color);
+    color: var(--secondary-color);
     font-weight: 600;
     font-size: 0.9rem;
 }
 
 .download-card:hover .btn-dl {
-    color: var(--white);
+    color: var(--accent-color);
 }
 
 /* Responsive Rules for ESG Page */
