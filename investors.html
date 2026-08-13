@@ -54,40 +54,45 @@
             margin-top: 30px;
         }
         .pdf-card {
-            background: var(--light-bg);
+            background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(245,247,250,1) 100%);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 20px;
+            border-radius: 12px;
+            padding: 24px;
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
+            height: 100%;
             transition: var(--transition-smooth);
         }
         .pdf-card:hover {
             border-color: var(--secondary-color);
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-md);
+            transform: translateY(-6px);
+            box-shadow: 0 15px 35px rgba(0, 0, 50, 0.1);
         }
         .pdf-card-title {
             font-weight: 600;
             color: var(--primary-color);
-            font-size: 0.95rem;
+            font-size: 1.05rem;
+            margin-bottom: 4px;
         }
         .pdf-icon-btn {
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             background-color: rgba(19, 101, 196, 0.1);
             color: var(--secondary-color);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.1rem;
-            transition: var(--transition-fast);
+            font-size: 1.3rem;
+            flex-shrink: 0;
+            transition: var(--transition-smooth);
         }
         .pdf-card:hover .pdf-icon-btn {
             background-color: var(--secondary-color);
             color: var(--white);
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(19, 101, 196, 0.3);
         }
 
         /* Investment Case Grid */
@@ -98,40 +103,72 @@
             margin-top: 40px;
         }
         .ic-card {
-            background: var(--white);
-            border-radius: 10px;
-            padding: 28px;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(245,247,250,1) 100%);
+            border-radius: 12px;
+            padding: 30px;
+            border: 1px solid var(--border-color);
             display: flex;
             gap: 20px;
-            transition: var(--transition-smooth);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .ic-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 50%; height: 100%;
+            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0) 100%);
+            transform: skewX(-25deg);
+            z-index: -1;
+            opacity: 0.6;
+        }
+        .ic-card:hover::before {
+            animation: sheenSweep 0.8s ease-out forwards;
+        }
+        @keyframes sheenSweep {
+            0% { left: -100%; }
+            100% { left: 200%; }
         }
         .ic-card:hover {
             border-color: var(--secondary-color);
-            box-shadow: var(--shadow-md);
+            box-shadow: 0 22px 45px rgba(19, 101, 196, 0.15);
+            transform: translateY(-10px) scale(1.02);
         }
         .ic-icon {
-            width: 50px;
-            height: 50px;
+            width: 54px;
+            height: 54px;
             background: rgba(19, 101, 196, 0.08);
             color: var(--secondary-color);
-            border-radius: 8px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             flex-shrink: 0;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.3s, color 0.3s, box-shadow 0.3s;
+        }
+        .ic-card:hover .ic-icon {
+            background-color: var(--secondary-color);
+            color: var(--white);
+            box-shadow: 0 12px 25px rgba(19, 101, 196, 0.4);
+            transform: scale(1.15) rotate(10deg);
         }
         .ic-card h3 {
-            font-size: 1.05rem;
+            font-size: 1.15rem;
             margin-bottom: 8px;
             color: var(--primary-color);
+            transition: all 0.3s ease;
+        }
+        .ic-card:hover h3 {
+            color: var(--secondary-color);
+            transform: translateX(6px);
         }
         .ic-card p {
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             color: var(--muted-text);
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
         /* Filter Tabs & Controls */
@@ -272,21 +309,100 @@
             margin-top: 40px;
         }
         .contact-info-card {
-            background: var(--light-bg);
-            border-radius: 10px;
-            padding: 30px;
-            border-left: 4px solid var(--secondary-color);
+            background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(245,247,250,1) 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 35px;
+            border-left: 5px solid var(--secondary-color);
+            transition: var(--transition-smooth);
+        }
+        .contact-info-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 15px 35px rgba(0, 0, 50, 0.1);
+            border-color: var(--secondary-color);
         }
         .contact-info-card h4 {
-            font-size: 1.1rem;
-            margin-bottom: 15px;
+            font-size: 1.2rem;
+            margin-bottom: 18px;
             color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
         .contact-info-card p {
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             color: var(--muted-text);
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             line-height: 1.6;
+        }
+
+        /* PDF Modal Styles */
+        .pdf-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pdf-modal.show {
+            display: flex;
+        }
+
+        .pdf-modal-content {
+            background-color: #fff;
+            width: 90%;
+            max-width: 1200px;
+            height: 90vh;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .pdf-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .pdf-modal-header h3 {
+            margin: 0;
+            font-size: 1.1rem;
+            color: #333;
+        }
+
+        .pdf-modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+            transition: color 0.2s;
+        }
+
+        .pdf-modal-close:hover {
+            color: #d9534f;
+        }
+
+        .pdf-modal-body {
+            flex-grow: 1;
+            width: 100%;
+        }
+
+        .pdf-modal-body iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
         }
     </style>
 </head>
@@ -428,39 +544,39 @@
     </div>
 
     <!-- HERO OVERVIEW SECTION -->
-    <section class="about-hero-info">
+    <section class="biz-hero reveal-on-scroll" style="background: linear-gradient(135deg, rgba(13, 13, 57, 0.94) 0%, rgba(19, 101, 196, 0.85) 100%), url('assets/leadership_banner.png'); background-size: cover; background-position: center; padding: 100px 0 80px; position: relative;">
         <div class="container">
             <div class="about-head-content">
                 <span class="about-pill">FINANCIAL & OPERATIONAL DISCLOSURES</span>
-                <h1 class="about-main-title">Delivering Sustainable Value for Our Shareholders</h1>
-                <p class="about-lead-text">
+                <h1 class="about-main-title" style="color: var(--white);">Delivering Sustainable Value for Our Shareholders</h1>
+                <p class="about-lead-text" style="color: rgba(255, 255, 255, 0.9);">
                     BKM Industries Limited is committed to maintaining high standards of corporate governance, transparent financial reporting, and disciplined capital allocation to create long-term value for all stakeholders.
                 </p>
 
                 <!-- QUICK PDF DOWNLOAD CARDS -->
                 <div class="pdf-quick-grid">
-                    <a href="assets/pdf_placeholder.pdf" target="_blank" download class="pdf-card">
+                    <a href="assets/pdf_placeholder.pdf" target="_blank" download class="pdf-card reveal-on-scroll reveal-delay-1">
                         <div>
                             <div class="pdf-card-title">Earnings Presentation Q4 FY26</div>
                             <small style="color: var(--muted-text);">PDF Download | Financial Performance</small>
                         </div>
                         <div class="pdf-icon-btn"><i class="fas fa-file-pdf"></i></div>
                     </a>
-                    <a href="assets/pdf_placeholder.pdf" target="_blank" download class="pdf-card">
+                    <a href="assets/pdf_placeholder.pdf" target="_blank" download class="pdf-card reveal-on-scroll reveal-delay-2">
                         <div>
                             <div class="pdf-card-title">Integrated Annual Report FY26</div>
                             <small style="color: var(--muted-text);">PDF Download | Complete Report & Audited Accounts</small>
                         </div>
                         <div class="pdf-icon-btn"><i class="fas fa-file-pdf"></i></div>
                     </a>
-                    <a href="assets/pdf_placeholder.pdf" target="_blank" download class="pdf-card">
+                    <a href="assets/pdf_placeholder.pdf" target="_blank" download class="pdf-card reveal-on-scroll reveal-delay-3">
                         <div>
                             <div class="pdf-card-title">Sustainability Report FY26</div>
                             <small style="color: var(--muted-text);">PDF Download | ESG & Governance Performance</small>
                         </div>
                         <div class="pdf-icon-btn"><i class="fas fa-file-pdf"></i></div>
                     </a>
-                    <a href="assets/pdf_placeholder.pdf" target="_blank" download class="pdf-card">
+                    <a href="assets/pdf_placeholder.pdf" target="_blank" download class="pdf-card reveal-on-scroll reveal-delay-4">
                         <div>
                             <div class="pdf-card-title">Shareholder Notice & Proxy Form</div>
                             <small style="color: var(--muted-text);">PDF Download | Annual General Meeting</small>
@@ -470,11 +586,6 @@
                 </div>
             </div>
         </div>
-    </section>
-
-    <!-- FULL-WIDTH HERO BANNER -->
-    <section class="about-banner-container">
-        <img src="assets/leadership_banner.png" alt="BKM Industries Investor Relations" class="about-hero-img">
     </section>
 
     <!-- INVESTMENT CASE SECTION -->
@@ -487,7 +598,7 @@
             </div>
 
             <div class="ic-grid">
-                <div class="ic-card">
+                <div class="ic-card reveal-on-scroll reveal-delay-1">
                     <div class="ic-icon"><i class="fas fa-industry"></i></div>
                     <div>
                         <h3>World-Class Manufacturing Footprint</h3>
@@ -495,7 +606,7 @@
                     </div>
                 </div>
 
-                <div class="ic-card">
+                <div class="ic-card reveal-on-scroll reveal-delay-2">
                     <div class="ic-icon"><i class="fas fa-chart-line"></i></div>
                     <div>
                         <h3>Market Leadership in FMCG & Alcobev</h3>
@@ -503,7 +614,7 @@
                     </div>
                 </div>
 
-                <div class="ic-card">
+                <div class="ic-card reveal-on-scroll reveal-delay-3">
                     <div class="ic-icon"><i class="fas fa-cogs"></i></div>
                     <div>
                         <h3>Operational Excellence & Technology</h3>
@@ -511,7 +622,7 @@
                     </div>
                 </div>
 
-                <div class="ic-card">
+                <div class="ic-card reveal-on-scroll reveal-delay-4">
                     <div class="ic-icon"><i class="fas fa-coins"></i></div>
                     <div>
                         <h3>Disciplined Capital Allocation</h3>
@@ -519,7 +630,7 @@
                     </div>
                 </div>
 
-                <div class="ic-card">
+                <div class="ic-card reveal-on-scroll reveal-delay-5">
                     <div class="ic-icon"><i class="fas fa-shield-alt"></i></div>
                     <div>
                         <h3>Robust Corporate Governance</h3>
@@ -527,7 +638,7 @@
                     </div>
                 </div>
 
-                <div class="ic-card">
+                <div class="ic-card reveal-on-scroll reveal-delay-6">
                     <div class="ic-icon"><i class="fas fa-leaf"></i></div>
                     <div>
                         <h3>ESG Leadership & Sustainability</h3>
@@ -540,7 +651,7 @@
 
     <!-- RESULTS & REPORTS INTERACTIVE SECTION (VEDANTA FORMAT) -->
     <section class="biz-highlights-section" id="resultsReports" style="background-color: var(--white);">
-        <div class="container">
+        <div class="container reveal-on-scroll">
             <div class="section-header text-center">
                 <span class="section-subtitle">FINANCIAL FILINGS & DISCLOSURES</span>
                 <h2 class="section-title">Results and Reports</h2>
@@ -589,10 +700,14 @@
                         </thead>
                         <tbody id="financialResultsBody">
                             <tr data-year="FY26" data-quarter="Q4">
-                                <td>Consolidated Audited Financial Results</td>
+                                <td>
+                                    <a href="#" onclick="previewPDF('assets/pdf/Standalone and Consolidated Financial Results 2025-26.pdf'); return false;">
+                                        Consolidated Audited Financial Results
+                                    </a>
+                                </td>
                                 <td>Q4 / FY26 Full Year</td>
                                 <td>FY 2025-26</td>
-                                <td><a href="assets/pdf_placeholder.pdf" download class="btn-pdf-download"><i class="fas fa-file-pdf"></i> PDF Download</a></td>
+                                <td><a href="assets/pdf/Standalone and Consolidated Financial Results 2025-26.pdf" download class="btn-pdf-download"><i class="fas fa-file-pdf"></i> PDF Download</a></td>
                             </tr>
                             <tr data-year="FY26" data-quarter="Q4">
                                 <td>Standalone Audited Financial Statements</td>
@@ -739,7 +854,7 @@
             </div>
 
             <div class="contact-info-grid" id="investorContact">
-                <div class="contact-info-card">
+                <div class="contact-info-card reveal-on-scroll reveal-delay-1">
                     <h4><i class="fas fa-building" style="color: var(--secondary-color);"></i> Company Nodal / Grievance Officer</h4>
                     <p><strong>Company Secretary & Compliance Officer:</strong></p>
                     <p>BKM Industries Limited</p>
@@ -748,7 +863,7 @@
                     <p><i class="fas fa-phone"></i> Direct Line: +91 33 2289 0000 / 0055</p>
                 </div>
 
-                <div class="contact-info-card">
+                <div class="contact-info-card reveal-on-scroll reveal-delay-2">
                     <h4><i class="fas fa-users-cog" style="color: var(--secondary-color);"></i> Registrar & Share Transfer Agent (RTA)</h4>
                     <p><strong>Maheshwari Datamatics Pvt. Ltd. / Link Intime India</strong></p>
                     <p><i class="fas fa-map-marker-alt"></i> 23, R.N. Mukherjee Road, 5th Floor, Kolkata - 700 001</p>
@@ -814,6 +929,19 @@
         </div>
     </footer>
 
+    <!-- PDF Modal -->
+    <div id="pdfModal" class="pdf-modal">
+        <div class="pdf-modal-content">
+            <div class="pdf-modal-header">
+                <h3>PDF Preview</h3>
+                <button class="pdf-modal-close" onclick="closePDFModal()">&times;</button>
+            </div>
+            <div class="pdf-modal-body">
+                <iframe id="pdfIframe" src="" frameborder="0"></iframe>
+            </div>
+        </div>
+    </div>
+
     <!-- INTERACTIVE JAVASCRIPT FOR TABS & FILTERS -->
     <script>
         function switchTab(tabId, element) {
@@ -876,6 +1004,38 @@
         document.getElementById('mobileToggle').addEventListener('click', function() {
             document.getElementById('navMenu').classList.toggle('active');
         });
+
+        // PDF Modal Logic
+        const pdfModal = document.getElementById('pdfModal');
+        const pdfIframe = document.getElementById('pdfIframe');
+
+        function previewPDF(pdfPath) {
+            pdfIframe.src = pdfPath;
+            pdfModal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePDFModal() {
+            pdfModal.classList.remove('show');
+            pdfIframe.src = '';
+            document.body.style.overflow = '';
+        }
+
+        if (pdfModal) {
+            pdfModal.addEventListener('click', function (e) {
+                if (e.target === pdfModal) {
+                    closePDFModal();
+                }
+            });
+        }
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && pdfModal && pdfModal.classList.contains('show')) {
+                closePDFModal();
+            }
+        });
     </script>
+    <!-- GLOBAL SCRIPTS -->
+    <script src="script.js"></script>
 </body>
 </html>

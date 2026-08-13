@@ -18,11 +18,12 @@
         .ir-sh-menu a { color: rgba(255,255,255,0.8); font-size: 0.88rem; font-weight: 500; white-space: nowrap; }
         .ir-sh-menu a:hover, .ir-sh-menu a.active { color: var(--accent-color); }
         
-        .ir-table { width: 100%; border-collapse: collapse; background: var(--white); border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
-        .ir-table th { background-color: var(--primary-color); color: var(--white); text-align: left; padding: 14px 20px; font-size: 0.9rem; font-weight: 600; }
-        .ir-table td { padding: 16px 20px; border-bottom: 1px solid #edf2f7; font-size: 0.9rem; color: var(--dark-text); }
-        .btn-pdf { display: inline-flex; align-items: center; gap: 8px; padding: 7px 16px; background: #eef6ff; color: var(--secondary-color); border-radius: 4px; font-weight: 600; font-size: 0.85rem; border: 1px solid rgba(19, 101, 196, 0.2); }
-        .btn-pdf:hover { background: var(--secondary-color); color: var(--white); }
+        .ir-table { width: 100%; border-collapse: collapse; background: var(--white); border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+        .ir-table th { background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%); color: var(--white); text-align: left; padding: 18px 20px; font-size: 0.95rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+        .ir-table td { padding: 18px 20px; border-bottom: 1px solid #edf2f7; font-size: 0.95rem; color: var(--dark-text); transition: background-color 0.3s; }
+        .ir-table tr:hover td { background-color: #f8fafc; }
+        .btn-pdf { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 18px; background: rgba(19, 101, 196, 0.08); color: var(--secondary-color); border-radius: 6px; font-weight: 600; font-size: 0.9rem; border: 1px solid rgba(19, 101, 196, 0.2); transition: var(--transition-smooth); }
+        .btn-pdf:hover { background: var(--secondary-color); color: var(--white); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(19, 101, 196, 0.3); }
     </style>
 </head>
 <body>
@@ -168,12 +169,12 @@
     </div>
 
     <!-- HERO SECTION -->
-    <section class="about-hero-info">
+    <section class="biz-hero reveal-on-scroll" style="background: linear-gradient(135deg, rgba(13, 13, 57, 0.94) 0%, rgba(19, 101, 196, 0.85) 100%), url('assets/leadership_banner.png'); background-size: cover; background-position: center; padding: 70px 0 50px; position: relative;">
         <div class="container">
             <div class="about-head-content">
                 <span class="about-pill">NSE & BSE DISCLOSURES</span>
-                <h1 class="about-main-title">Stock Exchange Announcements</h1>
-                <p class="about-lead-text">
+                <h1 class="about-main-title" style="color: var(--white);">Stock Exchange Announcements</h1>
+                <p class="about-lead-text" style="color: rgba(255, 255, 255, 0.9);">
                     Official intimations, corporate announcements, and regulatory submissions submitted to National Stock Exchange of India (NSE) and BSE Limited.
                 </p>
             </div>
@@ -183,7 +184,7 @@
     <!-- ANNOUNCEMENTS TABLE -->
     <section class="biz-portfolio-section">
         <div class="container">
-            <table class="ir-table">
+            <table class="ir-table reveal-on-scroll">
                 <thead>
                     <tr>
                         <th>Subject / Announcement Headline</th>
@@ -263,5 +264,7 @@
             document.getElementById('navMenu').classList.toggle('active');
         });
     </script>
+    <!-- GLOBAL SCRIPTS -->
+    <script src="script.js"></script>
 </body>
 </html>

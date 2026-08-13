@@ -24,31 +24,34 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================
     const mobileToggle = document.getElementById('mobileToggle');
     const mobileMenu = document.getElementById('mobileMenu');
-    const toggleIcon = mobileToggle.querySelector('i');
+    
+    if (mobileToggle && mobileMenu) {
+        const toggleIcon = mobileToggle.querySelector('i');
 
-    mobileToggle.addEventListener('click', () => {
-        mobileMenu.classList.toggle('open');
-        const isOpen = mobileMenu.classList.contains('open');
-        
-        // Swap hamburger and times icon
-        if (isOpen) {
-            toggleIcon.classList.remove('fa-bars');
-            toggleIcon.classList.add('fa-times');
-        } else {
-            toggleIcon.classList.remove('fa-times');
-            toggleIcon.classList.add('fa-bars');
-        }
-    });
-
-    // Close menu when clicking on a link
-    const mobileLinks = mobileMenu.querySelectorAll('a');
-    mobileLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            mobileMenu.classList.remove('open');
-            toggleIcon.classList.remove('fa-times');
-            toggleIcon.classList.add('fa-bars');
+        mobileToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('open');
+            const isOpen = mobileMenu.classList.contains('open');
+            
+            // Swap hamburger and times icon
+            if (isOpen) {
+                toggleIcon.classList.remove('fa-bars');
+                toggleIcon.classList.add('fa-times');
+            } else {
+                toggleIcon.classList.remove('fa-times');
+                toggleIcon.classList.add('fa-bars');
+            }
         });
-    });
+
+        // Close menu when clicking on a link
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+                toggleIcon.classList.remove('fa-times');
+                toggleIcon.classList.add('fa-bars');
+            });
+        });
+    }
 
     // ==========================================
     // 3. HERO SLIDER LOGIC
@@ -91,27 +94,35 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Event listeners for arrows
-    nextBtn.addEventListener('click', () => {
-        nextSlide();
-        startSlideShow(); // Reset timer
-    });
-
-    prevBtn.addEventListener('click', () => {
-        prevSlide();
-        startSlideShow(); // Reset timer
-    });
-
-    // Event listeners for dots
-    dots.forEach(dot => {
-        dot.addEventListener('click', (e) => {
-            const index = parseInt(e.target.getAttribute('data-index'));
-            showSlide(index);
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            nextSlide();
             startSlideShow(); // Reset timer
         });
-    });
+    }
+
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            prevSlide();
+            startSlideShow(); // Reset timer
+        });
+    }
+
+    // Event listeners for dots
+    if (dots.length > 0) {
+        dots.forEach(dot => {
+            dot.addEventListener('click', (e) => {
+                const index = parseInt(e.target.getAttribute('data-index'));
+                showSlide(index);
+                startSlideShow(); // Reset timer
+            });
+        });
+    }
 
     // Initial Start
-    startSlideShow();
+    if (slides.length > 0) {
+        startSlideShow();
+    }
 
     // ==========================================
     // 4. ANIMATED STATISTICS COUNTER
@@ -151,8 +162,10 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }, { threshold: 0.2 });
 
-        observer.observe(statsSection);
-    } else {
+        if (statsSection) {
+            observer.observe(statsSection);
+        }
+    } else if (statsSection) {
         // Fallback for older browsers
         window.addEventListener('scroll', () => {
             const rect = statsSection.getBoundingClientRect();
@@ -163,4 +176,57 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // ==========================================
+    // 5. HERO PARALLAX & FADE EFFECT
+    // ==========================================
+    const heroSlider = document.getElementById('heroSlider');
+    const heroContents = document.querySelectorAll('.slide-content');
+    
+    window.addEventListener('scroll', () => {
+        if (!heroSlider) return;
+        const scrollY = window.scrollY;
+        
+        // Only run if we are near the top (optimization)
+        if (scrollY < window.innerHeight) {
+            // Parallax the background slightly
+            heroSlider.style.transform = `translateY(${scrollY * 0.4}px)`;
+            
+            // Fade and scale down the text content
+            heroContents.forEach(content => {
+                const opacity = Math.max(1 - (scrollY / 500), 0);
+                const scale = Math.max(1 - (scrollY / 2000), 0.9);
+                const translateY = scrollY * 0.2;
+                content.style.opacity = opacity;
+                content.style.transform = `translateY(${translateY}px) scale(${scale})`;
+            });
+        }
+    });
+
+    // ==========================================
+    // 6. SCROLL REVEAL ANIMATIONS
+    // ==========================================
+    const revealElements = document.querySelectorAll('.reveal-on-scroll');
+    
+    if ('IntersectionObserver' in window && revealElements.length > 0) {
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    // Optional: stop observing once revealed
+                    // observer.unobserve(entry.target); 
+                }
+            });
+        }, {
+            root: null,
+            threshold: 0.15,
+            rootMargin: "0px 0px -50px 0px"
+        });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+    } else {
+        // Fallback: immediately show all elements if IntersectionObserver is not supported
+        revealElements.forEach(el => el.classList.add('visible'));
+    }
+
 });
