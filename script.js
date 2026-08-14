@@ -230,3 +230,67 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 });
+
+
+// ----------------------------------------------------
+// LEAFLET MAP INITIALIZATION
+// ----------------------------------------------------
+document.addEventListener('DOMContentLoaded', () => {
+    const mapElement = document.getElementById('bkm-map');
+    if (mapElement && typeof L !== 'undefined') {
+        // Initialize the map centered on India
+        const map = L.map('bkm-map', {
+            zoomControl: false, // Keep it clean visually
+            scrollWheelZoom: false // Prevent scrolling past the map from getting trapped
+        }).setView([21.1458, 79.0882], 4.4); // Center of India
+
+        // Add a clean, premium Light tile layer (CartoDB Positron) matching the aesthetic
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+            subdomains: 'abcd',
+            maxZoom: 20
+        }).addTo(map);
+
+        // Define our custom pulsing icon HTML to preserve existing marker styling
+        const createCustomIcon = (label) => {
+            return L.divIcon({
+                className: 'custom-leaflet-marker',
+                html: `
+                    <div class="leaflet-pin">
+                        <div class="pulse-ring"></div>
+                        <div class="pin-center"></div>
+                        <div class="pin-label">${label}</div>
+                    </div>
+                `,
+                iconSize: [20, 20],
+                iconAnchor: [10, 10] // Center the icon precisely on the coordinate
+            });
+        };
+
+        // Reusable locations array per Requirement 11
+        const locations = [
+            {
+                name: 'Kolkata (HQ)',
+                latitude: 22.5726,
+                longitude: 88.3639
+            },
+            {
+                name: 'Silvassa (Plant)',
+                latitude: 20.2763,
+                longitude: 73.0083
+            },
+            {
+                name: 'Mumbai (Sales)',
+                latitude: 19.0760,
+                longitude: 72.8777
+            }
+        ];
+
+        // Dynamically plot all markers using geographic coordinates (Y=lat, X=lng)
+        locations.forEach(loc => {
+            L.marker([loc.latitude, loc.longitude], { 
+                icon: createCustomIcon(loc.name) 
+            }).addTo(map);
+        });
+    }
+});

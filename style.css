@@ -6318,3 +6318,81 @@ section {
     color: var(--white);
     transform: scale(1.1);
 }
+
+
+/* --- LEAFLET MAP STYLES --- */
+#bkm-map {
+    margin: 20px auto;
+    background: #f8fafc; /* Fallback before tiles load */
+}
+
+/* Ensure Leaflet controls don't mess with our z-index hierarchy */
+.leaflet-container {
+    font-family: 'Inter', sans-serif;
+}
+
+/* Make Leaflet's marker background transparent so our custom HTML renders cleanly */
+.custom-leaflet-marker {
+    background: transparent;
+    border: none;
+}
+
+/* Our Custom Pulsing Marker styling */
+.leaflet-pin {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.leaflet-pin .pulse-ring {
+    position: absolute;
+    top: -2px; left: -2px; right: -2px; bottom: -2px;
+    background: rgba(220, 38, 38, 0.4);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+.leaflet-pin .pin-center {
+    position: absolute;
+    top: 5px; left: 5px;
+    width: 10px; height: 10px;
+    background: #dc2626;
+    border-radius: 50%;
+    border: 2px solid var(--white);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    z-index: 2;
+}
+
+.leaflet-pin .pin-label {
+    position: absolute;
+    top: -36px;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    background: var(--white);
+    color: var(--primary-color);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000; /* Ensure tooltip is above other markers */
+    pointer-events: none;
+}
+
+.leaflet-pin:hover .pin-label {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+@keyframes pulse {
+    0% { transform: scale(0.5); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: scale(1.5); opacity: 0; }
+}
+\n.precision-card { display: flex; flex-direction: column; height: 100%; }\n\n.business-card, .esg-card { display: flex; flex-direction: column; height: 100%; }\n.business-card-content, .esg-card p { flex-grow: 1; }\n

@@ -17,6 +17,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Main Stylesheet -->
     <link rel="stylesheet" href="style.css">
+
+    <!-- Leaflet CSS & JS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 </head>
 
 <body>
@@ -539,7 +543,7 @@
         <div class="container">
             <div class="section-header text-center">
                 <span class="section-subtitle">LOCATIONS</span>
-                <h2 class="section-title">Our Global Presence</h2>
+                <h2 class="section-title">Our National Presence</h2>
                 <p class="section-desc">With corporate offices, processing hubs, and manufacturing facilities located in
                     key industrial corridors.</p>
             </div>
@@ -548,42 +552,8 @@
                 <div class="presence-map">
                     <!-- Cobe Globe Canvas -->
                     <!-- 2D Dotted World Map -->
-                    <div class="world-map-container">
-                        <img src="assets/dotted_world_map.png" alt="Dotted World Map" class="world-map-bg">
-                        <!-- City Pins -->
-                        <div class="map-point" style="top: 15%; left: 10%;">
-                            <span class="pulse-ring"></span>
-                            <span class="point-label left-label">Fairbanks</span>
-                        </div>
-                        <div class="map-point" style="top: 35%; left: 15%;">
-                            <span class="pulse-ring"></span>
-                            <span class="point-label">Los Angeles</span>
-                        </div>
-                        <div class="map-point" style="top: 65%; left: 32%;">
-                            <span class="pulse-ring"></span>
-                            <span class="point-label">Brasília</span>
-                        </div>
-                        <div class="map-point" style="top: 25%; left: 48%;">
-                            <span class="pulse-ring"></span>
-                            <span class="point-label top-label">London</span>
-                        </div>
-                        <div class="map-point" style="top: 32%; left: 45%;">
-                            <span class="pulse-ring"></span>
-                            <span class="point-label left-label">Lisbon</span>
-                        </div>
-                        <div class="map-point" style="top: 60%; left: 60%;">
-                            <span class="pulse-ring"></span>
-                            <span class="point-label top-label">Nairobi</span>
-                        </div>
-                        <div class="map-point" style="top: 40%; left: 70%;">
-                            <span class="pulse-ring"></span>
-                            <span class="point-label top-label">New Delhi</span>
-                        </div>
-                        <div class="map-point" style="top: 25%; left: 85%;">
-                            <span class="pulse-ring"></span>
-                            <span class="point-label top-label">Vladivostok</span>
-                        </div>
-                    </div>
+                    
+                    <div id="bkm-map" style="height: 500px; width: 100%; border-radius: 12px; z-index: 1; filter: drop-shadow(0 15px 25px rgba(0,0,0,0.1)); border: 1px solid rgba(226, 232, 240, 0.8);"></div>
                 </div>
                 <div class="presence-info">
                     <div class="info-block">
