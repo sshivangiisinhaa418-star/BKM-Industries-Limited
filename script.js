@@ -294,3 +294,69 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+// Scroll to Top functionality
+const scrollToTopBtn = document.getElementById("scrollToTop");
+if (scrollToTopBtn) {
+    window.addEventListener("scroll", () => {
+        const halfPageScroll = (document.documentElement.scrollHeight - window.innerHeight) / 2;
+        if (window.scrollY > halfPageScroll) {
+            scrollToTopBtn.classList.add("show");
+        } else {
+            scrollToTopBtn.classList.remove("show");
+        }
+    });
+
+    scrollToTopBtn.addEventListener("click", () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    });
+}
+
+// ==========================================
+// LIVE RSS ANNOUNCEMENTS (METHOD 2)
+// ==========================================
+async function fetchAnnouncements() {
+    // Find all announcement scroll containers (in case there are multiple or we are on a different page)
+    const announcementTracks = document.querySelectorAll('.announcement-scroll');
+    if (announcementTracks.length === 0) return;
+
+    // We are using Moneycontrol's Business News RSS feed as a free, reliable proxy to demonstrate this.
+    // In production, replace this URL with the specific RSS feed for BKM Industries.
+    const rssFeedUrl = 'https://www.moneycontrol.com/rss/business.xml';
+    
+    // rss2json is a free API that converts XML RSS feeds into easy-to-use JSON
+    const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssFeedUrl)}`;
+
+    try {
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+        
+        if (data.status === 'ok' && data.items.length > 0) {
+            // Get the latest 4 news items
+            const topNews = data.items.slice(0, 4);
+            
+            let htmlContent = '';
+            topNews.forEach(item => {
+                // Clean up title and add a link
+                htmlContent += `<span class="announcement-item"><strong>LIVE NEWS</strong>: <a href="${item.link}" target="_blank" style="color:inherit; text-decoration:underline;">${item.title}</a></span>`;
+            });
+            
+            // Loop through all tracks and update them
+            // We duplicate the htmlContent so the CSS seamless scrolling works perfectly without breaking
+            announcementTracks.forEach(track => {
+                track.innerHTML = htmlContent + htmlContent;
+            });
+        }
+    } catch (error) {
+        console.error("Failed to fetch live announcements:", error);
+        // If it fails, the website just silently falls back to the hardcoded HTML announcements.
+    }
+}
+
+// Initialize the fetch when the DOM is ready
+document.addEventListener("DOMContentLoaded", () => {
+    fetchAnnouncements();
+});
