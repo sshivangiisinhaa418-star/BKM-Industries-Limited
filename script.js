@@ -1,8 +1,27 @@
-/* ==========================================================================
-   BKM Industries Limited - Premium Corporate Interactions Script
-   ========================================================================== */
+/* ==========================================
+   0. GOOGLE ANALYTICS 4 DYNAMIC INITIALIZATION
+   ========================================== */
+const GA_MEASUREMENT_ID = 'G-DGTRKZ3N9X';
+
+function initGoogleAnalytics() {
+    if (!GA_MEASUREMENT_ID || GA_MEASUREMENT_ID.trim() === '') return;
+
+    const gaScript = document.createElement('script');
+    gaScript.async = true;
+    gaScript.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
+    document.head.appendChild(gaScript);
+
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    window.gtag = gtag;
+
+    gtag('js', new Date());
+    gtag('config', GA_MEASUREMENT_ID, { send_page_view: true });
+}
 
 document.addEventListener('DOMContentLoaded', () => {
+    initGoogleAnalytics();
+    initMiniMapBadge();
     
     // ==========================================
     // 1. HEADER SCROLL EFFECT
@@ -360,3 +379,55 @@ async function fetchAnnouncements() {
 document.addEventListener("DOMContentLoaded", () => {
     fetchAnnouncements();
 });
+
+// ==========================================
+// MINI MAP GRAPHIC BADGE (MUMBAI • SILVASSA • KOLKATA)
+// ==========================================
+function initMiniMapBadge() {
+    const headerRights = document.querySelectorAll('.header-right');
+    const isHomePage = window.location.pathname.endsWith('index.html') || window.location.pathname === '/' || window.location.pathname.endsWith('/') || window.location.pathname === '';
+
+    headerRights.forEach(hr => {
+        if (hr.querySelector('.mini-map-badge')) return; // Avoid duplicate insertion
+
+        const getInTouchBtn = hr.querySelector('.btn-header');
+        if (!getInTouchBtn) return;
+
+        const mapBadge = document.createElement('div');
+        mapBadge.className = 'mini-map-badge notranslate';
+        mapBadge.setAttribute('translate', 'no');
+        mapBadge.innerHTML = `
+            <svg viewBox="0 0 612 696" class="india-mini-svg">
+                <defs>
+                    <linearGradient id="mapBgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#0b112c"/>
+                        <stop offset="100%" stop-color="#16204d"/>
+                    </linearGradient>
+                </defs>
+
+                <!-- Background Base Card -->
+                <rect width="612" height="696" rx="80" fill="url(#mapBgGrad)"/>
+
+                <!-- Exact Official India Map (assets/india_map.svg) Background -->
+                <image href="assets/india_map.svg" width="580" height="660" x="16" y="18" opacity="0.75" style="filter: brightness(0) invert(1);"/>
+            </svg>
+
+            <div class="map-network-tooltip">
+                <span>Mumbai</span> • <span>Silvassa</span> • <span>Kolkata</span>
+            </div>
+        `;
+
+        // Click handler to smooth scroll to map section on home page
+        mapBadge.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetSection = document.getElementById('contact');
+            if (targetSection && (isHomePage || window.location.pathname.includes('index.html'))) {
+                targetSection.scrollIntoView({ behavior: 'smooth' });
+            } else {
+                window.location.href = 'index.html#contact';
+            }
+        });
+
+        hr.insertBefore(mapBadge, getInTouchBtn);
+    });
+}
