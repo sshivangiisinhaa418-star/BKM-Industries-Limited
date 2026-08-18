@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     protectUntranslatableElements();
     initLanguageSelector();
     loadGoogleTranslateScript();
+    initPDFAnalyticsTracking();
     
     // ==========================================
     // 1. HEADER SCROLL EFFECT
@@ -551,4 +552,35 @@ function loadGoogleTranslateScript() {
     script.id = 'google-translate-script';
     script.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
     document.head.appendChild(script);
+}
+
+// ==========================================
+// AUTOMATIC PDF DOWNLOAD & PREVIEW GA4 TRACKING
+// ==========================================
+function initPDFAnalyticsTracking() {
+    document.addEventListener('click', function(e) {
+        const link = e.target.closest('a');
+        if (!link) return;
+        const href = link.getAttribute('href') || '';
+        const onclick = link.getAttribute('onclick') || '';
+        
+        let pdfName = '';
+        if (href.toLowerCase().endsWith('.pdf')) {
+            pdfName = href.split('/').pop();
+        } else if (onclick.includes('previewPDF')) {
+            const match = onclick.match(/previewPDF\(['"](.*?)['"]\)/);
+            if (match && match[1]) {
+                pdfName = match[1].split('/').pop();
+            }
+        }
+        
+        if (pdfName && typeof window.gtag === 'function') {
+            window.gtag('event', 'pdf_download', {
+                'file_name': decodeURIComponent(pdfName),
+                'file_extension': 'pdf',
+                'link_url': href || 'modal_preview',
+                'page_location': window.location.href
+            });
+        }
+    });
 }
