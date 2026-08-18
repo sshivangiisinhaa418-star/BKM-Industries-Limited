@@ -555,7 +555,7 @@ function loadGoogleTranslateScript() {
 }
 
 // ==========================================
-// AUTOMATIC PDF DOWNLOAD & PREVIEW GA4 TRACKING
+// AUTOMATIC PDF, LEAD & CONTACT GA4 TRACKING
 // ==========================================
 function initPDFAnalyticsTracking() {
     document.addEventListener('click', function(e) {
@@ -563,7 +563,9 @@ function initPDFAnalyticsTracking() {
         if (!link) return;
         const href = link.getAttribute('href') || '';
         const onclick = link.getAttribute('onclick') || '';
-        
+        const text = link.innerText ? link.innerText.trim() : '';
+
+        // 1. PDF Download & Preview Tracking
         let pdfName = '';
         if (href.toLowerCase().endsWith('.pdf')) {
             pdfName = href.split('/').pop();
@@ -575,10 +577,69 @@ function initPDFAnalyticsTracking() {
         }
         
         if (pdfName && typeof window.gtag === 'function') {
-            window.gtag('event', 'pdf_download', {
+            window.gtag('event', 'file_download', {
                 'file_name': decodeURIComponent(pdfName),
                 'file_extension': 'pdf',
                 'link_url': href || 'modal_preview',
+                'page_location': window.location.href
+            });
+        }
+
+        // 2. "Get In Touch" Lead Button Tracking
+        if (text.toLowerCase().includes('get in touch') || link.classList.contains('btn-header')) {
+            if (typeof window.gtag === 'function') {
+                window.gtag('event', 'generate_lead', {
+                    'lead_type': 'Get In Touch Button',
+                    'link_url': href,
+                    'page_location': window.location.href
+                });
+            }
+        }
+
+        // 3. Email Contact Link Tracking (mailto:)
+        if (href.startsWith('mailto:')) {
+            const emailAddr = href.replace('mailto:', '');
+            if (typeof window.gtag === 'function') {
+                window.gtag('event', 'contact_email_click', {
+                    'email_address': emailAddr,
+                    'page_location': window.location.href
+                });
+                window.gtag('event', 'generate_lead', {
+                    'lead_type': 'Email Contact',
+                    'email_address': emailAddr,
+                    'page_location': window.location.href
+                });
+            }
+        }
+
+        // 4. Phone Call Contact Link Tracking (tel:)
+        if (href.startsWith('tel:')) {
+            const phoneNum = href.replace('tel:', '');
+            if (typeof window.gtag === 'function') {
+                window.gtag('event', 'contact_phone_click', {
+                    'phone_number': phoneNum,
+                    'page_location': window.location.href
+                });
+                window.gtag('event', 'generate_lead', {
+                    'lead_type': 'Phone Contact',
+                    'phone_number': phoneNum,
+                    'page_location': window.location.href
+                });
+            }
+        }
+    });
+
+    // 5. Contact Form Submission Tracking
+    document.addEventListener('submit', function(e) {
+        const form = e.target;
+        if (form && typeof window.gtag === 'function') {
+            window.gtag('event', 'generate_lead', {
+                'lead_type': 'Contact Form Submission',
+                'form_id': form.id || 'contact_form',
+                'page_location': window.location.href
+            });
+            window.gtag('event', 'form_submission', {
+                'form_id': form.id || 'contact_form',
                 'page_location': window.location.href
             });
         }
