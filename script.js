@@ -22,6 +22,9 @@ function initGoogleAnalytics() {
 document.addEventListener('DOMContentLoaded', () => {
     initGoogleAnalytics();
     initMiniMapBadge();
+    protectUntranslatableElements();
+    initLanguageSelector();
+    loadGoogleTranslateScript();
     
     // ==========================================
     // 1. HEADER SCROLL EFFECT
@@ -430,4 +433,122 @@ function initMiniMapBadge() {
 
         hr.insertBefore(mapBadge, getInTouchBtn);
     });
+}
+
+// ==========================================
+// UNTRANSLATABLE ELEMENTS PROTECTION
+// ==========================================
+function protectUntranslatableElements() {
+    // Protect stock tickers and company logos from translation
+    document.querySelectorAll('.ticker-label, .logo, .stock-ticker').forEach(el => {
+        el.classList.add('notranslate');
+        el.setAttribute('translate', 'no');
+    });
+
+    // Protect specific metric numbers (e.g., ISO 9001, 25mm - 31.5mm, 1.8 Billion+)
+    document.querySelectorAll('.biz-metric-num').forEach(el => {
+        const text = el.textContent || '';
+        if (text.includes('ISO') || text.includes('mm') || text.includes('Billion') || text.includes('%') || text.includes('PSI')) {
+            el.classList.add('notranslate');
+            el.setAttribute('translate', 'no');
+        }
+    });
+
+    // Wrap inline "ISO" and "ISO 9001" occurrences in a notranslate span
+    document.querySelectorAll('p, td, li, h1, h2, h3, h4, span').forEach(el => {
+        if (el.classList.contains('notranslate') || el.closest('.notranslate') || el.children.length > 0) return;
+        const text = el.innerHTML;
+        if (/\bISO(?:\s*\d+)?\b/i.test(text) && !text.includes('class="notranslate"')) {
+            el.innerHTML = text.replace(/\b(ISO(?:\s*\d+)?)\b/gi, '<span class="notranslate" translate="no">$1</span>');
+        }
+    });
+}
+
+// ==========================================
+// DYNAMIC LANGUAGE SELECTOR (ENGLISH & HINDI)
+// ==========================================
+function initLanguageSelector() {
+    const langSelectors = document.querySelectorAll('.lang-selector');
+    if (langSelectors.length === 0) return;
+
+    const getCookie = (name) => {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+        return null;
+    };
+
+    const currentLang = getCookie('googtrans')?.includes('/hi') ? 'hi' : 'en';
+
+    langSelectors.forEach(selector => {
+        selector.style.position = 'relative';
+        selector.style.cursor = 'pointer';
+        selector.innerHTML = `
+            <i class="fas fa-globe"></i> <span>${currentLang === 'hi' ? 'हिंदी' : 'English'}</span> <i class="fas fa-chevron-down"></i>
+            <div class="lang-dropdown" style="display: none; position: absolute; top: 100%; right: 0; background: #0b112c; border: 1px solid rgba(255,255,255,0.15); border-radius: 6px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); z-index: 9999; margin-top: 5px; min-width: 130px; overflow: hidden;">
+                <div class="lang-option ${currentLang === 'en' ? 'active' : ''}" data-lang="en" style="padding: 8px 16px; color: #fff; font-size: 0.85rem; display: flex; align-items: center; gap: 8px; transition: background 0.2s;">
+                    <span>English</span>
+                </div>
+                <div class="lang-option ${currentLang === 'hi' ? 'active' : ''}" data-lang="hi" style="padding: 8px 16px; color: #fff; font-size: 0.85rem; display: flex; align-items: center; gap: 8px; transition: background 0.2s;">
+                    <span>हिंदी (Hindi)</span>
+                </div>
+            </div>
+        `;
+
+        const dropdown = selector.querySelector('.lang-dropdown');
+        selector.addEventListener('click', (e) => {
+            e.stopPropagation();
+            dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+        });
+
+        const options = selector.querySelectorAll('.lang-option');
+        options.forEach(opt => {
+            opt.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const selectedLang = opt.getAttribute('data-lang');
+                if (selectedLang === 'hi') {
+                    document.cookie = "googtrans=/en/hi; path=/;";
+                    document.cookie = "googtrans=/en/hi; path=/; domain=" + window.location.hostname;
+                } else {
+                    document.cookie = "googtrans=/en/en; path=/;";
+                    document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                    document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=" + window.location.hostname;
+                }
+                location.reload();
+            });
+
+            opt.addEventListener('mouseenter', () => {
+                opt.style.background = 'rgba(59, 130, 246, 0.25)';
+            });
+            opt.addEventListener('mouseleave', () => {
+                opt.style.background = 'transparent';
+            });
+        });
+    });
+
+    document.addEventListener('click', () => {
+        document.querySelectorAll('.lang-dropdown').forEach(d => d.style.display = 'none');
+    });
+}
+
+function loadGoogleTranslateScript() {
+    if (document.getElementById('google-translate-script')) return;
+
+    const gtContainer = document.createElement('div');
+    gtContainer.id = 'google_translate_element';
+    gtContainer.style.display = 'none';
+    document.body.appendChild(gtContainer);
+
+    window.googleTranslateElementInit = function() {
+        new google.translate.TranslateElement({
+            pageLanguage: 'en',
+            includedLanguages: 'en,hi',
+            autoDisplay: false
+        }, 'google_translate_element');
+    };
+
+    const script = document.createElement('script');
+    script.id = 'google-translate-script';
+    script.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+    document.head.appendChild(script);
 }
