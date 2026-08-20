@@ -361,16 +361,33 @@ async function fetchAnnouncements() {
             // Get the latest 4 news items
             const topNews = data.items.slice(0, 4);
             
-            let htmlContent = '';
-            topNews.forEach(item => {
-                // Clean up title and add a link
-                htmlContent += `<span class="announcement-item"><strong>LIVE NEWS</strong>: <a href="${item.link}" target="_blank" style="color:inherit; text-decoration:underline;">${item.title}</a></span>`;
-            });
-            
             // Loop through all tracks and update them
-            // We duplicate the htmlContent so the CSS seamless scrolling works perfectly without breaking
+            // We duplicate the items so the CSS seamless scrolling works perfectly without breaking
             announcementTracks.forEach(track => {
-                track.innerHTML = htmlContent + htmlContent;
+                track.innerHTML = ''; // Clear existing fallback content
+                
+                // We create the elements twice for the seamless scrolling effect
+                for (let i = 0; i < 2; i++) {
+                    topNews.forEach(item => {
+                        const span = document.createElement('span');
+                        span.className = 'announcement-item';
+                        
+                        const strong = document.createElement('strong');
+                        strong.textContent = 'LIVE NEWS';
+                        span.appendChild(strong);
+                        span.appendChild(document.createTextNode(': '));
+                        
+                        const a = document.createElement('a');
+                        a.href = item.link; 
+                        a.target = '_blank';
+                        a.style.color = 'inherit';
+                        a.style.textDecoration = 'underline';
+                        a.textContent = item.title;
+                        span.appendChild(a);
+                        
+                        track.appendChild(span);
+                    });
+                }
             });
         }
     } catch (error) {
