@@ -328,10 +328,12 @@
                         <label for="fySelect" style="font-weight:700; color:var(--primary-color);">Select Financial
                             Year: </label>
                         <select id="fySelect" class="select-custom" onchange="filterTable()">
+                            <option value="FY27">FY 2026 - 2027</option>
                             <option value="FY26" selected>FY 2025 - 2026</option>
                             <option value="FY25">FY 2024 - 2025</option>
                             <option value="FY24">FY 2023 - 2024</option>
-                            <option value="FY23">FY 2022 - 2023</option>
+                            <option value="Annual">Annual Reports / Balance Sheets</option>
+                            <option value="all">All Financial Years</option>
                         </select>
                     </div>
                     <div class="q-tabs">
@@ -353,94 +355,467 @@
                         </tr>
                     </thead>
                     <tbody id="reportsBody">
-                        <!-- <tr data-fy="FY26" data-q="Q4">
-                            <td><a href="assets/pdf/Standalone and Consolidated Financial Results 2025-26.pdf">Consolidated Audited Financial Results</a></td>
-                            <td>Q4 / Annual</td>
-                            <td>FY 2025-26</td>
-                            <td><a href="assets/pdf/Standalone and Consolidated Financial Results 2025-26.pdf" download
-                                    class="btn-pdf"><i class="fas fa-file-pdf"></i> Download PDF</a></td>
-                        </tr> -->
-
-                        <tr data-fy="FY26" data-q="Q4">
+                        <tr data-fy="FY27" data-q="Q1">
                             <td>
-                                <a href="#"
-                                    onclick="previewPDF('assets/pdf/Standalone and Consolidated Financial Results 2025-26.pdf'); return false;">
-                                    Consolidated Audited Financial Results
+                                <a href="#" onclick="previewPDF('assets/pdf/financial/2026-27/Q1/LR Q1 Standalone.pdf'); return false;">
+                                    Limited Review Report (Standalone) - Q1
                                 </a>
                             </td>
-
-                            <td>Q4 / Annual</td>
-                            <td>FY 2025-26</td>
-
+                            <td>Q1</td>
+                            <td>FY 2026-27</td>
                             <td>
-                                <a href="assets/pdf/Standalone and Consolidated Financial Results 2025-26.pdf" download
-                                    class="btn-pdf">
+                                <a href="assets/pdf/financial/2026-27/Q1/LR Q1 Standalone.pdf" download class="btn-pdf">
+                                    <i class="fas fa-file-pdf"></i> Download PDF
+                                </a>
+                            </td>
+                        </tr>
+                        <tr data-fy="FY27" data-q="Q1">
+                            <td>
+                                <a href="#" onclick="previewPDF('assets/pdf/financial/2026-27/Q1/LR Q1 consolidated.pdf'); return false;">
+                                    Limited Review Report (Consolidated) - Q1
+                                </a>
+                            </td>
+                            <td>Q1</td>
+                            <td>FY 2026-27</td>
+                            <td>
+                                <a href="assets/pdf/financial/2026-27/Q1/LR Q1 consolidated.pdf" download class="btn-pdf">
+                                    <i class="fas fa-file-pdf"></i> Download PDF
+                                </a>
+                            </td>
+                        </tr>
+                        <tr data-fy="FY26" data-q="Q3">
+                            <td>
+                                <a href="#" onclick="previewPDF('assets/pdf/financial/2025-26/LR Q3/LR Report Standalone & Consolidated_30.09.25 (Q3).pdf'); return false;">
+                                    Limited Review Report Standalone & Consolidated (30.09.2025)
+                                </a>
+                            </td>
+                            <td>Q3</td>
+                            <td>FY 2025-26</td>
+                            <td>
+                                <a href="assets/pdf/financial/2025-26/LR Q3/LR Report Standalone & Consolidated_30.09.25 (Q3).pdf" download class="btn-pdf">
                                     <i class="fas fa-file-pdf"></i> Download PDF
                                 </a>
                             </td>
                         </tr>
                         <tr data-fy="FY26" data-q="Q4">
-                            <td><a href="#"
-                                    onclick="previewPDF('assets/pdf/Standalone Audited Financial Statements & Notes.pdf'); return false;">Standalone
-                                    Audited Financial Statements & Notes</a></td>
+                            <td>
+                                <a href="#" onclick="previewPDF('assets/pdf/financial/2025-26/LR Q4/LR Standalone Q4 31.03.2026.pdf'); return false;">
+                                    Limited Review Report (Standalone) - Q4 (31.03.2026)
+                                </a>
+                            </td>
                             <td>Q4 / Annual</td>
                             <td>FY 2025-26</td>
-                            <td><a href="assets/pdf/Standalone Audited Financial Statements & Notes.pdf" download
-                                    class="btn-pdf"><i class="fas fa-file-pdf"></i> Download PDF</a></td>
+                            <td>
+                                <a href="assets/pdf/financial/2025-26/LR Q4/LR Standalone Q4 31.03.2026.pdf" download class="btn-pdf">
+                                    <i class="fas fa-file-pdf"></i> Download PDF
+                                </a>
+                            </td>
                         </tr>
                         <tr data-fy="FY26" data-q="Q4">
-                            <td><a href="#"
-                                    onclick="previewPDF('assets/pdf/Production & Operational Release Q4.pdf'); return false;">Production
-                                    & Operational Release Q4</a></td>
+                            <td>
+                                <a href="#" onclick="previewPDF('assets/pdf/financial/2025-26/LR Q4/LR Consolidated Q4 31.03.2026.pdf'); return false;">
+                                    Limited Review Report (Consolidated) - Q4 (31.03.2026)
+                                </a>
+                            </td>
                             <td>Q4 / Annual</td>
                             <td>FY 2025-26</td>
-                            <td><a href="assets/pdf/Production & Operational Release Q4.pdf" download class="btn-pdf"><i
-                                        class="fas fa-file-pdf"></i> Download PDF</a></td>
-                        </tr>
-                        <tr data-fy="FY26" data-q="Q3">
-                            <td><a href="#"
-                                    onclick="previewPDF('assets/pdf/Unaudited Financial Results Q3 FY26.pdf'); return false;">Unaudited
-                                    Financial Results Q3 FY26</a></td>
-                            <td>Q3</td>
-                            <td>FY 2025-26</td>
-                            <td><a href="assets/pdf/Unaudited Financial Results Q3 FY26.pdf" download class="btn-pdf"><i
-                                        class="fas fa-file-pdf"></i> Download PDF</a></td>
+                            <td>
+                                <a href="assets/pdf/financial/2025-26/LR Q4/LR Consolidated Q4 31.03.2026.pdf" download class="btn-pdf">
+                                    <i class="fas fa-file-pdf"></i> Download PDF
+                                </a>
+                            </td>
                         </tr>
                         <tr data-fy="FY26" data-q="Q2">
-                            <td><a href="#"
-                                    onclick="previewPDF('assets/pdf/Unaudited Financial Results Q2 FY26 & Limited Review.pdf'); return false;">Unaudited
-                                    Financial Results Q2 FY26 & Limited Review</a></td>
+                            <td>
+                                <a href="#" onclick="previewPDF('assets/pdf/financial/2025-26/LR Q2/Audit Report Standalone and Conso.pdf'); return false;">
+                                    Audit Report (Standalone & Consolidated) - Q2
+                                </a>
+                            </td>
                             <td>Q2</td>
                             <td>FY 2025-26</td>
-                            <td><a href="assets/pdf/Unaudited Financial Results Q2 FY26 & Limited Review.pdf" download
-                                    class="btn-pdf"><i class="fas fa-file-pdf"></i> Download PDF</a></td>
+                            <td>
+                                <a href="assets/pdf/financial/2025-26/LR Q2/Audit Report Standalone and Conso.pdf" download class="btn-pdf">
+                                    <i class="fas fa-file-pdf"></i> Download PDF
+                                </a>
+                            </td>
+                        </tr>
+                        <tr data-fy="FY26" data-q="Q2">
+                            <td>
+                                <a href="#" onclick="previewPDF('assets/pdf/financial/2025-26/LR Q2/Standalone and Conso Financial Results.pdf'); return false;">
+                                    Standalone & Consolidated Financial Results - Q2
+                                </a>
+                            </td>
+                            <td>Q2</td>
+                            <td>FY 2025-26</td>
+                            <td>
+                                <a href="assets/pdf/financial/2025-26/LR Q2/Standalone and Conso Financial Results.pdf" download class="btn-pdf">
+                                    <i class="fas fa-file-pdf"></i> Download PDF
+                                </a>
+                            </td>
                         </tr>
                         <tr data-fy="FY26" data-q="Q1">
-                            <td><a href="#"
-                                    onclick="previewPDF('assets/pdf/Unaudited Financial Results Q1 FY26.pdf'); return false;">Unaudited
-                                    Financial Results Q1 FY26</a></td>
+                            <td>
+                                <a href="#" onclick="previewPDF('assets/pdf/financial/2025-26/LR Q1/Audit report Standalone and conso.pdf'); return false;">
+                                    Audit Report (Standalone & Consolidated) - Q1
+                                </a>
+                            </td>
                             <td>Q1</td>
                             <td>FY 2025-26</td>
-                            <td><a href="assets/pdf/Unaudited Financial Results Q1 FY26.pdf" download class="btn-pdf"><i
-                                        class="fas fa-file-pdf"></i> Download PDF</a></td>
+                            <td>
+                                <a href="assets/pdf/financial/2025-26/LR Q1/Audit report Standalone and conso.pdf" download class="btn-pdf">
+                                    <i class="fas fa-file-pdf"></i> Download PDF
+                                </a>
+                            </td>
+                        </tr>
+                        <tr data-fy="FY26" data-q="Q1">
+                            <td>
+                                <a href="#" onclick="previewPDF('assets/pdf/financial/2025-26/LR Q1/Standalone and Conso Financial Results.pdf'); return false;">
+                                    Standalone & Consolidated Financial Results - Q1
+                                </a>
+                            </td>
+                            <td>Q1</td>
+                            <td>FY 2025-26</td>
+                            <td>
+                                <a href="assets/pdf/financial/2025-26/LR Q1/Standalone and Conso Financial Results.pdf" download class="btn-pdf">
+                                    <i class="fas fa-file-pdf"></i> Download PDF
+                                </a>
+                            </td>
                         </tr>
                         <tr data-fy="FY25" data-q="Q4">
-                            <td><a href="#"
-                                    onclick="previewPDF('assets/pdf/Integrated Annual Report & Audited Accounts FY25.pdf'); return false;">Integrated
-                                    Annual Report & Audited Accounts FY25</a></td>
+                            <td>
+                                <a href="#" onclick="previewPDF('assets/pdf/financial/2024-25/Q4/Independent Auditor\'s Report (Consolidated).pdf'); return false;">
+                                    Independent Auditor's Report (Consolidated) - Q4
+                                </a>
+                            </td>
                             <td>Q4 / Annual</td>
                             <td>FY 2024-25</td>
-                            <td><a href="assets/pdf/Integrated Annual Report & Audited Accounts FY25.pdf" download
-                                    class="btn-pdf"><i class="fas fa-file-pdf"></i> Download PDF</a></td>
+                            <td>
+                                <a href="assets/pdf/financial/2024-25/Q4/Independent Auditor's Report (Consolidated).pdf" download class="btn-pdf">
+                                    <i class="fas fa-file-pdf"></i> Download PDF
+                                </a>
+                            </td>
                         </tr>
                         <tr data-fy="FY25" data-q="Q4">
-                            <td><a href="#"
-                                    onclick="previewPDF('assets/pdf/Audited Financial Results FY25.pdf'); return false;">Audited
-                                    Financial Results FY25</a></td>
+                            <td>
+                                <a href="#" onclick="previewPDF('assets/pdf/financial/2024-25/Q4/Independent Auditor\'s Report (Standalone).pdf'); return false;">
+                                    Independent Auditor's Report (Standalone) - Q4
+                                </a>
+                            </td>
                             <td>Q4 / Annual</td>
                             <td>FY 2024-25</td>
-                            <td><a href="assets/pdf/Audited Financial Results FY25.pdf" download class="btn-pdf"><i
-                                        class="fas fa-file-pdf"></i> Download PDF</a></td>
+                            <td>
+                                <a href="assets/pdf/financial/2024-25/Q4/Independent Auditor's Report (Standalone).pdf" download class="btn-pdf">
+                                    <i class="fas fa-file-pdf"></i> Download PDF
+                                </a>
+                            </td>
+                        </tr>
+                        <tr data-fy="FY25" data-q="Q4">
+                            <td>
+                                <a href="#" onclick="previewPDF('assets/pdf/financial/2024-25/Q4/Standalone and Conso Financial Result.pdf'); return false;">
+                                    Standalone & Consolidated Financial Results - Q4
+                                </a>
+                            </td>
+                            <td>Q4 / Annual</td>
+                            <td>FY 2024-25</td>
+                            <td>
+                                <a href="assets/pdf/financial/2024-25/Q4/Standalone and Conso Financial Result.pdf" download class="btn-pdf">
+                                    <i class="fas fa-file-pdf"></i> Download PDF
+                                </a>
+                            </td>
+                        </tr>
+                        <tr data-fy="FY25" data-q="Q3">
+                            <td>
+                                <a href="#" onclick="previewPDF('assets/pdf/financial/2024-25/Q3/Audit Report Standalone and Conso.pdf'); return false;">
+                                    Audit Report (Standalone & Consolidated) - Q3
+                                </a>
+                            </td>
+                            <td>Q3</td>
+                            <td>FY 2024-25</td>
+                            <td>
+                                <a href="assets/pdf/financial/2024-25/Q3/Audit Report Standalone and Conso.pdf" download class="btn-pdf">
+                                    <i class="fas fa-file-pdf"></i> Download PDF
+                                </a>
+                            </td>
+                        </tr>
+                        <tr data-fy="FY25" data-q="Q3">
+                            <td>
+                                <a href="#" onclick="previewPDF('assets/pdf/financial/2024-25/Q3/Standalone and Conso financial Results.pdf'); return false;">
+                                    Standalone & Consolidated Financial Results - Q3
+                                </a>
+                            </td>
+                            <td>Q3</td>
+                            <td>FY 2024-25</td>
+                            <td>
+                                <a href="assets/pdf/financial/2024-25/Q3/Standalone and Conso financial Results.pdf" download class="btn-pdf">
+                                    <i class="fas fa-file-pdf"></i> Download PDF
+                                </a>
+                            </td>
+                        </tr>
+                        <tr data-fy="FY25" data-q="Q2">
+                            <td>
+                                <a href="#" onclick="previewPDF('assets/pdf/financial/2024-25/Q2/Audit Report Stand and Conso.pdf'); return false;">
+                                    Audit Report (Standalone & Consolidated) - Q2
+                                </a>
+                            </td>
+                            <td>Q2</td>
+                            <td>FY 2024-25</td>
+                            <td>
+                                <a href="assets/pdf/financial/2024-25/Q2/Audit Report Stand and Conso.pdf" download class="btn-pdf">
+                                    <i class="fas fa-file-pdf"></i> Download PDF
+                                </a>
+                            </td>
+                        </tr>
+                        <tr data-fy="FY25" data-q="Q2">
+                            <td>
+                                <a href="#" onclick="previewPDF('assets/pdf/financial/2024-25/Q2/Standalone and Conso Financial Results.pdf'); return false;">
+                                    Standalone & Consolidated Financial Results - Q2
+                                </a>
+                            </td>
+                            <td>Q2</td>
+                            <td>FY 2024-25</td>
+                            <td>
+                                <a href="assets/pdf/financial/2024-25/Q2/Standalone and Conso Financial Results.pdf" download class="btn-pdf">
+                                    <i class="fas fa-file-pdf"></i> Download PDF
+                                </a>
+                            </td>
+                        </tr>
+                        <tr data-fy="FY25" data-q="Q1">
+                            <td>
+                                <a href="#" onclick="previewPDF('assets/pdf/financial/2024-25/Q1/Audit Report Standalone and CFS.pdf'); return false;">
+                                    Audit Report (Standalone & CFS) - Q1
+                                </a>
+                            </td>
+                            <td>Q1</td>
+                            <td>FY 2024-25</td>
+                            <td>
+                                <a href="assets/pdf/financial/2024-25/Q1/Audit Report Standalone and CFS.pdf" download class="btn-pdf">
+                                    <i class="fas fa-file-pdf"></i> Download PDF
+                                </a>
+                            </td>
+                        </tr>
+                        <tr data-fy="FY25" data-q="Q1">
+                            <td>
+                                <a href="#" onclick="previewPDF('assets/pdf/financial/2024-25/Q1/Standalone and Conso Financial Results.pdf'); return false;">
+                                    Standalone & Consolidated Financial Results - Q1
+                                </a>
+                            </td>
+                            <td>Q1</td>
+                            <td>FY 2024-25</td>
+                            <td>
+                                <a href="assets/pdf/financial/2024-25/Q1/Standalone and Conso Financial Results.pdf" download class="btn-pdf">
+                                    <i class="fas fa-file-pdf"></i> Download PDF
+                                </a>
+                            </td>
+                        </tr>
+                        <tr data-fy="FY24" data-q="Q4">
+                            <td>
+                                <a href="#" onclick="previewPDF('assets/pdf/financial/2023-24/Q4/Audit Report Standalone and Conso.pdf'); return false;">
+                                    Audit Report (Standalone & Consolidated) - Q4
+                                </a>
+                            </td>
+                            <td>Q4 / Annual</td>
+                            <td>FY 2023-24</td>
+                            <td>
+                                <a href="assets/pdf/financial/2023-24/Q4/Audit Report Standalone and Conso.pdf" download class="btn-pdf">
+                                    <i class="fas fa-file-pdf"></i> Download PDF
+                                </a>
+                            </td>
+                        </tr>
+                        <tr data-fy="FY24" data-q="Q4">
+                            <td>
+                                <a href="#" onclick="previewPDF('assets/pdf/financial/2023-24/Q4/Standalone and Conso Financial Results.pdf'); return false;">
+                                    Standalone & Consolidated Financial Results - Q4
+                                </a>
+                            </td>
+                            <td>Q4 / Annual</td>
+                            <td>FY 2023-24</td>
+                            <td>
+                                <a href="assets/pdf/financial/2023-24/Q4/Standalone and Conso Financial Results.pdf" download class="btn-pdf">
+                                    <i class="fas fa-file-pdf"></i> Download PDF
+                                </a>
+                            </td>
+                        </tr>
+                        <tr data-fy="FY24" data-q="Q3">
+                            <td>
+                                <a href="#" onclick="previewPDF('assets/pdf/financial/2023-24/Q3/Conso Audit Report.pdf'); return false;">
+                                    Consolidated Audit Report - Q3
+                                </a>
+                            </td>
+                            <td>Q3</td>
+                            <td>FY 2023-24</td>
+                            <td>
+                                <a href="assets/pdf/financial/2023-24/Q3/Conso Audit Report.pdf" download class="btn-pdf">
+                                    <i class="fas fa-file-pdf"></i> Download PDF
+                                </a>
+                            </td>
+                        </tr>
+                        <tr data-fy="FY24" data-q="Q3">
+                            <td>
+                                <a href="#" onclick="previewPDF('assets/pdf/financial/2023-24/Q3/Conso Financial Results.pdf'); return false;">
+                                    Consolidated Financial Results - Q3
+                                </a>
+                            </td>
+                            <td>Q3</td>
+                            <td>FY 2023-24</td>
+                            <td>
+                                <a href="assets/pdf/financial/2023-24/Q3/Conso Financial Results.pdf" download class="btn-pdf">
+                                    <i class="fas fa-file-pdf"></i> Download PDF
+                                </a>
+                            </td>
+                        </tr>
+                        <tr data-fy="FY24" data-q="Q3">
+                            <td>
+                                <a href="#" onclick="previewPDF('assets/pdf/financial/2023-24/Q3/Standalone Audit Report.pdf'); return false;">
+                                    Standalone Audit Report - Q3
+                                </a>
+                            </td>
+                            <td>Q3</td>
+                            <td>FY 2023-24</td>
+                            <td>
+                                <a href="assets/pdf/financial/2023-24/Q3/Standalone Audit Report.pdf" download class="btn-pdf">
+                                    <i class="fas fa-file-pdf"></i> Download PDF
+                                </a>
+                            </td>
+                        </tr>
+                        <tr data-fy="FY24" data-q="Q3">
+                            <td>
+                                <a href="#" onclick="previewPDF('assets/pdf/financial/2023-24/Q3/Standalone Financial Results.pdf'); return false;">
+                                    Standalone Financial Results - Q3
+                                </a>
+                            </td>
+                            <td>Q3</td>
+                            <td>FY 2023-24</td>
+                            <td>
+                                <a href="assets/pdf/financial/2023-24/Q3/Standalone Financial Results.pdf" download class="btn-pdf">
+                                    <i class="fas fa-file-pdf"></i> Download PDF
+                                </a>
+                            </td>
+                        </tr>
+                        <tr data-fy="FY24" data-q="Q2">
+                            <td>
+                                <a href="#" onclick="previewPDF('assets/pdf/financial/2023-24/Q2/Audit Report Standalone and CFS.pdf'); return false;">
+                                    Audit Report (Standalone & CFS) - Q2
+                                </a>
+                            </td>
+                            <td>Q2</td>
+                            <td>FY 2023-24</td>
+                            <td>
+                                <a href="assets/pdf/financial/2023-24/Q2/Audit Report Standalone and CFS.pdf" download class="btn-pdf">
+                                    <i class="fas fa-file-pdf"></i> Download PDF
+                                </a>
+                            </td>
+                        </tr>
+                        <tr data-fy="FY24" data-q="Q2">
+                            <td>
+                                <a href="#" onclick="previewPDF('assets/pdf/financial/2023-24/Q2/Standalone and CFS Financial Results.pdf'); return false;">
+                                    Standalone & CFS Financial Results - Q2
+                                </a>
+                            </td>
+                            <td>Q2</td>
+                            <td>FY 2023-24</td>
+                            <td>
+                                <a href="assets/pdf/financial/2023-24/Q2/Standalone and CFS Financial Results.pdf" download class="btn-pdf">
+                                    <i class="fas fa-file-pdf"></i> Download PDF
+                                </a>
+                            </td>
+                        </tr>
+                        <tr data-fy="Annual" data-q="Q4">
+                            <td>
+                                <a href="#" onclick="previewPDF('assets/pdf/financial/annual/BKM Accounts Final Signed FY-22-23.pdf'); return false;">
+                                    BKM Accounts Final Signed FY 2022-23
+                                </a>
+                            </td>
+                            <td>Annual Report</td>
+                            <td>FY 2022-23</td>
+                            <td>
+                                <a href="assets/pdf/financial/annual/BKM Accounts Final Signed FY-22-23.pdf" download class="btn-pdf">
+                                    <i class="fas fa-file-pdf"></i> Download PDF
+                                </a>
+                            </td>
+                        </tr>
+                        <tr data-fy="Annual" data-q="Q4">
+                            <td>
+                                <a href="#" onclick="previewPDF('assets/pdf/financial/annual/Final Audit Report signed for the FY-2021-22.pdf'); return false;">
+                                    Final Audit Report Signed for FY 2021-22
+                                </a>
+                            </td>
+                            <td>Annual Report</td>
+                            <td>FY 2021-22</td>
+                            <td>
+                                <a href="assets/pdf/financial/annual/Final Audit Report signed for the FY-2021-22.pdf" download class="btn-pdf">
+                                    <i class="fas fa-file-pdf"></i> Download PDF
+                                </a>
+                            </td>
+                        </tr>
+                        <tr data-fy="Annual" data-q="Q4">
+                            <td>
+                                <a href="#" onclick="previewPDF('assets/pdf/financial/annual/Final Audit Report signed for the FY-2020-21.pdf'); return false;">
+                                    Final Audit Report Signed for FY 2020-21
+                                </a>
+                            </td>
+                            <td>Annual Report</td>
+                            <td>FY 2020-21</td>
+                            <td>
+                                <a href="assets/pdf/financial/annual/Final Audit Report signed for the FY-2020-21.pdf" download class="btn-pdf">
+                                    <i class="fas fa-file-pdf"></i> Download PDF
+                                </a>
+                            </td>
+                        </tr>
+                        <tr data-fy="Annual" data-q="Q4">
+                            <td>
+                                <a href="#" onclick="previewPDF('assets/pdf/financial/annual/Audited Financial Statement 2019-20_BSE.pdf'); return false;">
+                                    Audited Financial Statement 2019-20 (BSE)
+                                </a>
+                            </td>
+                            <td>Annual Report</td>
+                            <td>FY 2019-20</td>
+                            <td>
+                                <a href="assets/pdf/financial/annual/Audited Financial Statement 2019-20_BSE.pdf" download class="btn-pdf">
+                                    <i class="fas fa-file-pdf"></i> Download PDF
+                                </a>
+                            </td>
+                        </tr>
+                        <tr data-fy="Annual" data-q="Q4">
+                            <td>
+                                <a href="#" onclick="previewPDF('assets/pdf/financial/annual/BKM Balance sheet 2018-19.pdf'); return false;">
+                                    BKM Annual Balance Sheet 2018-19
+                                </a>
+                            </td>
+                            <td>Annual Report</td>
+                            <td>FY 2018-19</td>
+                            <td>
+                                <a href="assets/pdf/financial/annual/BKM Balance sheet 2018-19.pdf" download class="btn-pdf">
+                                    <i class="fas fa-file-pdf"></i> Download PDF
+                                </a>
+                            </td>
+                        </tr>
+                        <tr data-fy="Annual" data-q="Q4">
+                            <td>
+                                <a href="#" onclick="previewPDF('assets/pdf/financial/annual/AR_2017_2018.pdf'); return false;">
+                                    Annual Report & Financials 2017-18
+                                </a>
+                            </td>
+                            <td>Annual Report</td>
+                            <td>FY 2017-18</td>
+                            <td>
+                                <a href="assets/pdf/financial/annual/AR_2017_2018.pdf" download class="btn-pdf">
+                                    <i class="fas fa-file-pdf"></i> Download PDF
+                                </a>
+                            </td>
+                        </tr>
+                        <tr data-fy="Annual" data-q="Q4">
+                            <td>
+                                <a href="#" onclick="previewPDF('assets/pdf/financial/annual/BKM Balance sheet 2016-17.pdf'); return false;">
+                                    BKM Annual Balance Sheet 2016-17
+                                </a>
+                            </td>
+                            <td>Annual Report</td>
+                            <td>FY 2016-17</td>
+                            <td>
+                                <a href="assets/pdf/financial/annual/BKM Balance sheet 2016-17.pdf" download class="btn-pdf">
+                                    <i class="fas fa-file-pdf"></i> Download PDF
+                                </a>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -532,6 +907,7 @@
             btn.classList.add('active');
             filterTable();
         }
+        document.addEventListener('DOMContentLoaded', filterTable);
         function filterTable() {
             const selectedFy = document.getElementById('fySelect').value;
             const rows = document.querySelectorAll('#reportsBody tr');

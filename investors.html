@@ -305,35 +305,150 @@
         .contact-info-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
+            gap: 25px;
+            margin-top: 30px;
         }
         .contact-info-card {
-            background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(245,247,250,1) 100%);
-            border: 1px solid var(--border-color);
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
             border-radius: 12px;
-            padding: 35px;
-            border-left: 5px solid var(--secondary-color);
+            padding: 28px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+            border-top: 4px solid var(--secondary-color);
             transition: var(--transition-smooth);
         }
         .contact-info-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 15px 35px rgba(0, 0, 50, 0.1);
-            border-color: var(--secondary-color);
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(19, 101, 196, 0.1);
         }
-        .contact-info-card h4 {
-            font-size: 1.2rem;
-            margin-bottom: 18px;
-            color: var(--primary-color);
+
+        /* Modern Shareholder Contact Cards */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 35px;
+        }
+
+        .contact-card-modern {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 28px 24px;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.03);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .contact-card-modern::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .contact-card-modern:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 32px rgba(19, 101, 196, 0.12);
+            border-color: #cbd5e1;
+        }
+
+        .contact-card-modern:hover::before {
+            opacity: 1;
+        }
+
+        .contact-card-header {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 16px;
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #f1f5f9;
         }
-        .contact-info-card p {
-            font-size: 0.95rem;
-            color: var(--muted-text);
-            margin-bottom: 12px;
-            line-height: 1.6;
+
+        .contact-card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: rgba(19, 101, 196, 0.08);
+            color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .contact-card-role {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--secondary-color);
+            font-weight: 700;
+            margin-bottom: 3px;
+        }
+
+        .contact-card-name {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin: 0;
+            line-height: 1.3;
+        }
+
+        .contact-card-designation {
+            font-size: 0.88rem;
+            color: #64748b;
+            margin-bottom: 16px;
+            font-weight: 500;
+        }
+
+        .contact-card-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            font-size: 0.9rem;
+            color: #334155;
+        }
+
+        .contact-card-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            line-height: 1.5;
+        }
+
+        .contact-card-list li i {
+            color: var(--secondary-color);
+            margin-top: 3px;
+            font-size: 0.92rem;
+            width: 16px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .contact-card-list a {
+            color: var(--secondary-color);
+            font-weight: 500;
+            text-decoration: none;
+            transition: color 0.2s;
+            word-break: break-word;
+        }
+
+        .contact-card-list a:hover {
+            color: var(--primary-color);
+            text-decoration: underline;
         }
 
         /* PDF Modal Styles */
@@ -654,200 +769,6 @@
         </div>
     </section>
 
-    <!-- RESULTS & REPORTS INTERACTIVE SECTION (VEDANTA FORMAT) -->
-    <section class="biz-highlights-section" id="resultsReports" style="background-color: var(--white);">
-        <div class="container reveal-on-scroll">
-            <div class="section-header text-center">
-                <span class="section-subtitle">FINANCIAL FILINGS & DISCLOSURES</span>
-                <h2 class="section-title">Results and Reports</h2>
-                <p class="section-desc">Access financial statements, annual reports, subsidiary accounts, shareholder forms, and regulatory announcements by financial year.</p>
-            </div>
-
-            <div class="ir-filter-section">
-                <!-- CONTROLS BAR: YEAR SELECTOR AND TABS -->
-                <div class="ir-controls-bar">
-                    <div class="year-select-box">
-                        <label for="yearFilter"><i class="fas fa-calendar-alt" style="color: var(--secondary-color);"></i> Select Financial Year:</label>
-                        <select id="yearFilter" class="select-custom" onchange="filterReports()">
-                            <option value="FY26" selected>FY 2025 - 2026</option>
-                            <option value="FY25">FY 2024 - 2025</option>
-                            <option value="FY24">FY 2023 - 2024</option>
-                            <option value="FY23">FY 2022 - 2023</option>
-                            <option value="FY22">FY 2021 - 2022</option>
-                        </select>
-                    </div>
-
-                    <div class="tab-buttons-row">
-                        <button class="tab-btn active" onclick="switchTab('financial-results', this)">Financial Results</button>
-                        <button class="tab-btn" onclick="switchTab('annual-reports', this)">Annual Reports</button>
-                        <button class="tab-btn" onclick="switchTab('governance-filings', this)">Governance & Shareholder Forms</button>
-                    </div>
-                </div>
-
-                <!-- TAB 1: FINANCIAL RESULTS -->
-                <div id="tab-financial-results" class="ir-tab-content">
-                    <div class="quarter-btns-row">
-                        <button class="q-btn active" onclick="switchQuarter('all', this)">All Quarters</button>
-                        <button class="q-btn" onclick="switchQuarter('Q4', this)">Q4 / Full Year</button>
-                        <button class="q-btn" onclick="switchQuarter('Q3', this)">Q3</button>
-                        <button class="q-btn" onclick="switchQuarter('Q2', this)">Q2</button>
-                        <button class="q-btn" onclick="switchQuarter('Q1', this)">Q1</button>
-                    </div>
-
-                    <table class="ir-data-table">
-                        <thead>
-                            <tr>
-                                <th>Document Description</th>
-                                <th>Period / Quarter</th>
-                                <th>Financial Year</th>
-                                <th>Download Format</th>
-                            </tr>
-                        </thead>
-                        <tbody id="financialResultsBody">
-                            <tr data-year="FY26" data-quarter="Q4">
-                                <td>
-                                    <a href="#" onclick="previewPDF('assets/pdf/Standalone and Consolidated Financial Results 2025-26.pdf'); return false;">
-                                        Consolidated Audited Financial Results
-                                    </a>
-                                </td>
-                                <td>Q4 / FY26 Full Year</td>
-                                <td>FY 2025-26</td>
-                                <td><a href="assets/pdf/Standalone and Consolidated Financial Results 2025-26.pdf" download class="btn-pdf-download"><i class="fas fa-file-pdf"></i> PDF Download</a></td>
-                            </tr>
-                            <tr data-year="FY26" data-quarter="Q4">
-                                <td>Standalone Audited Financial Statements</td>
-                                <td>Q4 / FY26 Full Year</td>
-                                <td>FY 2025-26</td>
-                                <td><a href="assets/pdf_placeholder.pdf" download class="btn-pdf-download"><i class="fas fa-file-pdf"></i> PDF Download</a></td>
-                            </tr>
-                            <tr data-year="FY26" data-quarter="Q4">
-                                <td>Investor Earnings Presentation & Transcript</td>
-                                <td>Q4 / FY26 Full Year</td>
-                                <td>FY 2025-26</td>
-                                <td><a href="assets/pdf_placeholder.pdf" download class="btn-pdf-download"><i class="fas fa-file-pdf"></i> PDF Download</a></td>
-                            </tr>
-                            <tr data-year="FY26" data-quarter="Q3">
-                                <td>Unaudited Financial Results & Segment Report</td>
-                                <td>Q3 FY26</td>
-                                <td>FY 2025-26</td>
-                                <td><a href="assets/pdf_placeholder.pdf" download class="btn-pdf-download"><i class="fas fa-file-pdf"></i> PDF Download</a></td>
-                            </tr>
-                            <tr data-year="FY26" data-quarter="Q2">
-                                <td>Unaudited Financial Results & Limited Review Report</td>
-                                <td>Q2 FY26</td>
-                                <td>FY 2025-26</td>
-                                <td><a href="assets/pdf_placeholder.pdf" download class="btn-pdf-download"><i class="fas fa-file-pdf"></i> PDF Download</a></td>
-                            </tr>
-                            <tr data-year="FY26" data-quarter="Q1">
-                                <td>Unaudited Financial Results Q1</td>
-                                <td>Q1 FY26</td>
-                                <td>FY 2025-26</td>
-                                <td><a href="assets/pdf_placeholder.pdf" download class="btn-pdf-download"><i class="fas fa-file-pdf"></i> PDF Download</a></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <!-- TAB 2: ANNUAL REPORTS -->
-                <div id="tab-annual-reports" class="ir-tab-content" style="display: none;">
-                    <table class="ir-data-table">
-                        <thead>
-                            <tr>
-                                <th>Report Title</th>
-                                <th>Category</th>
-                                <th>Financial Year</th>
-                                <th>Download Format</th>
-                            </tr>
-                        </thead>
-                        <tbody id="annualReportsBody">
-                            <tr data-year="FY26">
-                                <td>Integrated Annual Report & Audited Accounts 2026</td>
-                                <td>Annual Report</td>
-                                <td>FY 2025-26</td>
-                                <td><a href="assets/pdf_placeholder.pdf" download class="btn-pdf-download"><i class="fas fa-file-pdf"></i> PDF Download</a></td>
-                            </tr>
-                            <tr data-year="FY26">
-                                <td>Business Responsibility & Sustainability Report (BRSR)</td>
-                                <td>ESG Report</td>
-                                <td>FY 2025-26</td>
-                                <td><a href="assets/pdf_placeholder.pdf" download class="btn-pdf-download"><i class="fas fa-file-pdf"></i> PDF Download</a></td>
-                            </tr>
-                            <tr data-year="FY25">
-                                <td>Integrated Annual Report & Audited Accounts 2025</td>
-                                <td>Annual Report</td>
-                                <td>FY 2024-25</td>
-                                <td><a href="assets/pdf_placeholder.pdf" download class="btn-pdf-download"><i class="fas fa-file-pdf"></i> PDF Download</a></td>
-                            </tr>
-                            <tr data-year="FY24">
-                                <td>Integrated Annual Report & Financial Statements 2024</td>
-                                <td>Annual Report</td>
-                                <td>FY 2023-24</td>
-                                <td><a href="assets/pdf_placeholder.pdf" download class="btn-pdf-download"><i class="fas fa-file-pdf"></i> PDF Download</a></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <!-- TAB 3: GOVERNANCE & SHAREHOLDER FORMS -->
-                <div id="tab-governance-filings" class="ir-tab-content" style="display: none;">
-                    <table class="ir-data-table">
-                        <thead>
-                            <tr>
-                                <th>Form / Document Title</th>
-                                <th>Purpose / Description</th>
-                                <th>Category</th>
-                                <th>Download Format</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Form SH-13 (Nomination Form)</td>
-                                <td>Nomination of shares by individual equity holders</td>
-                                <td>Shareholder Form</td>
-                                <td><a href="assets/pdf_placeholder.pdf" download class="btn-pdf-download"><i class="fas fa-file-pdf"></i> PDF Download</a></td>
-                            </tr>
-                            <tr>
-                                <td>Form ISR-1 (KYC Update Details)</td>
-                                <td>Updation of PAN, KYC, Bank Account & Demat details</td>
-                                <td>SEBI Mandate Form</td>
-                                <td><a href="assets/pdf_placeholder.pdf" download class="btn-pdf-download"><i class="fas fa-file-pdf"></i> PDF Download</a></td>
-                            </tr>
-                            <tr>
-                                <td>Form ISR-2 (Signature Attestation)</td>
-                                <td>Confirmation of signature by banker</td>
-                                <td>Shareholder Form</td>
-                                <td><a href="assets/pdf_placeholder.pdf" download class="btn-pdf-download"><i class="fas fa-file-pdf"></i> PDF Download</a></td>
-                            </tr>
-                            <tr>
-                                <td>Form SH-14 (Cancellation / Variation of Nomination)</td>
-                                <td>Cancellation or change of nomination details</td>
-                                <td>Shareholder Form</td>
-                                <td><a href="assets/pdf_placeholder.pdf" download class="btn-pdf-download"><i class="fas fa-file-pdf"></i> PDF Download</a></td>
-                            </tr>
-                            <tr>
-                                <td>Loss of Share Certificate Application Format</td>
-                                <td>Procedure & affidavit formats for duplicate shares issue</td>
-                                <td>Shareholder Service</td>
-                                <td><a href="assets/pdf_placeholder.pdf" download class="btn-pdf-download"><i class="fas fa-file-pdf"></i> PDF Download</a></td>
-                            </tr>
-                            <tr>
-                                <td>Code of Fair Disclosure & Conduct</td>
-                                <td>SEBI Insider Trading Regulations Governance Code</td>
-                                <td>Policy Document</td>
-                                <td><a href="assets/pdf_placeholder.pdf" download class="btn-pdf-download"><i class="fas fa-file-pdf"></i> PDF Download</a></td>
-                            </tr>
-                            <tr>
-                                <td>Policy on Materiality of Related Party Transactions</td>
-                                <td>Governance policy on RPT disclosures</td>
-                                <td>Policy Document</td>
-                                <td><a href="assets/pdf_placeholder.pdf" download class="btn-pdf-download"><i class="fas fa-file-pdf"></i> PDF Download</a></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- CORPORATE INFORMATION -->
     <section class="biz-portfolio-section bg-light" id="corporateInformation" style="padding-top: 40px; padding-bottom: 40px;">
@@ -880,44 +801,131 @@
                 <p class="section-desc">For inquiries regarding share transfers, dividend status, dematerialization, or financial reporting, reach out to our dedicated Investor Relations team.</p>
             </div>
 
-                        <div class="contact-grid" id="investorContact" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
-                <div class="contact-box reveal-on-scroll">
-                    <h3><i class="fas fa-user-shield" style="color: var(--secondary-color);"></i> Compliance Officer & Nodal Contact</h3>
-                    <p><strong>Mrs. Priya Motwani</strong></p>
-                    <p>Company Secretary & Compliance Officer</p>
-                    <p><i class="fas fa-map-marker-alt"></i> 2A, Ganesh Chandra Avenue, 2nd Floor, Room No. 11, Kolkata – 700 013</p>
-                    <p><i class="fas fa-phone"></i> Mob: +91- 7470726806</p>
-                    <p><i class="fas fa-envelope"></i> Email: <a href="mailto:secretarial@bkmindustries.in">secretarial@bkmindustries.in</a></p>
+            <div class="contact-grid" id="investorContact">
+                <!-- Card 1: Compliance Officer -->
+                <div class="contact-card-modern reveal-on-scroll">
+                    <div class="contact-card-header">
+                        <div class="contact-card-icon">
+                            <i class="fas fa-user-shield"></i>
+                        </div>
+                        <div>
+                            <div class="contact-card-role">Compliance Officer & Nodal Contact</div>
+                            <h3 class="contact-card-name">Mrs. Priya Motwani</h3>
+                        </div>
+                    </div>
+                    <div class="contact-card-designation">Company Secretary & Compliance Officer</div>
+                    <ul class="contact-card-list">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>2A, Ganesh Chandra Avenue, 2nd Floor, Room No. 11, Kolkata – 700 013</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <span>Mob: <a href="tel:+917470726806">+91-7470726806</a></span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>Email: <a href="mailto:secretarial@bkmindustries.in">secretarial@bkmindustries.in</a></span>
+                        </li>
+                    </ul>
                 </div>
 
-                <div class="contact-box reveal-on-scroll reveal-delay-1">
-                    <h3><i class="fas fa-money-check-alt" style="color: var(--secondary-color);"></i> Chief Financial Officer</h3>
-                    <p><strong>Mr. Kishan Kejriwal</strong></p>
-                    <p>Chief Financial Officer</p>
-                    <p><i class="fas fa-map-marker-alt"></i> 2A, Ganesh Chandra Avenue, 2nd Floor, Room No. 11, Kolkata - 700 013</p>
-                    <p><i class="fas fa-phone"></i> Phone: 033-2213 2372/73</p>
-                    <p><i class="fas fa-fax"></i> Fax: 033-2213 2903</p>
-                    <p><i class="fas fa-envelope"></i> Email: <a href="mailto:secretarial@bkmindustries.in">secretarial@bkmindustries.in</a></p>
-                </div>
-                
-                <div class="contact-box reveal-on-scroll reveal-delay-2">
-                    <h3><i class="fas fa-building" style="color: var(--secondary-color);"></i> Registrar of Companies</h3>
-                    <p><strong>ROC - Kolkata</strong></p>
-                    <p><i class="fas fa-map-marker-alt"></i> Nizam Palace, 2nd MSO Building, 2nd Floor, 234/4, A.J.C.B. Road, Kolkata-700020</p>
-                    <p><i class="fas fa-phone"></i> Phone: 033-2287 7390</p>
-                    <p><i class="fas fa-fax"></i> Fax: 033-2290 3795</p>
-                    <p><i class="fas fa-envelope"></i> Email: <a href="mailto:roc.kolkata@mca.gov.in">roc.kolkata@mca.gov.in</a></p>
-                    <p><i class="fas fa-globe"></i> Website: <a href="http://www.mca.gov.in" target="_blank">www.mca.gov.in</a></p>
+                <!-- Card 2: CFO -->
+                <div class="contact-card-modern reveal-on-scroll reveal-delay-1">
+                    <div class="contact-card-header">
+                        <div class="contact-card-icon">
+                            <i class="fas fa-money-check-alt"></i>
+                        </div>
+                        <div>
+                            <div class="contact-card-role">Chief Financial Officer</div>
+                            <h3 class="contact-card-name">Mr. Kishan Kejriwal</h3>
+                        </div>
+                    </div>
+                    <div class="contact-card-designation">Chief Financial Officer (CFO)</div>
+                    <ul class="contact-card-list">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>2A, Ganesh Chandra Avenue, 2nd Floor, Room No. 11, Kolkata - 700 013</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <span>Phone: <a href="tel:03322132372">033-2213 2372 / 73</a></span>
+                        </li>
+                        <li>
+                            <i class="fas fa-fax"></i>
+                            <span>Fax: 033-2213 2903</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>Email: <a href="mailto:secretarial@bkmindustries.in">secretarial@bkmindustries.in</a></span>
+                        </li>
+                    </ul>
                 </div>
 
-                <div class="contact-box reveal-on-scroll reveal-delay-3">
-                    <h3><i class="fas fa-university" style="color: var(--secondary-color);"></i> Registrar & Share Transfer Agent (RTA)</h3>
-                    <p><strong>Maheshwari Datamatics Pvt. Ltd.</strong></p>
-                    <p><i class="fas fa-map-marker-alt"></i> 23, R.N. Mukherjee Road, 5th Floor, Kolkata - 700 001</p>
-                    <p><i class="fas fa-envelope"></i> Email: <a href="mailto:mdpldc@yahoo.com">mdpldc@yahoo.com</a></p>
-                    <p><i class="fas fa-phone"></i> Phone: +91 33 2248 2248</p>
+                <!-- Card 3: ROC Kolkata -->
+                <div class="contact-card-modern reveal-on-scroll reveal-delay-2">
+                    <div class="contact-card-header">
+                        <div class="contact-card-icon">
+                            <i class="fas fa-building-columns"></i>
+                        </div>
+                        <div>
+                            <div class="contact-card-role">Statutory Registrar</div>
+                            <h3 class="contact-card-name">ROC - Kolkata</h3>
+                        </div>
+                    </div>
+                    <div class="contact-card-designation">Registrar of Companies (MCA)</div>
+                    <ul class="contact-card-list">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Nizam Palace, 2nd MSO Building, 2nd Floor, 234/4, A.J.C.B. Road, Kolkata-700020</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <span>Phone: <a href="tel:03322877390">033-2287 7390</a></span>
+                        </li>
+                        <li>
+                            <i class="fas fa-fax"></i>
+                            <span>Fax: 033-2290 3795</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>Email: <a href="mailto:roc.kolkata@mca.gov.in">roc.kolkata@mca.gov.in</a></span>
+                        </li>
+                        <li>
+                            <i class="fas fa-globe"></i>
+                            <span>Website: <a href="http://www.mca.gov.in" target="_blank" rel="noopener">www.mca.gov.in</a></span>
+                        </li>
+                    </ul>
                 </div>
-            </div>            </div>
+
+                <!-- Card 4: RTA -->
+                <div class="contact-card-modern reveal-on-scroll reveal-delay-3">
+                    <div class="contact-card-header">
+                        <div class="contact-card-icon">
+                            <i class="fas fa-university"></i>
+                        </div>
+                        <div>
+                            <div class="contact-card-role">Registrar & Share Transfer Agent</div>
+                            <h3 class="contact-card-name">Maheshwari Datamatics</h3>
+                        </div>
+                    </div>
+                    <div class="contact-card-designation">Maheshwari Datamatics Pvt. Ltd. (RTA)</div>
+                    <ul class="contact-card-list">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>23, R.N. Mukherjee Road, 5th Floor, Kolkata - 700 001</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <span>Phone: <a href="tel:+913322482248">+91 33 2248 2248</a></span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>Email: <a href="mailto:mdpldc@yahoo.com">mdpldc@yahoo.com</a></span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -994,64 +1002,7 @@
         </div>
     </div>
 
-    <!-- INTERACTIVE JAVASCRIPT FOR TABS & FILTERS -->
     <script>
-        function switchTab(tabId, element) {
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            element.classList.add('active');
-
-            document.querySelectorAll('.ir-tab-content').forEach(content => content.style.display = 'none');
-            document.getElementById('tab-' + tabId).style.display = 'block';
-        }
-
-        function switchQuarter(quarter, element) {
-            document.querySelectorAll('.q-btn').forEach(btn => btn.classList.remove('active'));
-            element.classList.add('active');
-
-            const selectedYear = document.getElementById('yearFilter').value;
-            const rows = document.querySelectorAll('#financialResultsBody tr');
-
-            rows.forEach(row => {
-                const rowYear = row.getAttribute('data-year');
-                const rowQuarter = row.getAttribute('data-quarter');
-
-                const matchesYear = (selectedYear === 'all' || rowYear === selectedYear);
-                const matchesQuarter = (quarter === 'all' || rowQuarter === quarter);
-
-                if (matchesYear && matchesQuarter) {
-                    row.style.display = '';
-                } else {
-                    row.style.display = 'none';
-                }
-            });
-        }
-
-        function filterReports() {
-            const selectedYear = document.getElementById('yearFilter').value;
-            
-            // Filter Financial Results Table
-            const financialRows = document.querySelectorAll('#financialResultsBody tr');
-            financialRows.forEach(row => {
-                const rowYear = row.getAttribute('data-year');
-                if (rowYear === selectedYear || selectedYear === 'all') {
-                    row.style.display = '';
-                } else {
-                    row.style.display = 'none';
-                }
-            });
-
-            // Filter Annual Reports Table
-            const annualRows = document.querySelectorAll('#annualReportsBody tr');
-            annualRows.forEach(row => {
-                const rowYear = row.getAttribute('data-year');
-                if (rowYear === selectedYear || selectedYear === 'all') {
-                    row.style.display = '';
-                } else {
-                    row.style.display = 'none';
-                }
-            });
-        }
-
         // Mobile Menu Toggle
         document.getElementById('mobileToggle').addEventListener('click', function() {
             document.getElementById('navMenu').classList.toggle('active');
