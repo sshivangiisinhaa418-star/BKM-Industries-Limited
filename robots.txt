@@ -1,0 +1,11 @@
+# Robots.txt for BKM Industries Limited
+# https://www.bkmindustries.in
+
+User-agent: *
+Allow: /
+Disallow: /query/
+Disallow: /api/
+
+# Host & Sitemap
+Host: https://www.bkmindustries.in
+Sitemap: https://www.bkmindustries.in/sitemap.xml

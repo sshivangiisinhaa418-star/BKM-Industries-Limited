@@ -25,6 +25,7 @@ const MIME_TYPES = {
     '.eot': 'application/vnd.ms-fontobject',
     '.webp': 'image/webp',
     '.avif': 'image/avif',
+    '.xml': 'application/xml; charset=UTF-8',
     '.txt': 'text/plain; charset=UTF-8'
 };
 
