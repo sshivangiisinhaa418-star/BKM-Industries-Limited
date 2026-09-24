@@ -4,7 +4,8 @@
   "description": "BKM Industries Limited Website",
   "main": "index.html",
   "scripts": {
-    "dev": "npx serve ."
+    "dev": "node server.js",
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",

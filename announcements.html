@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Exchange Announcements & Disclosures | BKM Industries Limited</title>
+    <meta name="description"
+        content="Comprehensive repository of official stock exchange intimations, board meeting outcomes, CIRP disclosures, and SEBI filings of BKM Industries Limited from 2017 to 2026.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .ir-sub-header {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 14px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .ir-sh-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .ir-sh-title h2 {
+            color: var(--white);
+            font-size: 1.3rem;
+            margin: 0;
+        }
+
+        .ir-sh-menu {
+            display: flex;
+            gap: 18px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+        }
+
+        .ir-sh-menu a {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.88rem;
+            font-weight: 500;
+            white-space: nowrap;
+            transition: color 0.3s;
+        }
+
+        .ir-sh-menu a:hover,
+        .ir-sh-menu a.active {
+            color: var(--accent-color);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 35px;
+        }
+
+        .stat-card {
+            background: #ffffff;
+            padding: 22px 25px;
+            border-radius: 12px;
+            border: 1px solid rgba(19, 101, 196, 0.12);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            background: rgba(19, 101, 196, 0.08);
+            color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            flex-shrink: 0;
+        }
+
+        .stat-info h3 {
+            font-size: 1.6rem;
+            color: var(--primary-color);
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            margin: 0 0 2px 0;
+        }
+
+        .stat-info p {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin: 0;
+            font-weight: 500;
+        }
+
+        .filter-section {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 25px;
+            border: 1px solid rgba(19, 101, 196, 0.12);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+            margin-bottom: 30px;
+        }
+
+        .filter-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 280px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 18px 12px 45px;
+            border-radius: 8px;
+            border: 1px solid #cbd5e1;
+            font-size: 0.95rem;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s;
+            outline: none;
+        }
+
+        .search-box input:focus {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(19, 101, 196, 0.15);
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+            font-size: 1rem;
+        }
+
+        .category-select {
+            min-width: 220px;
+        }
+
+        .category-select select {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 8px;
+            border: 1px solid #cbd5e1;
+            font-size: 0.95rem;
+            font-family: 'Inter', sans-serif;
+            background: #ffffff;
+            color: var(--dark-text);
+            outline: none;
+            cursor: pointer;
+        }
+
+        .year-tabs {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 6px;
+            border-top: 1px solid #f1f5f9;
+            padding-top: 18px;
+        }
+
+        .year-tab {
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            background: #f1f5f9;
+            color: #475569;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        .year-tab:hover {
+            background: #e2e8f0;
+            color: var(--primary-color);
+        }
+
+        .year-tab.active {
+            background: var(--secondary-color);
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(19, 101, 196, 0.25);
+        }
+
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        .ir-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+            border: 1px solid #e2e8f0;
+        }
+
+        .ir-table th {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--white);
+            text-align: left;
+            padding: 16px 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .ir-table td {
+            padding: 16px 20px;
+            border-bottom: 1px solid #edf2f7;
+            font-size: 0.92rem;
+            color: var(--dark-text);
+            vertical-align: middle;
+            transition: background-color 0.2s;
+        }
+
+        .ir-table tr:hover td {
+            background-color: #f8fafc;
+        }
+
+        .cat-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            background: #e0f2fe;
+            color: #0369a1;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .btn-pdf {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: rgba(19, 101, 196, 0.08);
+            color: var(--secondary-color);
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            border: 1px solid rgba(19, 101, 196, 0.2);
+            text-decoration: none;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        .btn-pdf:hover {
+            background: var(--secondary-color);
+            color: var(--white) !important;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(19, 101, 196, 0.25);
+        }
+
+        .load-more-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .btn-load-more {
+            padding: 12px 35px;
+            border-radius: 30px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            background: #ffffff;
+            color: var(--secondary-color);
+            border: 2px solid var(--secondary-color);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-load-more:hover {
+            background: var(--secondary-color);
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(19, 101, 196, 0.25);
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 50px 20px;
+            color: #64748b;
+            font-size: 1.05rem;
+            display: none;
+        }
+
+        .no-results i {
+            font-size: 3rem;
+            color: #cbd5e1;
+            margin-bottom: 15px;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- TOP TICKER BAR -->
+    <div class="top-bar">
+        <div class="container top-bar-container">
+            <div class="stock-ticker">
+                <span class="ticker-label">NSE: BKMIND</span>
+                <span class="ticker-price">₹12.45 <i class="fas fa-caret-up"></i> (+1.8%)</span>
+                <span class="ticker-sep">|</span>
+                <span class="ticker-label">BSE: 539043</span>
+                <span class="ticker-price">₹12.40 <i class="fas fa-caret-up"></i> (+1.5%)</span>
+            </div>
+            <div class="top-nav-links">
+                <a href="investors.html">Investors</a>
+                <a href="index.html#media">Media</a>
+                <a href="index.html#contact">Contact</a>
+                <div class="lang-selector">
+                    <i class="fas fa-globe"></i> English <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN HEADER -->
+    <header class="main-header">
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <img src="assets/logo.png" alt="BKM Industries Limited" class="logo-img">
+            </a>
+
+            <nav class="nav-menu" id="navMenu">
+                <ul>
+                    <li class="dropdown">
+                        <a href="about.html" class="nav-link">Who We Are <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-content">
+                            <div class="dropdown-grid">
+                                <div>
+                                    <h4>WHO WE ARE</h4>
+                                    <a href="about.html">About Us</a>
+                                    <a href="founders-journey.html">Our Journey & History</a>
+                                </div>
+                                <div>
+                                    <h4>GOVERNANCE & ACCOLADES</h4>
+                                    <a href="leadership.html">Leadership</a>
+                                    <a href="awards-recognition.html">Awards & Recognition</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="businesses-overview.html" class="nav-link">Our Businesses <i
+                                class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-content">
+                            <div class="dropdown-grid">
+                                <div>
+                                    <h4>OUR BUSINESSES</h4>
+                                    <a href="businesses-overview.html">Overview</a>
+                                    <a href="tin-cans.html">Tin Cans</a>
+                                </div>
+                                <div>
+                                    <h4>SPECIALTY CLOSURES</h4>
+                                    <a href="ropp-closures.html">ROPP Caps</a>
+                                    <a href="crown-caps.html">Metal Crown Caps</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li><a href="esg.html" class="nav-link">ESG & Sustainability</a></li>
+                    <li class="dropdown">
+                        <a href="investors.html" class="nav-link active">Investors <i
+                                class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-content">
+                            <div class="dropdown-grid">
+                                <div>
+                                    <h4>FINANCIALS & REPORTS</h4>
+                                    <a href="investors.html">Overview</a>
+                                    <a href="investor-results-reports.html">Results & Reports</a>
+                                    <a href="investor-presentation.html">Investor Presentation</a>
+                                    <a href="investor-shareholder-info.html">Shareholder Info</a>
+                                    <a href="investor-corporate-governance.html">Corporate Governance</a>
+                                </div>
+                                <div>
+                                    <h4>FILINGS & DISCLOSURES</h4>
+                                    <a href="investor-sec-filings.html">SEC Filings</a>
+                                    <a href="investor-stock-exchange-announcements.html">Stock Exchange
+                                        Announcements</a>
+                                    <a href="investor-sebi-disclosures.html">SEBI Disclosures</a>
+                                    <a href="investor-corporate-calendar.html">Corporate Calendar</a>
+                                    <a href="investor-contact.html">Contact Us</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li><a href="careers.html" class="nav-link">Careers</a></li>
+                    <li><a href="index.html#media" class="nav-link">Media</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-right">
+                <a href="index.html#contact" class="btn btn-primary btn-header">Get In Touch</a>
+                <button class="mobile-toggle" id="mobileToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- SUB-HEADER NAVIGATION FOR INVESTORS -->
+    <div class="ir-sub-header">
+        <div class="container">
+            <div class="ir-sh-flex">
+                <div class="ir-sh-title">
+                    <h2>Investor Relations</h2>
+                </div>
+                <div class="ir-sh-menu">
+                    <a href="investors.html">Overview</a>
+                    <a href="investor-results-reports.html">Results & Reports</a>
+                    <a href="investor-presentation.html">Presentation</a>
+                    <a href="investor-shareholder-info.html">Shareholder Info</a>
+                    <a href="investor-corporate-governance.html">Governance</a>
+                    <a href="investor-sec-filings.html">SEC Filings</a>
+                    <a href="investor-stock-exchange-announcements.html" class="active">Announcements</a>
+                    <a href="investor-sebi-disclosures.html">SEBI</a>
+                    <a href="investor-corporate-calendar.html">Calendar</a>
+                    <a href="investor-contact.html">Contact</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BREADCRUMB -->
+    <div class="breadcrumb-section">
+        <div class="container">
+            <div class="breadcrumb-links">
+                <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                <i class="fas fa-chevron-right breadcrumb-separator"></i>
+                <a href="investors.html">Investor Relations</a>
+                <i class="fas fa-chevron-right breadcrumb-separator"></i>
+                <span class="active">Stock Exchange Announcements</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- HERO SECTION -->
+    <section class="biz-hero"
+        style="background: linear-gradient(135deg, rgba(11, 19, 43, 0.88) 0%, rgba(20, 32, 58, 0.65) 100%), url('assets/leadership_banner.png'); background-size: cover; background-position: center; padding: 70px 0 50px; position: relative;">
+        <div class="container">
+            <div class="about-head-content">
+                <span class="about-pill">NSE & BSE DISCLOSURES</span>
+                <h1 class="about-main-title" style="color: var(--white);">Stock Exchange Announcements</h1>
+                <p class="about-lead-text" style="color: rgba(255, 255, 255, 0.9);">
+                    Complete historical repository of official corporate intimations, board outcomes, CIRP proceedings,
+                    and SEBI disclosures submitted to NSE & BSE from 2017 to 2026.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ANNOUNCEMENTS SECTION -->
+    <section class="biz-portfolio-section" style="padding: 60px 0 90px 0; background: #f8fafc;">
+        <div class="container">
+
+            <!-- STATS CARDS -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-file-contract"></i></div>
+                    <div class="stat-info">
+                        <h3 id="filingsCounter">0+</h3>
+                        <p>Total Regulatory Filings</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-calendar-alt"></i></div>
+                    <div class="stat-info">
+                        <h3>2017 – 2026</h3>
+                        <p>Years Covered</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-building-columns"></i></div>
+                    <div class="stat-info">
+                        <h3>NSE & BSE</h3>
+                        <p>Exchanges Intimated</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-shield-halved"></i></div>
+                    <div class="stat-info">
+                        <h3>SEBI (LODR)</h3>
+                        <p>Compliant Repository</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FILTERS & SEARCH TOOLBAR -->
+            <div class="filter-section">
+                <div class="filter-controls">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="annSearch" maxlength="100" autocomplete="off" spellcheck="false"
+                            placeholder="Search announcements by keyword, topic, or date (e.g. Outcome, CoC, Resignation)...">
+                    </div>
+                    <div class="category-select">
+                        <select id="annCategory">
+                            <option value="ALL">All Categories</option>
+                            <option value="Board Meeting Outcome">Board Meeting Outcome</option>
+                            <option value="CIRP & CoC Updates">CIRP & CoC Updates</option>
+                            <option value="SEBI Reg 30 Disclosures">SEBI Reg 30 Disclosures</option>
+                            <option value="Trading Window Closure">Trading Window Closure</option>
+                            <option value="Financial Results">Financial Results</option>
+                            <option value="KMP & Executive Changes">KMP & Executive Changes</option>
+                            <option value="Newspaper Publications">Newspaper Publications</option>
+                            <option value="SEBI Compliance Certificates">SEBI Compliance Certificates</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="year-tabs" id="yearTabs">
+                    <button class="year-tab active" data-year="ALL">All Years (318)</button>
+                    <button class="year-tab" data-year="2026">2026 (22)</button>
+                    <button class="year-tab" data-year="2025">2025 (35)</button>
+                    <button class="year-tab" data-year="2024">2024 (45)</button>
+                    <button class="year-tab" data-year="2023">2023 (7)</button>
+                    <button class="year-tab" data-year="2022">2022 (13)</button>
+                    <button class="year-tab" data-year="2021">2021 (33)</button>
+                    <button class="year-tab" data-year="2020">2020 (51)</button>
+                    <button class="year-tab" data-year="2019">2019 (45)</button>
+                    <button class="year-tab" data-year="2018">2018 (36)</button>
+                    <button class="year-tab" data-year="2017">2017 (31)</button>
+                </div>
+            </div>
+
+            <!-- RESULTS HEADER METRIC -->
+            <div class="results-header">
+                <span id="resultsCount">Showing 15 of 318 Disclosures</span>
+                <span>Sorted by Date (Newest First)</span>
+            </div>
+
+            <!-- ANNOUNCEMENTS TABLE -->
+            <div style="overflow-x: auto;">
+                <table class="ir-table" id="annTable">
+                    <thead>
+                        <tr>
+                            <th style="width: 140px;">Date</th>
+                            <th style="width: 220px;">Category</th>
+                            <th>Announcement Title / Subject</th>
+                            <th style="width: 130px;">Exchange</th>
+                            <th style="width: 170px; text-align: center;">PDF Access</th>
+                        </tr>
+                    </thead>
+                    <tbody id="annTbody">
+                        <!-- Populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- NO RESULTS ALERT -->
+            <div class="no-results" id="noResults">
+                <i class="fas fa-folder-open"></i>
+                <h3>No Matching Announcements Found</h3>
+                <p>Try adjusting your search keyword or clearing the filters.</p>
+            </div>
+
+            <!-- LOAD MORE BUTTON -->
+            <div class="load-more-container" id="loadMoreContainer">
+                <button class="btn-load-more" id="btnLoadMore"><i class="fas fa-chevron-down"></i> Load More
+                    Announcements</button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-top grid grid-4">
+                <div class="footer-col">
+                    <a href="index.html" class="logo footer-logo">
+                        <img src="assets/logo.png" alt="BKM Industries Limited" class="logo-img">
+                    </a>
+                    <p class="footer-about">BKM Industries Limited (formerly Manaksia Industries Limited) is India's
+                        premier industrial packaging, shipbuilding, and custom software company.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="about.html">Who We Are</a></li>
+                        <li><a href="founders-journey.html">Our Journey & History</a></li>
+                        <li><a href="leadership.html">Leadership</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="investors.html">Investors</a></li>
+                        <li><a href="investor-contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Our Businesses</h4>
+                    <ul>
+                        <li><a href="businesses-overview.html">Overview</a></li>
+                        <li><a href="tin-cans.html">Tin Cans</a></li>
+                        <li><a href="ropp-closures.html">ROPP Caps</a></li>
+                        <li><a href="crown-caps.html">Metal Crown Caps</a></li>
+                        <li><a href="esg.html">ESG & Sustainability</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Registered Office</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> 2A, Ganesh Chandra Avenue, 2nd Floor, Room No. 11, Kolkata
+                        – 700 013</p>
+                    <p><i class="fas fa-envelope"></i> <a href="mailto:info@bkmindustries.in"
+                            style="color: inherit;">info@bkmindustries.in</a></p>
+                    <p><i class="fas fa-phone"></i> +91 33 2289 0000</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 BKM Industries Limited. All Rights Reserved. Listed on NSE (BKMIND) & BSE (539043).</p>
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <a href="terms.html">Terms of Use</a>
+                    <a href="#">Disclaimer</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <div class="scroll-to-top" id="scrollToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- JavaScript Data & Logic -->
+    <script src="script.js"></script>
+    <script>
+        const ANNOUNCEMENTS_DATA = [{ "year": "2026", "filename": "BKMINDST_14082026181154_SDD.pdf", "path": "assets/pdf/Announcements/2026/BKMINDST_14082026181154_SDD.pdf", "size_bytes": 418407, "date": "Aug 14, 2026", "sort_date": 20260814, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (SDD)" }, { "year": "2026", "filename": "BKMINDST_27072026161032_LR_Q1_Standalone_m.pdf", "path": "assets/pdf/Announcements/2026/BKMINDST_27072026161032_LR_Q1_Standalone_m.pdf", "size_bytes": 1390820, "date": "Jul 27, 2026", "sort_date": 20260727, "category": "Financial Results", "title": "Financial Results & Limited Review Report - Standalone" }, { "year": "2026", "filename": "BKMINDST_27072026161342_LR_Q1_consolidated_m.pdf", "path": "assets/pdf/Announcements/2026/BKMINDST_27072026161342_LR_Q1_consolidated_m.pdf", "size_bytes": 1408794, "date": "Jul 27, 2026", "sort_date": 20260727, "category": "Financial Results", "title": "Financial Results & Limited Review Report - Consolidated" }, { "year": "2026", "filename": "BKMINDST_18052026205615_Conso_Merge.pdf", "path": "assets/pdf/Announcements/2026/BKMINDST_18052026205615_Conso_Merge.pdf", "size_bytes": 1657479, "date": "May 18, 2026", "sort_date": 20260518, "category": "Financial Results", "title": "Financial Results & Limited Review Report - Consolidated" }, { "year": "2026", "filename": "BKMINDST_18052026205947_Standalone_Merge.pdf", "path": "assets/pdf/Announcements/2026/BKMINDST_18052026205947_Standalone_Merge.pdf", "size_bytes": 1948684, "date": "May 18, 2026", "sort_date": 20260518, "category": "Financial Results", "title": "Financial Results & Limited Review Report - Standalone" }, { "year": "2026", "filename": "BKMINDST_29032026002406_CTC_Appointment_CS-S.pdf", "path": "assets/pdf/Announcements/2026/BKMINDST_29032026002406_CTC_Appointment_CS-S.pdf", "size_bytes": 277836, "date": "Mar 29, 2026", "sort_date": 20260329, "category": "KMP & Executive Changes", "title": "Intimation of Appointment of Company Secretary & Compliance Officer" }, { "year": "2026", "filename": "BKMINDST_29032026002716_BKM_Intimation-Q1-21_22-F__Merge.pdf", "path": "assets/pdf/Announcements/2026/BKMINDST_29032026002716_BKM_Intimation-Q1-21_22-F__Merge.pdf", "size_bytes": 1214372, "date": "Mar 29, 2026", "sort_date": 20260329, "category": "Financial Results", "title": "Submissions of Financial Results & Auditor Review Report" }, { "year": "2026", "filename": "BKMINDST_29032026003352_BKM_Intimation-Q2-21_22-F_Merge.pdf", "path": "assets/pdf/Announcements/2026/BKMINDST_29032026003352_BKM_Intimation-Q2-21_22-F_Merge.pdf", "size_bytes": 1220948, "date": "Mar 29, 2026", "sort_date": 20260329, "category": "Financial Results", "title": "Submissions of Financial Results & Auditor Review Report" }, { "year": "2026", "filename": "BKMINDST_29032026003756_BKM_Intimation-Q3-21_22-F_Merge.pdf", "path": "assets/pdf/Announcements/2026/BKMINDST_29032026003756_BKM_Intimation-Q3-21_22-F_Merge.pdf", "size_bytes": 1220690, "date": "Mar 29, 2026", "sort_date": 20260329, "category": "Financial Results", "title": "Submissions of Financial Results & Auditor Review Report" }, { "year": "2026", "filename": "BKMINDST_29032026003958_BKM_Intimation-Q4-21_22-F_merge.pdf", "path": "assets/pdf/Announcements/2026/BKMINDST_29032026003958_BKM_Intimation-Q4-21_22-F_merge.pdf", "size_bytes": 1215324, "date": "Mar 29, 2026", "sort_date": 20260329, "category": "Financial Results", "title": "Submissions of Financial Results & Auditor Review Report" }, { "year": "2026", "filename": "BKMINDST_29032026004259_BKM_Intimation-Q1-22_23-F_Merge.pdf", "path": "assets/pdf/Announcements/2026/BKMINDST_29032026004259_BKM_Intimation-Q1-22_23-F_Merge.pdf", "size_bytes": 1216476, "date": "Mar 29, 2026", "sort_date": 20260329, "category": "Financial Results", "title": "Submissions of Financial Results & Auditor Review Report" }, { "year": "2026", "filename": "BKMINDST_29032026130732_BKM_Intimation-Q2-22_23-F_Merge.pdf", "path": "assets/pdf/Announcements/2026/BKMINDST_29032026130732_BKM_Intimation-Q2-22_23-F_Merge.pdf", "size_bytes": 1219673, "date": "Mar 29, 2026", "sort_date": 20260329, "category": "Financial Results", "title": "Submissions of Financial Results & Auditor Review Report" }, { "year": "2026", "filename": "BKMINDST_29032026131505_BKM_Intimation-Q3-22_23-F_Merge.pdf", "path": "assets/pdf/Announcements/2026/BKMINDST_29032026131505_BKM_Intimation-Q3-22_23-F_Merge.pdf", "size_bytes": 1219870, "date": "Mar 29, 2026", "sort_date": 20260329, "category": "Financial Results", "title": "Submissions of Financial Results & Auditor Review Report" }, { "year": "2026", "filename": "BKMINDST_29032026133325_BKM_Intimation-Q4-22_23-F_Merge.pdf", "path": "assets/pdf/Announcements/2026/BKMINDST_29032026133325_BKM_Intimation-Q4-22_23-F_Merge.pdf", "size_bytes": 1215753, "date": "Mar 29, 2026", "sort_date": 20260329, "category": "Financial Results", "title": "Submissions of Financial Results & Auditor Review Report" }, { "year": "2026", "filename": "BKMINDST_29032026134936_BKM_Intimation-Q1-23_24-F_Merge.pdf", "path": "assets/pdf/Announcements/2026/BKMINDST_29032026134936_BKM_Intimation-Q1-23_24-F_Merge.pdf", "size_bytes": 1214046, "date": "Mar 29, 2026", "sort_date": 20260329, "category": "Financial Results", "title": "Submissions of Financial Results & Auditor Review Report" }, { "year": "2026", "filename": "BKMINDST_29032026141015_S-BKM_Intimation-F.pdf", "path": "assets/pdf/Announcements/2026/BKMINDST_29032026141015_S-BKM_Intimation-F.pdf", "size_bytes": 293350, "date": "Mar 29, 2026", "sort_date": 20260329, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (S BKM Intimation F)" }, { "year": "2026", "filename": "BKMINDST_04022026170702_BKM_4BM_FS.pdf", "path": "assets/pdf/Announcements/2026/BKMINDST_04022026170702_BKM_4BM_FS.pdf", "size_bytes": 1248951, "date": "Feb 04, 2026", "sort_date": 20260204, "category": "Financial Results", "title": "Submissions of Financial Results & Auditor Review Report" }, { "year": "2026", "filename": "BKMINDST_04022026171249_BKM_4BM_FS.pdf", "path": "assets/pdf/Announcements/2026/BKMINDST_04022026171249_BKM_4BM_FS.pdf", "size_bytes": 1248951, "date": "Feb 04, 2026", "sort_date": 20260204, "category": "Financial Results", "title": "Submissions of Financial Results & Auditor Review Report" }, { "year": "2026", "filename": "BKMINDST_04022026173836_Outcome_record_Date-S.pdf", "path": "assets/pdf/Announcements/2026/BKMINDST_04022026173836_Outcome_record_Date-S.pdf", "size_bytes": 3337505, "date": "Feb 04, 2026", "sort_date": 20260204, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2026", "filename": "BKMINDST_04022026174429_Outcome_record_Date-S.pdf", "path": "assets/pdf/Announcements/2026/BKMINDST_04022026174429_Outcome_record_Date-S.pdf", "size_bytes": 3337505, "date": "Feb 04, 2026", "sort_date": 20260204, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2026", "filename": "BKMINDST_04022026192753_BKM_4BM_FS.pdf", "path": "assets/pdf/Announcements/2026/BKMINDST_04022026192753_BKM_4BM_FS.pdf", "size_bytes": 1248951, "date": "Feb 04, 2026", "sort_date": 20260204, "category": "Financial Results", "title": "Submissions of Financial Results & Auditor Review Report" }, { "year": "2026", "filename": "BKMINDST_23012026170906_BKM_Intimation_to_SE-F_1.pdf", "path": "assets/pdf/Announcements/2026/BKMINDST_23012026170906_BKM_Intimation_to_SE-F_1.pdf", "size_bytes": 3289035, "date": "Jan 23, 2026", "sort_date": 20260123, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (BKM Intimation to SE F 1)" }, { "year": "2025", "filename": "BKMINDST_11112025183604_BKMOUTCOME.pdf", "path": "assets/pdf/Announcements/2025/BKMINDST_11112025183604_BKMOUTCOME.pdf", "size_bytes": 12309943, "date": "Nov 11, 2025", "sort_date": 20251111, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2025", "filename": "BKMINDST_11112025184314_BKMOUTCOME.pdf", "path": "assets/pdf/Announcements/2025/BKMINDST_11112025184314_BKMOUTCOME.pdf", "size_bytes": 12309943, "date": "Nov 11, 2025", "sort_date": 20251111, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2025", "filename": "BKMINDST_15102025154309_BKM745F30092025.pdf", "path": "assets/pdf/Announcements/2025/BKMINDST_15102025154309_BKM745F30092025.pdf", "size_bytes": 473730, "date": "Oct 15, 2025", "sort_date": 20251015, "category": "SEBI Compliance Certificates", "title": "Certificate under Regulation 74(5) of SEBI (Depositories & Participants) Regulations" }, { "year": "2025", "filename": "BKMINDST_22092025162937_BKMTWC30092025F.pdf", "path": "assets/pdf/Announcements/2025/BKMINDST_22092025162937_BKMTWC30092025F.pdf", "size_bytes": 254005, "date": "Sep 22, 2025", "sort_date": 20250922, "category": "Trading Window Closure", "title": "Intimation of Closure of Trading Window for Prohibition of Insider Trading" }, { "year": "2025", "filename": "BKMINDST_13082025171117_BKMOUTCOME.pdf", "path": "assets/pdf/Announcements/2025/BKMINDST_13082025171117_BKMOUTCOME.pdf", "size_bytes": 3135945, "date": "Aug 13, 2025", "sort_date": 20250813, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2025", "filename": "BKMINDST_05082025143744_OutcomeBMBKM.pdf", "path": "assets/pdf/Announcements/2025/BKMINDST_05082025143744_OutcomeBMBKM.pdf", "size_bytes": 1058353, "date": "Aug 05, 2025", "sort_date": 20250805, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2025", "filename": "BKMINDST_05082025145003_OutcomeBMBKM.pdf", "path": "assets/pdf/Announcements/2025/BKMINDST_05082025145003_OutcomeBMBKM.pdf", "size_bytes": 1058353, "date": "Aug 05, 2025", "sort_date": 20250805, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2025", "filename": "BKMINDST_05082025145148_OutcomeBMBKM.pdf", "path": "assets/pdf/Announcements/2025/BKMINDST_05082025145148_OutcomeBMBKM.pdf", "size_bytes": 1058353, "date": "Aug 05, 2025", "sort_date": 20250805, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2025", "filename": "BKMINDST_14072025125945_BKMDP.pdf", "path": "assets/pdf/Announcements/2025/BKMINDST_14072025125945_BKMDP.pdf", "size_bytes": 1685306, "date": "Jul 14, 2025", "sort_date": 20250714, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (BKMDP)" }, { "year": "2025", "filename": "BKMINDST_30062025133217_BKMRanjanaIDResignF.pdf", "path": "assets/pdf/Announcements/2025/BKMINDST_30062025133217_BKMRanjanaIDResignF.pdf", "size_bytes": 3027590, "date": "Jun 30, 2025", "sort_date": 20250630, "category": "KMP & Executive Changes", "title": "Intimation of Resignation of Independent Director" }, { "year": "2025", "filename": "BKMINDST_19062025143024_BKMTradingwindow300625F.pdf", "path": "assets/pdf/Announcements/2025/BKMINDST_19062025143024_BKMTradingwindow300625F.pdf", "size_bytes": 252899, "date": "Jun 19, 2025", "sort_date": 20250619, "category": "Trading Window Closure", "title": "Intimation of Closure of Trading Window for Prohibition of Insider Trading" }, { "year": "2025", "filename": "BKMINDST_13062025164818_BKMReg30IDDeath.pdf", "path": "assets/pdf/Announcements/2025/BKMINDST_13062025164818_BKMReg30IDDeath.pdf", "size_bytes": 1954383, "date": "Jun 13, 2025", "sort_date": 20250613, "category": "SEBI Reg 30 Disclosures", "title": "Disclosure under Regulation 30 of SEBI (LODR) Regulations" }, { "year": "2025", "filename": "BKMINDST_30052025170205_Reg33BKMOutcome30052025F.pdf", "path": "assets/pdf/Announcements/2025/BKMINDST_30052025170205_Reg33BKMOutcome30052025F.pdf", "size_bytes": 3925180, "date": "May 30, 2025", "sort_date": 20250530, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2025", "filename": "BKMINDST_30052025170754_BKMBMOutcome30052025F.pdf", "path": "assets/pdf/Announcements/2025/BKMINDST_30052025170754_BKMBMOutcome30052025F.pdf", "size_bytes": 869587, "date": "May 30, 2025", "sort_date": 20250530, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2025", "filename": "BKMINDST_30052025171005_BKMBMOutcome30052025F.pdf", "path": "assets/pdf/Announcements/2025/BKMINDST_30052025171005_BKMBMOutcome30052025F.pdf", "size_bytes": 869587, "date": "May 30, 2025", "sort_date": 20250530, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2025", "filename": "BKMINDST_29052025183938_Reg_30-BKM-Auditor_resignation-SIGNED.pdf", "path": "assets/pdf/Announcements/2025/BKMINDST_29052025183938_Reg_30-BKM-Auditor_resignation-SIGNED.pdf", "size_bytes": 691245, "date": "May 29, 2025", "sort_date": 20250529, "category": "KMP & Executive Changes", "title": "Intimation of Resignation of Statutory Auditor" }, { "year": "2025", "filename": "BKMINDST_29052025194754_Reg_30-BKM-Auditor_appt.pdf", "path": "assets/pdf/Announcements/2025/BKMINDST_29052025194754_Reg_30-BKM-Auditor_appt.pdf", "size_bytes": 358748, "date": "May 29, 2025", "sort_date": 20250529, "category": "KMP & Executive Changes", "title": "Intimation of Appointment of Statutory / Secretarial Auditor" }, { "year": "2025", "filename": "team_sandeshc_12052025151552_BKM.pdf", "path": "assets/pdf/Announcements/2025/team_sandeshc_12052025151552_BKM.pdf", "size_bytes": 3251146, "date": "May 12, 2025", "sort_date": 20250512, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (BKM)" }, { "year": "2025", "filename": "BKMINDST_08052025183612_Reg30-ID_Resign-F.pdf", "path": "assets/pdf/Announcements/2025/BKMINDST_08052025183612_Reg30-ID_Resign-F.pdf", "size_bytes": 2263150, "date": "May 08, 2025", "sort_date": 20250508, "category": "KMP & Executive Changes", "title": "Intimation of Resignation of Independent Director" }, { "year": "2025", "filename": "BKMINDST_11042025184225_BKMDP.pdf", "path": "assets/pdf/Announcements/2025/BKMINDST_11042025184225_BKMDP.pdf", "size_bytes": 2866053, "date": "Apr 11, 2025", "sort_date": 20250411, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (BKMDP)" }, { "year": "2025", "filename": "BKMINDST_07042025123719_BKMSAST.pdf", "path": "assets/pdf/Announcements/2025/BKMINDST_07042025123719_BKMSAST.pdf", "size_bytes": 3251146, "date": "Apr 07, 2025", "sort_date": 20250407, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (BKMSAST)" }, { "year": "2025", "filename": "BKMINDST_03042025193131_BKMdble.pdf", "path": "assets/pdf/Announcements/2025/BKMINDST_03042025193131_BKMdble.pdf", "size_bytes": 228857, "date": "Apr 03, 2025", "sort_date": 20250403, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (BK Mdble)" }, { "year": "2025", "filename": "BKMINDST_26032025133710_Reg30BKMF (1).pdf", "path": "assets/pdf/Announcements/2025/BKMINDST_26032025133710_Reg30BKMF (1).pdf", "size_bytes": 1117827, "date": "Mar 26, 2025", "sort_date": 20250326, "category": "SEBI Reg 30 Disclosures", "title": "Disclosure under Regulation 30 of SEBI (LODR) Regulations" }, { "year": "2025", "filename": "BKMINDST_26032025133710_Reg30BKMF.pdf", "path": "assets/pdf/Announcements/2025/BKMINDST_26032025133710_Reg30BKMF.pdf", "size_bytes": 1117827, "date": "Mar 26, 2025", "sort_date": 20250326, "category": "SEBI Reg 30 Disclosures", "title": "Disclosure under Regulation 30 of SEBI (LODR) Regulations" }, { "year": "2025", "filename": "BKMINDST_26032025134904_Reg30BKMF.pdf", "path": "assets/pdf/Announcements/2025/BKMINDST_26032025134904_Reg30BKMF.pdf", "size_bytes": 1117827, "date": "Mar 26, 2025", "sort_date": 20250326, "category": "SEBI Reg 30 Disclosures", "title": "Disclosure under Regulation 30 of SEBI (LODR) Regulations" }, { "year": "2025", "filename": "BKMINDST_26032025135158_Reg30BKMF.pdf", "path": "assets/pdf/Announcements/2025/BKMINDST_26032025135158_Reg30BKMF.pdf", "size_bytes": 1117827, "date": "Mar 26, 2025", "sort_date": 20250326, "category": "SEBI Reg 30 Disclosures", "title": "Disclosure under Regulation 30 of SEBI (LODR) Regulations" }, { "year": "2025", "filename": "BKMINDST_26032025135448_Reg30BKMF.pdf", "path": "assets/pdf/Announcements/2025/BKMINDST_26032025135448_Reg30BKMF.pdf", "size_bytes": 1117827, "date": "Mar 26, 2025", "sort_date": 20250326, "category": "SEBI Reg 30 Disclosures", "title": "Disclosure under Regulation 30 of SEBI (LODR) Regulations" }, { "year": "2025", "filename": "BKMINDST_26032025140521_Reg305BKMF.pdf", "path": "assets/pdf/Announcements/2025/BKMINDST_26032025140521_Reg305BKMF.pdf", "size_bytes": 1825826, "date": "Mar 26, 2025", "sort_date": 20250326, "category": "SEBI Reg 30 Disclosures", "title": "Disclosure under Regulation 30 of SEBI (LODR) Regulations" }, { "year": "2025", "filename": "BKMINDST_24032025110015_BKMTWCF.pdf", "path": "assets/pdf/Announcements/2025/BKMINDST_24032025110015_BKMTWCF.pdf", "size_bytes": 252842, "date": "Mar 24, 2025", "sort_date": 20250324, "category": "Trading Window Closure", "title": "Intimation of Closure of Trading Window for Prohibition of Insider Trading" }, { "year": "2025", "filename": "BKMINDST_13022025164640_BKMOUTCOME13022025F.pdf", "path": "assets/pdf/Announcements/2025/BKMINDST_13022025164640_BKMOUTCOME13022025F.pdf", "size_bytes": 9005676, "date": "Feb 13, 2025", "sort_date": 20250213, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2025", "filename": "BKMINDST_13022025165112_BKMIntegratedFinancial31122025F.pdf", "path": "assets/pdf/Announcements/2025/BKMINDST_13022025165112_BKMIntegratedFinancial31122025F.pdf", "size_bytes": 11197353, "date": "Feb 13, 2025", "sort_date": 20250213, "category": "Financial Results", "title": "Submissions of Financial Results & Auditor Review Report" }, { "year": "2025", "filename": "BKMOUTCOME13022025F_13022025164813.pdf", "path": "assets/pdf/Announcements/2025/BKMOUTCOME13022025F_13022025164813.pdf", "size_bytes": 9005676, "date": "Feb 13, 2025", "sort_date": 20250213, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2025", "filename": "BKMINDST_10012025120606_BKMREG74531122024F.pdf", "path": "assets/pdf/Announcements/2025/BKMINDST_10012025120606_BKMREG74531122024F.pdf", "size_bytes": 1540062, "date": "Jan 10, 2025", "sort_date": 20250110, "category": "SEBI Compliance Certificates", "title": "Certificate under Regulation 74(5) of SEBI (Depositories & Participants) Regulations" }, { "year": "2025", "filename": "Reg30-ID_Resign-F_1.pdf", "path": "assets/pdf/Announcements/2025/Reg30-ID_Resign-F_1.pdf", "size_bytes": 2263150, "date": "FY 2025", "sort_date": 20250101, "category": "KMP & Executive Changes", "title": "Intimation of Resignation of Independent Director" }, { "year": "2025", "filename": "Reg_30-BKM-Auditor_resignation-SIGNED_1.pdf", "path": "assets/pdf/Announcements/2025/Reg_30-BKM-Auditor_resignation-SIGNED_1.pdf", "size_bytes": 691245, "date": "FY 2025", "sort_date": 20250101, "category": "KMP & Executive Changes", "title": "Intimation of Resignation of Statutory Auditor" }, { "year": "2024", "filename": "BKMINDST_21122024125555_BKMNoticeforclosureofTradingWindow.pdf", "path": "assets/pdf/Announcements/2024/BKMINDST_21122024125555_BKMNoticeforclosureofTradingWindow.pdf", "size_bytes": 515718, "date": "Dec 21, 2024", "sort_date": 20241221, "category": "Trading Window Closure", "title": "Intimation of Closure of Trading Window for Prohibition of Insider Trading" }, { "year": "2024", "filename": "BKMINDST_14122024160515_Reg30BKMF.pdf", "path": "assets/pdf/Announcements/2024/BKMINDST_14122024160515_Reg30BKMF.pdf", "size_bytes": 1338398, "date": "Dec 14, 2024", "sort_date": 20241214, "category": "SEBI Reg 30 Disclosures", "title": "Disclosure under Regulation 30 of SEBI (LODR) Regulations" }, { "year": "2024", "filename": "BKMINDST_05122024142119_BKM-RD_Cancellatn_letter-05-12-2024.pdf", "path": "assets/pdf/Announcements/2024/BKMINDST_05122024142119_BKM-RD_Cancellatn_letter-05-12-2024.pdf", "size_bytes": 595999, "date": "Dec 05, 2024", "sort_date": 20241205, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (BKM RD Cancellatn letter 05 12 2024)" }, { "year": "2024", "filename": "BKMINDST_14112024115012_BKMReg30NP14112024F.pdf", "path": "assets/pdf/Announcements/2024/BKMINDST_14112024115012_BKMReg30NP14112024F.pdf", "size_bytes": 4890258, "date": "Nov 14, 2024", "sort_date": 20241114, "category": "SEBI Reg 30 Disclosures", "title": "Disclosure under Regulation 30 of SEBI (LODR) Regulations" }, { "year": "2024", "filename": "BKMINDST_13112024144237_BKMOutcomeBM13112024F.pdf", "path": "assets/pdf/Announcements/2024/BKMINDST_13112024144237_BKMOutcomeBM13112024F.pdf", "size_bytes": 10318767, "date": "Nov 13, 2024", "sort_date": 20241113, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2024", "filename": "BKMINDST_13112024144616_BKMOutcomeBM13112024F.pdf", "path": "assets/pdf/Announcements/2024/BKMINDST_13112024144616_BKMOutcomeBM13112024F.pdf", "size_bytes": 10318767, "date": "Nov 13, 2024", "sort_date": 20241113, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2024", "filename": "BKMINDST_13112024145027_BKMOutcomeBM13112024F.pdf", "path": "assets/pdf/Announcements/2024/BKMINDST_13112024145027_BKMOutcomeBM13112024F.pdf", "size_bytes": 10318767, "date": "Nov 13, 2024", "sort_date": 20241113, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2024", "filename": "BKMOutcomeBM13112024F_13112024144342.pdf", "path": "assets/pdf/Announcements/2024/BKMOutcomeBM13112024F_13112024144342.pdf", "size_bytes": 10318767, "date": "Nov 13, 2024", "sort_date": 20241113, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2024", "filename": "BKMINDST_08102024161610_BKM74_5_30092024F.pdf", "path": "assets/pdf/Announcements/2024/BKMINDST_08102024161610_BKM74_5_30092024F.pdf", "size_bytes": 1654718, "date": "Oct 08, 2024", "sort_date": 20241008, "category": "SEBI Compliance Certificates", "title": "Certificate under Regulation 74(5) of SEBI (Depositories & Participants) Regulations" }, { "year": "2024", "filename": "BKMINDST_23092024133216_BKMTWCF.pdf", "path": "assets/pdf/Announcements/2024/BKMINDST_23092024133216_BKMTWCF.pdf", "size_bytes": 1470166, "date": "Sep 23, 2024", "sort_date": 20240923, "category": "Trading Window Closure", "title": "Intimation of Closure of Trading Window for Prohibition of Insider Trading" }, { "year": "2024", "filename": "BKMINDST_13082024170507_BKMNP13082024F.pdf", "path": "assets/pdf/Announcements/2024/BKMINDST_13082024170507_BKMNP13082024F.pdf", "size_bytes": 7065665, "date": "Aug 13, 2024", "sort_date": 20240813, "category": "Newspaper Publications", "title": "Intimation of Newspaper Publication of Financial Results / Notices" }, { "year": "2024", "filename": "BKMINDST_12082024143307_BKMOUTCOMEBM12082024F.pdf", "path": "assets/pdf/Announcements/2024/BKMINDST_12082024143307_BKMOUTCOMEBM12082024F.pdf", "size_bytes": 15826921, "date": "Aug 12, 2024", "sort_date": 20240812, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2024", "filename": "BKMINDST_12082024143725_BKMOUTCOMEBM12082024F.pdf", "path": "assets/pdf/Announcements/2024/BKMINDST_12082024143725_BKMOUTCOMEBM12082024F.pdf", "size_bytes": 15826921, "date": "Aug 12, 2024", "sort_date": 20240812, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2024", "filename": "BKMOUTCOMEBM12082024F_12082024143440.pdf", "path": "assets/pdf/Announcements/2024/BKMOUTCOMEBM12082024F_12082024143440.pdf", "size_bytes": 15826921, "date": "Aug 12, 2024", "sort_date": 20240812, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2024", "filename": "BKMINDST_10072024152805_BKMNSEReply09072024.pdf", "path": "assets/pdf/Announcements/2024/BKMINDST_10072024152805_BKMNSEReply09072024.pdf", "size_bytes": 25200787, "date": "Jul 10, 2024", "sort_date": 20240710, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (BKMNSE Reply09072024)" }, { "year": "2024", "filename": "BKMINDST_08072024170217_BKMReg74_5_30062024.pdf", "path": "assets/pdf/Announcements/2024/BKMINDST_08072024170217_BKMReg74_5_30062024.pdf", "size_bytes": 432363, "date": "Jul 08, 2024", "sort_date": 20240708, "category": "SEBI Compliance Certificates", "title": "Certificate under Regulation 74(5) of SEBI (Depositories & Participants) Regulations" }, { "year": "2024", "filename": "BKMINDST_28062024113154_BKMBSEReply26062024f.pdf", "path": "assets/pdf/Announcements/2024/BKMINDST_28062024113154_BKMBSEReply26062024f.pdf", "size_bytes": 200044, "date": "Jun 28, 2024", "sort_date": 20240628, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (BKMBSE Reply26062024f)" }, { "year": "2024", "filename": "BKMINDST_28062024120115_BKMDisclosureofLargeEntity31032024.pdf", "path": "assets/pdf/Announcements/2024/BKMINDST_28062024120115_BKMDisclosureofLargeEntity31032024.pdf", "size_bytes": 1400369, "date": "Jun 28, 2024", "sort_date": 20240628, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (BKM Disclosureof Large Entity31032024)" }, { "year": "2024", "filename": "BKMINDST_22062024145830_BKMf.pdf", "path": "assets/pdf/Announcements/2024/BKMINDST_22062024145830_BKMf.pdf", "size_bytes": 1059591, "date": "Jun 22, 2024", "sort_date": 20240622, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (BK Mf)" }, { "year": "2024", "filename": "BKMINDST_06062024134036_Reg74_5_SELetter31032024.pdf", "path": "assets/pdf/Announcements/2024/BKMINDST_06062024134036_Reg74_5_SELetter31032024.pdf", "size_bytes": 563928, "date": "Jun 06, 2024", "sort_date": 20240606, "category": "SEBI Compliance Certificates", "title": "Certificate under Regulation 74(5) of SEBI (Depositories & Participants) Regulations" }, { "year": "2024", "filename": "BKMINDST_31052024141858_BKM_Newspaper_Letterf.pdf", "path": "assets/pdf/Announcements/2024/BKMINDST_31052024141858_BKM_Newspaper_Letterf.pdf", "size_bytes": 5324581, "date": "May 31, 2024", "sort_date": 20240531, "category": "Newspaper Publications", "title": "Intimation of Newspaper Publication of Financial Results / Notices" }, { "year": "2024", "filename": "BKMBMOutcome30052024F_30052024160203.pdf", "path": "assets/pdf/Announcements/2024/BKMBMOutcome30052024F_30052024160203.pdf", "size_bytes": 21123864, "date": "May 30, 2024", "sort_date": 20240530, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2024", "filename": "BKMINDST_30052024160010_BKMBMOutcome30052024F.pdf", "path": "assets/pdf/Announcements/2024/BKMINDST_30052024160010_BKMBMOutcome30052024F.pdf", "size_bytes": 21123864, "date": "May 30, 2024", "sort_date": 20240530, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2024", "filename": "BKMINDST_25052024174208_BKMReg7450092023.pdf", "path": "assets/pdf/Announcements/2024/BKMINDST_25052024174208_BKMReg7450092023.pdf", "size_bytes": 2002943, "date": "May 25, 2024", "sort_date": 20240525, "category": "SEBI Compliance Certificates", "title": "Certificate under Regulation 74(5) of SEBI (Depositories & Participants) Regulations" }, { "year": "2024", "filename": "BKMINDST_25052024174503_BKMReg74531122023.pdf", "path": "assets/pdf/Announcements/2024/BKMINDST_25052024174503_BKMReg74531122023.pdf", "size_bytes": 1991394, "date": "May 25, 2024", "sort_date": 20240525, "category": "SEBI Compliance Certificates", "title": "Certificate under Regulation 74(5) of SEBI (Depositories & Participants) Regulations" }, { "year": "2024", "filename": "BKMINDST_24042024150443_BKMNewspaper24042024F.pdf", "path": "assets/pdf/Announcements/2024/BKMINDST_24042024150443_BKMNewspaper24042024F.pdf", "size_bytes": 9498135, "date": "Apr 24, 2024", "sort_date": 20240424, "category": "Newspaper Publications", "title": "Intimation of Newspaper Publication of Financial Results / Notices" }, { "year": "2024", "filename": "BKMINDST_23042024160700_BKMOutcome23042024F.pdf", "path": "assets/pdf/Announcements/2024/BKMINDST_23042024160700_BKMOutcome23042024F.pdf", "size_bytes": 37526597, "date": "Apr 23, 2024", "sort_date": 20240423, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2024", "filename": "BKMINDST_23042024161739_BKMOutcome23042024F.pdf", "path": "assets/pdf/Announcements/2024/BKMINDST_23042024161739_BKMOutcome23042024F.pdf", "size_bytes": 3809905, "date": "Apr 23, 2024", "sort_date": 20240423, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2024", "filename": "BKMOutcome23042024F_23042024161314.pdf", "path": "assets/pdf/Announcements/2024/BKMOutcome23042024F_23042024161314.pdf", "size_bytes": 3809905, "date": "Apr 23, 2024", "sort_date": 20240423, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2024", "filename": "BKMOutcome23042024F_23042024161557.pdf", "path": "assets/pdf/Announcements/2024/BKMOutcome23042024F_23042024161557.pdf", "size_bytes": 3809905, "date": "Apr 23, 2024", "sort_date": 20240423, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2024", "filename": "BKMINDST_05042024145443_BKM.pdf", "path": "assets/pdf/Announcements/2024/BKMINDST_05042024145443_BKM.pdf", "size_bytes": 778341, "date": "Apr 05, 2024", "sort_date": 20240405, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (BKM)" }, { "year": "2024", "filename": "BKMINDST_22032024132534_OutcomeBKM22032024Final.pdf", "path": "assets/pdf/Announcements/2024/BKMINDST_22032024132534_OutcomeBKM22032024Final.pdf", "size_bytes": 1439637, "date": "Mar 22, 2024", "sort_date": 20240322, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2024", "filename": "BKMINDST_22032024133622_OutcomeBKM22032024Final.pdf", "path": "assets/pdf/Announcements/2024/BKMINDST_22032024133622_OutcomeBKM22032024Final.pdf", "size_bytes": 1439637, "date": "Mar 22, 2024", "sort_date": 20240322, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2024", "filename": "BKMINDST_22032024133623_OutcomeBKM22032024Final (1).pdf", "path": "assets/pdf/Announcements/2024/BKMINDST_22032024133623_OutcomeBKM22032024Final (1).pdf", "size_bytes": 1439637, "date": "Mar 22, 2024", "sort_date": 20240322, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2024", "filename": "BKMINDST_22032024133623_OutcomeBKM22032024Final.pdf", "path": "assets/pdf/Announcements/2024/BKMINDST_22032024133623_OutcomeBKM22032024Final.pdf", "size_bytes": 1439637, "date": "Mar 22, 2024", "sort_date": 20240322, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2024", "filename": "BKMINDST_22032024133624_OutcomeBKM22032024Final.pdf", "path": "assets/pdf/Announcements/2024/BKMINDST_22032024133624_OutcomeBKM22032024Final.pdf", "size_bytes": 1439637, "date": "Mar 22, 2024", "sort_date": 20240322, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2024", "filename": "BKMINDST_22032024133625_OutcomeBKM22032024Final.pdf", "path": "assets/pdf/Announcements/2024/BKMINDST_22032024133625_OutcomeBKM22032024Final.pdf", "size_bytes": 1439637, "date": "Mar 22, 2024", "sort_date": 20240322, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2024", "filename": "BKMINDST_22032024171114_BKMChangeofKMP22032024.pdf", "path": "assets/pdf/Announcements/2024/BKMINDST_22032024171114_BKMChangeofKMP22032024.pdf", "size_bytes": 306118, "date": "Mar 22, 2024", "sort_date": 20240322, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (BKM Changeof KMP22032024)" }, { "year": "2024", "filename": "BKMINDST_20032024181520_BKM.pdf", "path": "assets/pdf/Announcements/2024/BKMINDST_20032024181520_BKM.pdf", "size_bytes": 185699, "date": "Mar 20, 2024", "sort_date": 20240320, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (BKM)" }, { "year": "2024", "filename": "BKMINDST_14022024124452_BKMNPPUBLICATIONSIGNED.pdf", "path": "assets/pdf/Announcements/2024/BKMINDST_14022024124452_BKMNPPUBLICATIONSIGNED.pdf", "size_bytes": 5092972, "date": "Feb 14, 2024", "sort_date": 20240214, "category": "Newspaper Publications", "title": "Intimation of Newspaper Publication of Financial Results / Notices" }, { "year": "2024", "filename": "BKMBMOutcome_13022024171509.pdf", "path": "assets/pdf/Announcements/2024/BKMBMOutcome_13022024171509.pdf", "size_bytes": 8400300, "date": "Feb 13, 2024", "sort_date": 20240213, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2024", "filename": "BKMINDST_13022024171208_BKMBMOutcome.pdf", "path": "assets/pdf/Announcements/2024/BKMINDST_13022024171208_BKMBMOutcome.pdf", "size_bytes": 8400300, "date": "Feb 13, 2024", "sort_date": 20240213, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2024", "filename": "BKMINDST_13022024171950_BKMBMOutcome.pdf", "path": "assets/pdf/Announcements/2024/BKMINDST_13022024171950_BKMBMOutcome.pdf", "size_bytes": 8400300, "date": "Feb 13, 2024", "sort_date": 20240213, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2024", "filename": "BKMINDST_01012024173101_ClosureofTradingWindowBKM.pdf", "path": "assets/pdf/Announcements/2024/BKMINDST_01012024173101_ClosureofTradingWindowBKM.pdf", "size_bytes": 780539, "date": "Jan 01, 2024", "sort_date": 20240101, "category": "Trading Window Closure", "title": "Intimation of Closure of Trading Window for Prohibition of Insider Trading" }, { "year": "2024", "filename": "BKMINDST_01012024181541_BKMoutcome.pdf", "path": "assets/pdf/Announcements/2024/BKMINDST_01012024181541_BKMoutcome.pdf", "size_bytes": 158592, "date": "Jan 01, 2024", "sort_date": 20240101, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2023", "filename": "BKMINDST_16122023151618_BKMoutcome.pdf", "path": "assets/pdf/Announcements/2023/BKMINDST_16122023151618_BKMoutcome.pdf", "size_bytes": 158592, "date": "Dec 16, 2023", "sort_date": 20231216, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2023", "filename": "BKMINDST_16122023151834_BKMoutcome.pdf", "path": "assets/pdf/Announcements/2023/BKMINDST_16122023151834_BKMoutcome.pdf", "size_bytes": 158592, "date": "Dec 16, 2023", "sort_date": 20231216, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2023", "filename": "BKMINDST_16122023174949_BKMReg30.pdf", "path": "assets/pdf/Announcements/2023/BKMINDST_16122023174949_BKMReg30.pdf", "size_bytes": 219469, "date": "Dec 16, 2023", "sort_date": 20231216, "category": "SEBI Reg 30 Disclosures", "title": "Disclosure under Regulation 30 of SEBI (LODR) Regulations" }, { "year": "2023", "filename": "BKMINDST_28092023155717_BKMReslnapprovalS.pdf", "path": "assets/pdf/Announcements/2023/BKMINDST_28092023155717_BKMReslnapprovalS.pdf", "size_bytes": 5131407, "date": "Sep 28, 2023", "sort_date": 20230928, "category": "KMP & Executive Changes", "title": "Intimation of Resignation of Key Managerial Personnel" }, { "year": "2023", "filename": "BKMINDST_17042023133419_BKMSDD31032023.pdf", "path": "assets/pdf/Announcements/2023/BKMINDST_17042023133419_BKMSDD31032023.pdf", "size_bytes": 767215, "date": "Apr 17, 2023", "sort_date": 20230417, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (BKMSDD31032023)" }, { "year": "2023", "filename": "BKMINDST_10042023163347_BKMLargerEntity31032023.pdf", "path": "assets/pdf/Announcements/2023/BKMINDST_10042023163347_BKMLargerEntity31032023.pdf", "size_bytes": 561400, "date": "Apr 10, 2023", "sort_date": 20230410, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (BKM Larger Entity31032023)" }, { "year": "2023", "filename": "BKMINDST_20032023135215_BKMTradingWindowclosure.pdf", "path": "assets/pdf/Announcements/2023/BKMINDST_20032023135215_BKMTradingWindowclosure.pdf", "size_bytes": 189855, "date": "Mar 20, 2023", "sort_date": 20230320, "category": "Trading Window Closure", "title": "Intimation of Closure of Trading Window for Prohibition of Insider Trading" }, { "year": "2022", "filename": "BKMINDST_23122022174246_ClosureofTradingWindo31stDec22BKM.pdf", "path": "assets/pdf/Announcements/2022/BKMINDST_23122022174246_ClosureofTradingWindo31stDec22BKM.pdf", "size_bytes": 4191541, "date": "Dec 23, 2022", "sort_date": 20221223, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (Closureof Trading Windo31st Dec22 BKM)" }, { "year": "2022", "filename": "BKMINDST_24092022141612_ClosureofTradingWindowSigned24.09.2022.pdf", "path": "assets/pdf/Announcements/2022/BKMINDST_24092022141612_ClosureofTradingWindowSigned24.09.2022.pdf", "size_bytes": 6131320, "date": "Sep 24, 2022", "sort_date": 20220924, "category": "Trading Window Closure", "title": "Intimation of Closure of Trading Window for Prohibition of Insider Trading" }, { "year": "2022", "filename": "BKMINDST_23062022111842_BKMClosure_of_trading_window.pdf", "path": "assets/pdf/Announcements/2022/BKMINDST_23062022111842_BKMClosure_of_trading_window.pdf", "size_bytes": 304966, "date": "Jun 23, 2022", "sort_date": 20220623, "category": "Trading Window Closure", "title": "Intimation of Closure of Trading Window for Prohibition of Insider Trading" }, { "year": "2022", "filename": "BKMINDST_16052022161610_BKM16thCOCmeeting_Intimation__.pdf", "path": "assets/pdf/Announcements/2022/BKMINDST_16052022161610_BKM16thCOCmeeting_Intimation__.pdf", "size_bytes": 662115, "date": "May 16, 2022", "sort_date": 20220516, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (BKM16th CO Cmeeting Intimation)" }, { "year": "2022", "filename": "BKMINDST_09052022130451_15thCoCNotice.pdf", "path": "assets/pdf/Announcements/2022/BKMINDST_09052022130451_15thCoCNotice.pdf", "size_bytes": 330304, "date": "May 09, 2022", "sort_date": 20220509, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (15th Co C Notice)" }, { "year": "2022", "filename": "BKMINDST_30042022161338_BKMIntimationof14thCoC.pdf", "path": "assets/pdf/Announcements/2022/BKMINDST_30042022161338_BKMIntimationof14thCoC.pdf", "size_bytes": 779727, "date": "Apr 30, 2022", "sort_date": 20220430, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (BKM Intimationof14th Co C)" }, { "year": "2022", "filename": "BKMINDST_26042022181012_BKMIntimationofthe13thMeetingofCoC.pdf", "path": "assets/pdf/Announcements/2022/BKMINDST_26042022181012_BKMIntimationofthe13thMeetingofCoC.pdf", "size_bytes": 890526, "date": "Apr 26, 2022", "sort_date": 20220426, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (BKM Intimationofthe13th Meetingof Co C)" }, { "year": "2022", "filename": "BKMINDST_18042022142623_12thCocMeeting_BKM.pdf", "path": "assets/pdf/Announcements/2022/BKMINDST_18042022142623_12thCocMeeting_BKM.pdf", "size_bytes": 758555, "date": "Apr 18, 2022", "sort_date": 20220418, "category": "CIRP & CoC Updates", "title": "CIRP Disclosure - CoC Meeting Update" }, { "year": "2022", "filename": "BKMINDST_14042022115745_Disclosurebylargeentity.pdf", "path": "assets/pdf/Announcements/2022/BKMINDST_14042022115745_Disclosurebylargeentity.pdf", "size_bytes": 874636, "date": "Apr 14, 2022", "sort_date": 20220414, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (Disclosurebylargeentity)" }, { "year": "2022", "filename": "BKMINDST_24032022150426_CoCreschedule.pdf", "path": "assets/pdf/Announcements/2022/BKMINDST_24032022150426_CoCreschedule.pdf", "size_bytes": 897438, "date": "Mar 24, 2022", "sort_date": 20220324, "category": "KMP & Executive Changes", "title": "Intimation of Resignation of Key Managerial Personnel" }, { "year": "2022", "filename": "BKMINDST_22032022190146_CoC.pdf", "path": "assets/pdf/Announcements/2022/BKMINDST_22032022190146_CoC.pdf", "size_bytes": 332621, "date": "Mar 22, 2022", "sort_date": 20220322, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (Co C)" }, { "year": "2022", "filename": "BKMINDST_16032022151424_BKM_Trading_Window_Closure.pdf", "path": "assets/pdf/Announcements/2022/BKMINDST_16032022151424_BKM_Trading_Window_Closure.pdf", "size_bytes": 239031, "date": "Mar 16, 2022", "sort_date": 20220316, "category": "Trading Window Closure", "title": "Intimation of Closure of Trading Window for Prohibition of Insider Trading" }, { "year": "2022", "filename": "BKMINDST_28022022153214_BKM_REG_30.pdf", "path": "assets/pdf/Announcements/2022/BKMINDST_28022022153214_BKM_REG_30.pdf", "size_bytes": 582454, "date": "Feb 28, 2022", "sort_date": 20220228, "category": "SEBI Reg 30 Disclosures", "title": "Disclosure under Regulation 30 of SEBI (LODR) Regulations" }, { "year": "2021", "filename": "BKMINDST_22122021150628_BKM_closure_of_trading_window.pdf", "path": "assets/pdf/Announcements/2021/BKMINDST_22122021150628_BKM_closure_of_trading_window.pdf", "size_bytes": 494649, "date": "Dec 22, 2021", "sort_date": 20211222, "category": "Trading Window Closure", "title": "Intimation of Closure of Trading Window for Prohibition of Insider Trading" }, { "year": "2021", "filename": "BKMINDST_29112021191825_COC.pdf", "path": "assets/pdf/Announcements/2021/BKMINDST_29112021191825_COC.pdf", "size_bytes": 622092, "date": "Nov 29, 2021", "sort_date": 20211129, "category": "CIRP & CoC Updates", "title": "CIRP Disclosure - CoC Meeting Update" }, { "year": "2021", "filename": "BKMINDST_26112021191544_COC.pdf", "path": "assets/pdf/Announcements/2021/BKMINDST_26112021191544_COC.pdf", "size_bytes": 555265, "date": "Nov 26, 2021", "sort_date": 20211126, "category": "CIRP & CoC Updates", "title": "CIRP Disclosure - CoC Meeting Update" }, { "year": "2021", "filename": "BKMINDST_18112021162836_ListOfCreditors.pdf", "path": "assets/pdf/Announcements/2021/BKMINDST_18112021162836_ListOfCreditors.pdf", "size_bytes": 2174824, "date": "Nov 18, 2021", "sort_date": 20211118, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (List Of Creditors)" }, { "year": "2021", "filename": "BKMINDST_16112021170609_reschedule.pdf", "path": "assets/pdf/Announcements/2021/BKMINDST_16112021170609_reschedule.pdf", "size_bytes": 536956, "date": "Nov 16, 2021", "sort_date": 20211116, "category": "KMP & Executive Changes", "title": "Intimation of Resignation of Key Managerial Personnel" }, { "year": "2021", "filename": "BKMINDST_15112021123840_coc.pdf", "path": "assets/pdf/Announcements/2021/BKMINDST_15112021123840_coc.pdf", "size_bytes": 555743, "date": "Nov 15, 2021", "sort_date": 20211115, "category": "CIRP & CoC Updates", "title": "CIRP Disclosure - CoC Meeting Update" }, { "year": "2021", "filename": "BKMINDST_11112021164815_CIRP.pdf", "path": "assets/pdf/Announcements/2021/BKMINDST_11112021164815_CIRP.pdf", "size_bytes": 642192, "date": "Nov 11, 2021", "sort_date": 20211111, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (CIRP)" }, { "year": "2021", "filename": "BKMINDST_22092021125749_Closure_of_Trading_Window.pdf", "path": "assets/pdf/Announcements/2021/BKMINDST_22092021125749_Closure_of_Trading_Window.pdf", "size_bytes": 773077, "date": "Sep 22, 2021", "sort_date": 20210922, "category": "Trading Window Closure", "title": "Intimation of Closure of Trading Window for Prohibition of Insider Trading" }, { "year": "2021", "filename": "BKMINDST_30072021173236_FORMG_BKM_REISSUE.pdf", "path": "assets/pdf/Announcements/2021/BKMINDST_30072021173236_FORMG_BKM_REISSUE.pdf", "size_bytes": 1870334, "date": "Jul 30, 2021", "sort_date": 20210730, "category": "CIRP & Public Announcements", "title": "Public Announcement - Form G (Invitation for Expression of Interest under CIRP)" }, { "year": "2021", "filename": "BKMINDST_14072021150830_6thCoC.pdf", "path": "assets/pdf/Announcements/2021/BKMINDST_14072021150830_6thCoC.pdf", "size_bytes": 655479, "date": "Jul 14, 2021", "sort_date": 20210714, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (6th Co C)" }, { "year": "2021", "filename": "BKMINDST_30062021133031_Insider_Trading_Disclosure.pdf", "path": "assets/pdf/Announcements/2021/BKMINDST_30062021133031_Insider_Trading_Disclosure.pdf", "size_bytes": 943371, "date": "Jun 30, 2021", "sort_date": 20210630, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (Insider Trading Disclosure)" }, { "year": "2021", "filename": "BKMINDST_07062021155858_5th_CoC_Intimation.pdf", "path": "assets/pdf/Announcements/2021/BKMINDST_07062021155858_5th_CoC_Intimation.pdf", "size_bytes": 531040, "date": "Jun 07, 2021", "sort_date": 20210607, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (5th Co C Intimation)" }, { "year": "2021", "filename": "BKMINDST_14052021083642_Promoter_disclosure_under_regulation_30.pdf", "path": "assets/pdf/Announcements/2021/BKMINDST_14052021083642_Promoter_disclosure_under_regulation_30.pdf", "size_bytes": 551342, "date": "May 14, 2021", "sort_date": 20210514, "category": "SEBI Reg 30 Disclosures", "title": "Disclosure under Regulation 30 of SEBI (LODR) Regulations" }, { "year": "2021", "filename": "BKMINDST_14052021171719_BKMFormG.pdf", "path": "assets/pdf/Announcements/2021/BKMINDST_14052021171719_BKMFormG.pdf", "size_bytes": 22064363, "date": "May 14, 2021", "sort_date": 20210514, "category": "CIRP & Public Announcements", "title": "Public Announcement - Form G (Invitation for Expression of Interest under CIRP)" }, { "year": "2021", "filename": "BKMINDST_30042021120810_BKMCoC4th.pdf", "path": "assets/pdf/Announcements/2021/BKMINDST_30042021120810_BKMCoC4th.pdf", "size_bytes": 673086, "date": "Apr 30, 2021", "sort_date": 20210430, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (BKM Co C4th)" }, { "year": "2021", "filename": "BKMINDST_19042021195417_Updated_list_of_creditors.pdf", "path": "assets/pdf/Announcements/2021/BKMINDST_19042021195417_Updated_list_of_creditors.pdf", "size_bytes": 13819211, "date": "Apr 19, 2021", "sort_date": 20210419, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (Updated list of creditors)" }, { "year": "2021", "filename": "BKMINDST_24032021162012_Outcome_2nd_Coc_Meeting.pdf", "path": "assets/pdf/Announcements/2021/BKMINDST_24032021162012_Outcome_2nd_Coc_Meeting.pdf", "size_bytes": 733309, "date": "Mar 24, 2021", "sort_date": 20210324, "category": "CIRP & CoC Updates", "title": "Outcome of Committee of Creditors (CoC) Meeting under CIRP" }, { "year": "2021", "filename": "BKMINDST_24032021180108_Intimation_3rd_Coc_meeting.pdf", "path": "assets/pdf/Announcements/2021/BKMINDST_24032021180108_Intimation_3rd_Coc_meeting.pdf", "size_bytes": 709983, "date": "Mar 24, 2021", "sort_date": 20210324, "category": "CIRP & CoC Updates", "title": "Intimation of Committee of Creditors (CoC) Meeting under CIRP" }, { "year": "2021", "filename": "BKMINDST_17032021152438_TradingWindow.pdf", "path": "assets/pdf/Announcements/2021/BKMINDST_17032021152438_TradingWindow.pdf", "size_bytes": 898832, "date": "Mar 17, 2021", "sort_date": 20210317, "category": "Trading Window Closure", "title": "Intimation of Closure of Trading Window for Prohibition of Insider Trading" }, { "year": "2021", "filename": "BKMINDST_17032021160903_ListofCreditors.pdf", "path": "assets/pdf/Announcements/2021/BKMINDST_17032021160903_ListofCreditors.pdf", "size_bytes": 1501788, "date": "Mar 17, 2021", "sort_date": 20210317, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (Listof Creditors)" }, { "year": "2021", "filename": "BKMINDST_17032021161839_FormG_NewspaperPub1.pdf", "path": "assets/pdf/Announcements/2021/BKMINDST_17032021161839_FormG_NewspaperPub1.pdf", "size_bytes": 2053415, "date": "Mar 17, 2021", "sort_date": 20210317, "category": "CIRP & Public Announcements", "title": "Public Announcement - Form G (Invitation for Expression of Interest under CIRP)" }, { "year": "2021", "filename": "BKMINDST_08032021195928_Intimation_COC_meeting.pdf", "path": "assets/pdf/Announcements/2021/BKMINDST_08032021195928_Intimation_COC_meeting.pdf", "size_bytes": 852390, "date": "Mar 08, 2021", "sort_date": 20210308, "category": "CIRP & CoC Updates", "title": "Intimation of Committee of Creditors (CoC) Meeting under CIRP" }, { "year": "2021", "filename": "BKMINDST_08032021200818_List_of_Creditors.pdf", "path": "assets/pdf/Announcements/2021/BKMINDST_08032021200818_List_of_Creditors.pdf", "size_bytes": 7720023, "date": "Mar 08, 2021", "sort_date": 20210308, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (List of Creditors)" }, { "year": "2021", "filename": "BKMINDST_13022021152911_BKM_Newspaper_Publication.pdf", "path": "assets/pdf/Announcements/2021/BKMINDST_13022021152911_BKM_Newspaper_Publication.pdf", "size_bytes": 11757224, "date": "Feb 13, 2021", "sort_date": 20210213, "category": "Newspaper Publications", "title": "Intimation of Newspaper Publication of Financial Results / Notices" }, { "year": "2021", "filename": "BKMINDST_12022021151138_Outcome_BM_12022021.pdf", "path": "assets/pdf/Announcements/2021/BKMINDST_12022021151138_Outcome_BM_12022021.pdf", "size_bytes": 7327082, "date": "Feb 12, 2021", "sort_date": 20210212, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2021", "filename": "BKMINDST_10022021165446_OUTCOME_COC_10022021.pdf", "path": "assets/pdf/Announcements/2021/BKMINDST_10022021165446_OUTCOME_COC_10022021.pdf", "size_bytes": 685831, "date": "Feb 10, 2021", "sort_date": 20210210, "category": "CIRP & CoC Updates", "title": "Outcome of Committee of Creditors (CoC) Meeting under CIRP" }, { "year": "2021", "filename": "BKMINDST_06022021144740_ResignationRitikaAgarwal (1).pdf", "path": "assets/pdf/Announcements/2021/BKMINDST_06022021144740_ResignationRitikaAgarwal (1).pdf", "size_bytes": 1168577, "date": "Feb 06, 2021", "sort_date": 20210206, "category": "KMP & Executive Changes", "title": "Intimation of Resignation of Company Secretary & Compliance Officer" }, { "year": "2021", "filename": "BKMINDST_06022021144740_ResignationRitikaAgarwal.pdf", "path": "assets/pdf/Announcements/2021/BKMINDST_06022021144740_ResignationRitikaAgarwal.pdf", "size_bytes": 1168577, "date": "Feb 06, 2021", "sort_date": 20210206, "category": "KMP & Executive Changes", "title": "Intimation of Resignation of Company Secretary & Compliance Officer" }, { "year": "2021", "filename": "BKMINDST_04022021125218_Newspaper_Publication.pdf", "path": "assets/pdf/Announcements/2021/BKMINDST_04022021125218_Newspaper_Publication.pdf", "size_bytes": 14046032, "date": "Feb 04, 2021", "sort_date": 20210204, "category": "Newspaper Publications", "title": "Intimation of Newspaper Publication of Financial Results / Notices" }, { "year": "2021", "filename": "BKMINDST_25012021192154_List_of_creditors.pdf", "path": "assets/pdf/Announcements/2021/BKMINDST_25012021192154_List_of_creditors.pdf", "size_bytes": 2933888, "date": "Jan 25, 2021", "sort_date": 20210125, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (List of creditors)" }, { "year": "2021", "filename": "BKMINDST_25012021192358_Intimation_of_COC_Meeting.pdf", "path": "assets/pdf/Announcements/2021/BKMINDST_25012021192358_Intimation_of_COC_Meeting.pdf", "size_bytes": 1393257, "date": "Jan 25, 2021", "sort_date": 20210125, "category": "CIRP & CoC Updates", "title": "Intimation of Committee of Creditors (CoC) Meeting under CIRP" }, { "year": "2021", "filename": "BKMINDST_21012021174351_REG_74_DP.pdf", "path": "assets/pdf/Announcements/2021/BKMINDST_21012021174351_REG_74_DP.pdf", "size_bytes": 620198, "date": "Jan 21, 2021", "sort_date": 20210121, "category": "SEBI Compliance Certificates", "title": "Certificate under Regulation 74(5) of SEBI (Depositories & Participants) Regulations" }, { "year": "2021", "filename": "BKMINDST_18012021121517_Newspaper_publication_NSE.pdf", "path": "assets/pdf/Announcements/2021/BKMINDST_18012021121517_Newspaper_publication_NSE.pdf", "size_bytes": 3506698, "date": "Jan 18, 2021", "sort_date": 20210118, "category": "Newspaper Publications", "title": "Intimation of Newspaper Publication of Financial Results / Notices" }, { "year": "2020", "filename": "BKMINDST_31122020194622_BKM_REG_30_IBC.pdf", "path": "assets/pdf/Announcements/2020/BKMINDST_31122020194622_BKM_REG_30_IBC.pdf", "size_bytes": 719478, "date": "Dec 31, 2020", "sort_date": 20201231, "category": "SEBI Reg 30 Disclosures", "title": "Regulation 30 Disclosure - Intimation of Admission into CIRP under IBC" }, { "year": "2020", "filename": "BKMINDST_16122020170728_BKM_closure_of_trading_window.pdf", "path": "assets/pdf/Announcements/2020/BKMINDST_16122020170728_BKM_closure_of_trading_window.pdf", "size_bytes": 566723, "date": "Dec 16, 2020", "sort_date": 20201216, "category": "Trading Window Closure", "title": "Intimation of Closure of Trading Window for Prohibition of Insider Trading" }, { "year": "2020", "filename": "BKMINDST_14122020144948_REG_30_CLOSURE_OF_PLANT_HARIPAL.pdf", "path": "assets/pdf/Announcements/2020/BKMINDST_14122020144948_REG_30_CLOSURE_OF_PLANT_HARIPAL.pdf", "size_bytes": 600471, "date": "Dec 14, 2020", "sort_date": 20201214, "category": "SEBI Reg 30 Disclosures", "title": "Regulation 30 Disclosure - Intimation of Closure of Plant at Haripal" }, { "year": "2020", "filename": "BKMINDST_11122020142722_BKM_RPT.pdf", "path": "assets/pdf/Announcements/2020/BKMINDST_11122020142722_BKM_RPT.pdf", "size_bytes": 266850, "date": "Dec 11, 2020", "sort_date": 20201211, "category": "Related Party Transactions", "title": "Disclosure of Related Party Transactions under Regulation 23(9)" }, { "year": "2020", "filename": "BKMINDST_07122020120228_BKMResult.pdf", "path": "assets/pdf/Announcements/2020/BKMINDST_07122020120228_BKMResult.pdf", "size_bytes": 9733992, "date": "Dec 07, 2020", "sort_date": 20201207, "category": "KMP & Executive Changes", "title": "Intimation of Resignation of Key Managerial Personnel" }, { "year": "2020", "filename": "BKMINDST_19112020163957_ChangesinKMP.pdf", "path": "assets/pdf/Announcements/2020/BKMINDST_19112020163957_ChangesinKMP.pdf", "size_bytes": 88481, "date": "Nov 19, 2020", "sort_date": 20201119, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (Changesin KMP)" }, { "year": "2020", "filename": "BKMINDST_17112020144722_REG30ResofCSVarunAgarwal.pdf", "path": "assets/pdf/Announcements/2020/BKMINDST_17112020144722_REG30ResofCSVarunAgarwal.pdf", "size_bytes": 90363, "date": "Nov 17, 2020", "sort_date": 20201117, "category": "KMP & Executive Changes", "title": "Intimation of Resignation of Company Secretary & Compliance Officer" }, { "year": "2020", "filename": "BKMINDST_16112020185841_BKMNewspaperPublicationOutcome.pdf", "path": "assets/pdf/Announcements/2020/BKMINDST_16112020185841_BKMNewspaperPublicationOutcome.pdf", "size_bytes": 7490813, "date": "Nov 16, 2020", "sort_date": 20201116, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2020", "filename": "BKMINDST_13112020132657_BKM_Outcome_.pdf", "path": "assets/pdf/Announcements/2020/BKMINDST_13112020132657_BKM_Outcome_.pdf", "size_bytes": 9859482, "date": "Nov 13, 2020", "sort_date": 20201113, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2020", "filename": "BKMINDST_13112020152424_BKM_Outcome_BM_12112020.pdf", "path": "assets/pdf/Announcements/2020/BKMINDST_13112020152424_BKM_Outcome_BM_12112020.pdf", "size_bytes": 658668, "date": "Nov 13, 2020", "sort_date": 20201113, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2020", "filename": "BKMINDST_12112020172940_BKMOutcome.pdf", "path": "assets/pdf/Announcements/2020/BKMINDST_12112020172940_BKMOutcome.pdf", "size_bytes": 9476304, "date": "Nov 12, 2020", "sort_date": 20201112, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2020", "filename": "BKMINDST_05112020132024_NewspaperPublication5112020signed.pdf", "path": "assets/pdf/Announcements/2020/BKMINDST_05112020132024_NewspaperPublication5112020signed.pdf", "size_bytes": 2121221, "date": "Nov 05, 2020", "sort_date": 20201105, "category": "Newspaper Publications", "title": "Intimation of Newspaper Publication of Financial Results / Notices" }, { "year": "2020", "filename": "BKMINDST_19102020164335_Reg74.pdf", "path": "assets/pdf/Announcements/2020/BKMINDST_19102020164335_Reg74.pdf", "size_bytes": 891990, "date": "Oct 19, 2020", "sort_date": 20201019, "category": "SEBI Compliance Certificates", "title": "Certificate under Regulation 74(5) of SEBI (Depositories & Participants) Regulations" }, { "year": "2020", "filename": "BKMINDST_05102020213548_BKMIDRESIGNATION.pdf", "path": "assets/pdf/Announcements/2020/BKMINDST_05102020213548_BKMIDRESIGNATION.pdf", "size_bytes": 41612, "date": "Oct 05, 2020", "sort_date": 20201005, "category": "KMP & Executive Changes", "title": "Intimation of Resignation of Independent Director" }, { "year": "2020", "filename": "BKMINDST_25092020142312_AGM_OUTCOME_NSE.pdf", "path": "assets/pdf/Announcements/2020/BKMINDST_25092020142312_AGM_OUTCOME_NSE.pdf", "size_bytes": 11603049, "date": "Sep 25, 2020", "sort_date": 20200925, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2020", "filename": "BKMINDST_25092020154000_AGM_OUTCOME_NSE.pdf", "path": "assets/pdf/Announcements/2020/BKMINDST_25092020154000_AGM_OUTCOME_NSE.pdf", "size_bytes": 11637411, "date": "Sep 25, 2020", "sort_date": 20200925, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2020", "filename": "BKMINDST_18092020171043_TradingWindowClosureBKM.pdf", "path": "assets/pdf/Announcements/2020/BKMINDST_18092020171043_TradingWindowClosureBKM.pdf", "size_bytes": 506725, "date": "Sep 18, 2020", "sort_date": 20200918, "category": "Trading Window Closure", "title": "Intimation of Closure of Trading Window for Prohibition of Insider Trading" }, { "year": "2020", "filename": "BKMINDST_09092020145906_Reg_30_5_.pdf", "path": "assets/pdf/Announcements/2020/BKMINDST_09092020145906_Reg_30_5_.pdf", "size_bytes": 750042, "date": "Sep 09, 2020", "sort_date": 20200909, "category": "SEBI Reg 30 Disclosures", "title": "Disclosure under Regulation 30 of SEBI (LODR) Regulations" }, { "year": "2020", "filename": "BKMINDST_04092020151307_NewspaperResults.pdf", "path": "assets/pdf/Announcements/2020/BKMINDST_04092020151307_NewspaperResults.pdf", "size_bytes": 1866964, "date": "Sep 04, 2020", "sort_date": 20200904, "category": "KMP & Executive Changes", "title": "Intimation of Resignation of Key Managerial Personnel" }, { "year": "2020", "filename": "BKMINDST_04092020151717_Newspaper_completion_of_dispatch.pdf", "path": "assets/pdf/Announcements/2020/BKMINDST_04092020151717_Newspaper_completion_of_dispatch.pdf", "size_bytes": 2652922, "date": "Sep 04, 2020", "sort_date": 20200904, "category": "Newspaper Publications", "title": "Intimation of Newspaper Publication of Financial Results / Notices" }, { "year": "2020", "filename": "BKMINDST_03092020164854_BKM_Outcome.pdf", "path": "assets/pdf/Announcements/2020/BKMINDST_03092020164854_BKM_Outcome.pdf", "size_bytes": 7086541, "date": "Sep 03, 2020", "sort_date": 20200903, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2020", "filename": "BKMINDST_03092020175430_Completion_of_dispatch.pdf", "path": "assets/pdf/Announcements/2020/BKMINDST_03092020175430_Completion_of_dispatch.pdf", "size_bytes": 500159, "date": "Sep 03, 2020", "sort_date": 20200903, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (Completion of dispatch)" }, { "year": "2020", "filename": "BKMINDST_28082020155949_BKM_NewpaperPublication_27082020.pdf", "path": "assets/pdf/Announcements/2020/BKMINDST_28082020155949_BKM_NewpaperPublication_27082020.pdf", "size_bytes": 14268326, "date": "Aug 28, 2020", "sort_date": 20200828, "category": "Newspaper Publications", "title": "Intimation of Newspaper Publication of Financial Results / Notices" }, { "year": "2020", "filename": "BKMINDST_26082020185033_RPT_BKM_26082020.pdf", "path": "assets/pdf/Announcements/2020/BKMINDST_26082020185033_RPT_BKM_26082020.pdf", "size_bytes": 2118827, "date": "Aug 26, 2020", "sort_date": 20200826, "category": "Related Party Transactions", "title": "Disclosure of Related Party Transactions under Regulation 23(9)" }, { "year": "2020", "filename": "BKMINDST_19082020123857_NSEBriefprofileNM.pdf", "path": "assets/pdf/Announcements/2020/BKMINDST_19082020123857_NSEBriefprofileNM.pdf", "size_bytes": 157768, "date": "Aug 19, 2020", "sort_date": 20200819, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (NSE Briefprofile NM)" }, { "year": "2020", "filename": "BKMINDST_12082020154007_Intimation_NewspaperPublication_Emailupdationfiling.pdf", "path": "assets/pdf/Announcements/2020/BKMINDST_12082020154007_Intimation_NewspaperPublication_Emailupdationfiling.pdf", "size_bytes": 1763797, "date": "Aug 12, 2020", "sort_date": 20200812, "category": "Newspaper Publications", "title": "Intimation of Newspaper Publication of Financial Results / Notices" }, { "year": "2020", "filename": "BKMINDST_07082020150007_BKM_Bookclosure_AGM.pdf", "path": "assets/pdf/Announcements/2020/BKMINDST_07082020150007_BKM_Bookclosure_AGM.pdf", "size_bytes": 614278, "date": "Aug 07, 2020", "sort_date": 20200807, "category": "General Meetings & AGM", "title": "Intimation of Annual General Meeting & Book Closure Dates" }, { "year": "2020", "filename": "BKMINDST_07082020150229_Intimation_BookClosure_BKM.pdf", "path": "assets/pdf/Announcements/2020/BKMINDST_07082020150229_Intimation_BookClosure_BKM.pdf", "size_bytes": 614272, "date": "Aug 07, 2020", "sort_date": 20200807, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (Intimation Book Closure BKM)" }, { "year": "2020", "filename": "BKMINDST_30072020163347_NewspaperPublicationSigned (1).pdf", "path": "assets/pdf/Announcements/2020/BKMINDST_30072020163347_NewspaperPublicationSigned (1).pdf", "size_bytes": 5144897, "date": "Jul 30, 2020", "sort_date": 20200730, "category": "Newspaper Publications", "title": "Intimation of Newspaper Publication of Financial Results / Notices" }, { "year": "2020", "filename": "BKMINDST_30072020163347_NewspaperPublicationSigned.pdf", "path": "assets/pdf/Announcements/2020/BKMINDST_30072020163347_NewspaperPublicationSigned.pdf", "size_bytes": 5144897, "date": "Jul 30, 2020", "sort_date": 20200730, "category": "Newspaper Publications", "title": "Intimation of Newspaper Publication of Financial Results / Notices" }, { "year": "2020", "filename": "BKMINDST_28072020210012_Results_BKM_28072020.pdf", "path": "assets/pdf/Announcements/2020/BKMINDST_28072020210012_Results_BKM_28072020.pdf", "size_bytes": 1802708, "date": "Jul 28, 2020", "sort_date": 20200728, "category": "KMP & Executive Changes", "title": "Intimation of Resignation of Key Managerial Personnel" }, { "year": "2020", "filename": "BKMINDST_28072020211808_AppointmentofCS.pdf", "path": "assets/pdf/Announcements/2020/BKMINDST_28072020211808_AppointmentofCS.pdf", "size_bytes": 1814550, "date": "Jul 28, 2020", "sort_date": 20200728, "category": "KMP & Executive Changes", "title": "Intimation of Appointment of Company Secretary & Compliance Officer" }, { "year": "2020", "filename": "BKMINDST_28072020212642_AppointmentofCFO.pdf", "path": "assets/pdf/Announcements/2020/BKMINDST_28072020212642_AppointmentofCFO.pdf", "size_bytes": 1814562, "date": "Jul 28, 2020", "sort_date": 20200728, "category": "KMP & Executive Changes", "title": "Intimation of Appointment of Chief Financial Officer (CFO)" }, { "year": "2020", "filename": "BKMINDST_28072020212642_AppointmentofCS.pdf", "path": "assets/pdf/Announcements/2020/BKMINDST_28072020212642_AppointmentofCS.pdf", "size_bytes": 1814550, "date": "Jul 28, 2020", "sort_date": 20200728, "category": "KMP & Executive Changes", "title": "Intimation of Appointment of Company Secretary & Compliance Officer" }, { "year": "2020", "filename": "BKMINDST_28072020212642_AppointmentofID.pdf", "path": "assets/pdf/Announcements/2020/BKMINDST_28072020212642_AppointmentofID.pdf", "size_bytes": 1814550, "date": "Jul 28, 2020", "sort_date": 20200728, "category": "KMP & Executive Changes", "title": "Intimation of Appointment of Independent Director" }, { "year": "2020", "filename": "BKMINDST_22072020150859_DisclosureuunderReg30Signed.pdf", "path": "assets/pdf/Announcements/2020/BKMINDST_22072020150859_DisclosureuunderReg30Signed.pdf", "size_bytes": 942471, "date": "Jul 22, 2020", "sort_date": 20200722, "category": "SEBI Reg 30 Disclosures", "title": "Disclosure under Regulation 30 of SEBI (LODR) Regulations" }, { "year": "2020", "filename": "BKMINDST_22072020151150_DisclosureuunderReg30Signed.pdf", "path": "assets/pdf/Announcements/2020/BKMINDST_22072020151150_DisclosureuunderReg30Signed.pdf", "size_bytes": 942471, "date": "Jul 22, 2020", "sort_date": 20200722, "category": "SEBI Reg 30 Disclosures", "title": "Disclosure under Regulation 30 of SEBI (LODR) Regulations" }, { "year": "2020", "filename": "BKMINDST_22072020183316_Reg74.pdf", "path": "assets/pdf/Announcements/2020/BKMINDST_22072020183316_Reg74.pdf", "size_bytes": 1040720, "date": "Jul 22, 2020", "sort_date": 20200722, "category": "SEBI Compliance Certificates", "title": "Certificate under Regulation 74(5) of SEBI (Depositories & Participants) Regulations" }, { "year": "2020", "filename": "BKMINDST_09072020141042_BKMNEWSPAPERPUBLICATIONletterFinal.pdf", "path": "assets/pdf/Announcements/2020/BKMINDST_09072020141042_BKMNEWSPAPERPUBLICATIONletterFinal.pdf", "size_bytes": 5527492, "date": "Jul 09, 2020", "sort_date": 20200709, "category": "Newspaper Publications", "title": "Intimation of Newspaper Publication of Financial Results / Notices" }, { "year": "2020", "filename": "BKMINDST_01072020164926_BKMNEWSPAPERPUBLICATIONletterFinal.pdf", "path": "assets/pdf/Announcements/2020/BKMINDST_01072020164926_BKMNEWSPAPERPUBLICATIONletterFinal.pdf", "size_bytes": 5527492, "date": "Jul 01, 2020", "sort_date": 20200701, "category": "Newspaper Publications", "title": "Intimation of Newspaper Publication of Financial Results / Notices" }, { "year": "2020", "filename": "BKMINDST_29062020144916_RESG_LTR_RAVEENA.pdf", "path": "assets/pdf/Announcements/2020/BKMINDST_29062020144916_RESG_LTR_RAVEENA.pdf", "size_bytes": 235681, "date": "Jun 29, 2020", "sort_date": 20200629, "category": "KMP & Executive Changes", "title": "Intimation of Resignation of Company Secretary & Compliance Officer" }, { "year": "2020", "filename": "BKMINDST_23062020124031_closoftradwind.pdf", "path": "assets/pdf/Announcements/2020/BKMINDST_23062020124031_closoftradwind.pdf", "size_bytes": 332077, "date": "Jun 23, 2020", "sort_date": 20200623, "category": "Trading Window Closure", "title": "Intimation of Closure of Trading Window for Prohibition of Insider Trading" }, { "year": "2020", "filename": "BKMINDST_10062020154358_DIR_RESIGNATION_INTIMATION_LTR_final.pdf", "path": "assets/pdf/Announcements/2020/BKMINDST_10062020154358_DIR_RESIGNATION_INTIMATION_LTR_final.pdf", "size_bytes": 259625, "date": "Jun 10, 2020", "sort_date": 20200610, "category": "KMP & Executive Changes", "title": "Intimation of Resignation of Key Managerial Personnel" }, { "year": "2020", "filename": "BKMINDST_02062020174010_BKM020620Covid19impact.pdf", "path": "assets/pdf/Announcements/2020/BKMINDST_02062020174010_BKM020620Covid19impact.pdf", "size_bytes": 441898, "date": "Jun 02, 2020", "sort_date": 20200602, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (BKM020620 Covid19impact)" }, { "year": "2020", "filename": "BKMINDST_06052020114823_BKM_NSE_LC.pdf", "path": "assets/pdf/Announcements/2020/BKMINDST_06052020114823_BKM_NSE_LC.pdf", "size_bytes": 170413, "date": "May 06, 2020", "sort_date": 20200506, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (BKM NSE LC)" }, { "year": "2020", "filename": "BKMINDST_01042020160739_Reg_30_Covid_19_Intimations_NSE_sw.pdf", "path": "assets/pdf/Announcements/2020/BKMINDST_01042020160739_Reg_30_Covid_19_Intimations_NSE_sw.pdf", "size_bytes": 680342, "date": "Apr 01, 2020", "sort_date": 20200401, "category": "SEBI Reg 30 Disclosures", "title": "Regulation 30 Disclosure - Impact of COVID-19 Pandemic on Operations" }, { "year": "2020", "filename": "BKMINDST_20032020140356_BKMtradingwindowclosure.pdf", "path": "assets/pdf/Announcements/2020/BKMINDST_20032020140356_BKMtradingwindowclosure.pdf", "size_bytes": 610145, "date": "Mar 20, 2020", "sort_date": 20200320, "category": "Trading Window Closure", "title": "Intimation of Closure of Trading Window for Prohibition of Insider Trading" }, { "year": "2020", "filename": "BKMINDST_14022020173612_BKMNP140220.pdf", "path": "assets/pdf/Announcements/2020/BKMINDST_14022020173612_BKMNP140220.pdf", "size_bytes": 9359363, "date": "Feb 14, 2020", "sort_date": 20200214, "category": "Newspaper Publications", "title": "Intimation of Newspaper Publication of Financial Results / Notices" }, { "year": "2020", "filename": "BKMINDST_13022020171523_Outcome13022020.pdf", "path": "assets/pdf/Announcements/2020/BKMINDST_13022020171523_Outcome13022020.pdf", "size_bytes": 6886303, "date": "Feb 13, 2020", "sort_date": 20200213, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2020", "filename": "BKMINDST_07022020125413_NPIntofBM.pdf", "path": "assets/pdf/Announcements/2020/BKMINDST_07022020125413_NPIntofBM.pdf", "size_bytes": 4452944, "date": "Feb 07, 2020", "sort_date": 20200207, "category": "Newspaper Publications", "title": "Intimation of Newspaper Publication of Financial Results / Notices" }, { "year": "2020", "filename": "BKMINDST_17012020183545_BKM_NSC_17012020_206.pdf", "path": "assets/pdf/Announcements/2020/BKMINDST_17012020183545_BKM_NSC_17012020_206.pdf", "size_bytes": 459077, "date": "Jan 17, 2020", "sort_date": 20200117, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (BKM NSC)" }, { "year": "2019", "filename": "BKMINDST_20122019155519_Tradingwindowclosure_081.pdf", "path": "assets/pdf/Announcements/2019/BKMINDST_20122019155519_Tradingwindowclosure_081.pdf", "size_bytes": 812377, "date": "Dec 20, 2019", "sort_date": 20191220, "category": "Trading Window Closure", "title": "Intimation of Closure of Trading Window for Prohibition of Insider Trading" }, { "year": "2019", "filename": "listcontract1_2511201916465_RPTDisclosure_179.pdf", "path": "assets/pdf/Announcements/2019/listcontract1_2511201916465_RPTDisclosure_179.pdf", "size_bytes": 324853, "date": "Nov 25, 2019", "sort_date": 20191125, "category": "Related Party Transactions", "title": "Disclosure of Related Party Transactions under Regulation 23(9)" }, { "year": "2019", "filename": "BKMINDST_14112019122048_ApptofIDJaya_119.pdf", "path": "assets/pdf/Announcements/2019/BKMINDST_14112019122048_ApptofIDJaya_119.pdf", "size_bytes": 3644879, "date": "Nov 14, 2019", "sort_date": 20191114, "category": "KMP & Executive Changes", "title": "Intimation of Appointment of Independent Director" }, { "year": "2019", "filename": "BKMINDST_14112019122131_ApptofIDShipra_117.pdf", "path": "assets/pdf/Announcements/2019/BKMINDST_14112019122131_ApptofIDShipra_117.pdf", "size_bytes": 3644885, "date": "Nov 14, 2019", "sort_date": 20191114, "category": "KMP & Executive Changes", "title": "Intimation of Appointment of Independent Director" }, { "year": "2019", "filename": "BKMINDST_14112019124750_ApptofIDGanesh_118.pdf", "path": "assets/pdf/Announcements/2019/BKMINDST_14112019124750_ApptofIDGanesh_118.pdf", "size_bytes": 3644879, "date": "Nov 14, 2019", "sort_date": 20191114, "category": "KMP & Executive Changes", "title": "Intimation of Appointment of Independent Director" }, { "year": "2019", "filename": "BKMINDST_14112019174515_BKMNPResult_539.pdf", "path": "assets/pdf/Announcements/2019/BKMINDST_14112019174515_BKMNPResult_539.pdf", "size_bytes": 516552, "date": "Nov 14, 2019", "sort_date": 20191114, "category": "KMP & Executive Changes", "title": "Intimation of Resignation of Key Managerial Personnel" }, { "year": "2019", "filename": "BKMINDST_13112019190448_outcome_089.pdf", "path": "assets/pdf/Announcements/2019/BKMINDST_13112019190448_outcome_089.pdf", "size_bytes": 3593206, "date": "Nov 13, 2019", "sort_date": 20191113, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2019", "filename": "BKMINDST_07112019175823_newspaper131119_391.pdf", "path": "assets/pdf/Announcements/2019/BKMINDST_07112019175823_newspaper131119_391.pdf", "size_bytes": 4492233, "date": "Nov 07, 2019", "sort_date": 20191107, "category": "Newspaper Publications", "title": "Intimation of Newspaper Publication of Financial Results / Notices" }, { "year": "2019", "filename": "BKMINDST_15102019172357_Confirmationcertificate_251.pdf", "path": "assets/pdf/Announcements/2019/BKMINDST_15102019172357_Confirmationcertificate_251.pdf", "size_bytes": 1566175, "date": "Oct 15, 2019", "sort_date": 20191015, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (Confirmationcertificate)" }, { "year": "2019", "filename": "BKMINDST_04102019124848_Reg30Intimation_037.pdf", "path": "assets/pdf/Announcements/2019/BKMINDST_04102019124848_Reg30Intimation_037.pdf", "size_bytes": 1352829, "date": "Oct 04, 2019", "sort_date": 20191004, "category": "SEBI Reg 30 Disclosures", "title": "Disclosure under Regulation 30 of SEBI (LODR) Regulations" }, { "year": "2019", "filename": "BKMINDST_27092019184018_rtaletter_563.pdf", "path": "assets/pdf/Announcements/2019/BKMINDST_27092019184018_rtaletter_563.pdf", "size_bytes": 741150, "date": "Sep 27, 2019", "sort_date": 20190927, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (rtaletter)" }, { "year": "2019", "filename": "BKMINDST_21092019155553_proceedings_039.pdf", "path": "assets/pdf/Announcements/2019/BKMINDST_21092019155553_proceedings_039.pdf", "size_bytes": 11698699, "date": "Sep 21, 2019", "sort_date": 20190921, "category": "General Meetings & AGM", "title": "Proceedings and Voting Results of Annual General Meeting (AGM)" }, { "year": "2019", "filename": "BKMINDST_21092019160349_PIT_042.pdf", "path": "assets/pdf/Announcements/2019/BKMINDST_21092019160349_PIT_042.pdf", "size_bytes": 585909, "date": "Sep 21, 2019", "sort_date": 20190921, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (PIT)" }, { "year": "2019", "filename": "BKMINDST_02092019182331_NPAGM_108.pdf", "path": "assets/pdf/Announcements/2019/BKMINDST_02092019182331_NPAGM_108.pdf", "size_bytes": 3352723, "date": "Sep 02, 2019", "sort_date": 20190902, "category": "Newspaper Publications", "title": "Intimation of Newspaper Publication of Financial Results / Notices" }, { "year": "2019", "filename": "listcontract3_30082019194009_BKM_AGMBOOK_558.pdf", "path": "assets/pdf/Announcements/2019/listcontract3_30082019194009_BKM_AGMBOOK_558.pdf", "size_bytes": 632181, "date": "Aug 30, 2019", "sort_date": 20190830, "category": "General Meetings & AGM", "title": "Proceedings and Voting Results of Annual General Meeting (AGM)" }, { "year": "2019", "filename": "BKMINDST_08082019173644_BKMNPResult_397.pdf", "path": "assets/pdf/Announcements/2019/BKMINDST_08082019173644_BKMNPResult_397.pdf", "size_bytes": 3902679, "date": "Aug 08, 2019", "sort_date": 20190808, "category": "KMP & Executive Changes", "title": "Intimation of Resignation of Key Managerial Personnel" }, { "year": "2019", "filename": "BKMINDST_07082019180713_KKCSKRes_466.pdf", "path": "assets/pdf/Announcements/2019/BKMINDST_07082019180713_KKCSKRes_466.pdf", "size_bytes": 715318, "date": "Aug 07, 2019", "sort_date": 20190807, "category": "KMP & Executive Changes", "title": "Intimation of Resignation of Company Secretary & Compliance Officer" }, { "year": "2019", "filename": "BKMINDST_07082019181206_KKCRes_475.pdf", "path": "assets/pdf/Announcements/2019/BKMINDST_07082019181206_KKCRes_475.pdf", "size_bytes": 42720, "date": "Aug 07, 2019", "sort_date": 20190807, "category": "KMP & Executive Changes", "title": "Intimation of Resignation of Key Managerial Personnel" }, { "year": "2019", "filename": "BKMINDST_07082019181531_SKres_476.pdf", "path": "assets/pdf/Announcements/2019/BKMINDST_07082019181531_SKres_476.pdf", "size_bytes": 196972, "date": "Aug 07, 2019", "sort_date": 20190807, "category": "KMP & Executive Changes", "title": "Intimation of Resignation of Key Managerial Personnel" }, { "year": "2019", "filename": "listcontract3_07082019090539_BKMINDST_1_008.pdf", "path": "assets/pdf/Announcements/2019/listcontract3_07082019090539_BKMINDST_1_008.pdf", "size_bytes": 7187011, "date": "Aug 07, 2019", "sort_date": 20190807, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (BKMINDST 1)" }, { "year": "2019", "filename": "BKMINDST_06082019192401_Outcome060819_569.pdf", "path": "assets/pdf/Announcements/2019/BKMINDST_06082019192401_Outcome060819_569.pdf", "size_bytes": 327085, "date": "Aug 06, 2019", "sort_date": 20190806, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2019", "filename": "BKMINDST_06082019193220_Outcome060819_575.pdf", "path": "assets/pdf/Announcements/2019/BKMINDST_06082019193220_Outcome060819_575.pdf", "size_bytes": 7185625, "date": "Aug 06, 2019", "sort_date": 20190806, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2019", "filename": "BKMINDST_02082019200631_reg30Intimation_589.pdf", "path": "assets/pdf/Announcements/2019/BKMINDST_02082019200631_reg30Intimation_589.pdf", "size_bytes": 530843, "date": "Aug 02, 2019", "sort_date": 20190802, "category": "SEBI Reg 30 Disclosures", "title": "Disclosure under Regulation 30 of SEBI (LODR) Regulations" }, { "year": "2019", "filename": "BKMINDST_31072019123220_Newspaper_066.pdf", "path": "assets/pdf/Announcements/2019/BKMINDST_31072019123220_Newspaper_066.pdf", "size_bytes": 3318527, "date": "Jul 31, 2019", "sort_date": 20190731, "category": "Newspaper Publications", "title": "Intimation of Newspaper Publication of Financial Results / Notices" }, { "year": "2019", "filename": "BKMINDST_16072019132231_74_082.pdf", "path": "assets/pdf/Announcements/2019/BKMINDST_16072019132231_74_082.pdf", "size_bytes": 1612508, "date": "Jul 16, 2019", "sort_date": 20190716, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (74)" }, { "year": "2019", "filename": "BKMINDST_25062019182158_TradingWindow_123.pdf", "path": "assets/pdf/Announcements/2019/BKMINDST_25062019182158_TradingWindow_123.pdf", "size_bytes": 623902, "date": "Jun 25, 2019", "sort_date": 20190625, "category": "Trading Window Closure", "title": "Intimation of Closure of Trading Window for Prohibition of Insider Trading" }, { "year": "2019", "filename": "BKMINDST_31052019190651_Newspaperresultbkm_502.pdf", "path": "assets/pdf/Announcements/2019/BKMINDST_31052019190651_Newspaperresultbkm_502.pdf", "size_bytes": 3305578, "date": "May 31, 2019", "sort_date": 20190531, "category": "KMP & Executive Changes", "title": "Intimation of Resignation of Key Managerial Personnel" }, { "year": "2019", "filename": "BKMINDST_30052019193050_OutcomeBKM31032019_511.pdf", "path": "assets/pdf/Announcements/2019/BKMINDST_30052019193050_OutcomeBKM31032019_511.pdf", "size_bytes": 4133159, "date": "May 30, 2019", "sort_date": 20190530, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2019", "filename": "BKMINDST_17052019192803_Newspaperpublication_502.pdf", "path": "assets/pdf/Announcements/2019/BKMINDST_17052019192803_Newspaperpublication_502.pdf", "size_bytes": 7188397, "date": "May 17, 2019", "sort_date": 20190517, "category": "Newspaper Publications", "title": "Intimation of Newspaper Publication of Financial Results / Notices" }, { "year": "2019", "filename": "listcontract3_06052019124509_Revised_Disclosure_of_promoter_holding_115.pdf", "path": "assets/pdf/Announcements/2019/listcontract3_06052019124509_Revised_Disclosure_of_promoter_holding_115.pdf", "size_bytes": 882257, "date": "May 06, 2019", "sort_date": 20190506, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (Revised Disclosure of promoter holding)" }, { "year": "2019", "filename": "BKMINDST_24042019131423_BKM74_107.pdf", "path": "assets/pdf/Announcements/2019/BKMINDST_24042019131423_BKM74_107.pdf", "size_bytes": 245596, "date": "Apr 24, 2019", "sort_date": 20190424, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (BKM74)" }, { "year": "2019", "filename": "listcontract1_23042019090629_BKM_025.pdf", "path": "assets/pdf/Announcements/2019/listcontract1_23042019090629_BKM_025.pdf", "size_bytes": 425535, "date": "Apr 23, 2019", "sort_date": 20190423, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (BKM)" }, { "year": "2019", "filename": "BKMINDST_05042019194752_tradingwindowclosure_542.pdf", "path": "assets/pdf/Announcements/2019/BKMINDST_05042019194752_tradingwindowclosure_542.pdf", "size_bytes": 111430, "date": "Apr 05, 2019", "sort_date": 20190405, "category": "Trading Window Closure", "title": "Intimation of Closure of Trading Window for Prohibition of Insider Trading" }, { "year": "2019", "filename": "BKMINDST_02032019135518_SegmentReportingReply020319_035.pdf", "path": "assets/pdf/Announcements/2019/BKMINDST_02032019135518_SegmentReportingReply020319_035.pdf", "size_bytes": 628425, "date": "Mar 02, 2019", "sort_date": 20190302, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (Segment Reporting Reply020319)" }, { "year": "2019", "filename": "BKMINDST_23022019163705_CreditRatingreplyletterBKM230219_036.pdf", "path": "assets/pdf/Announcements/2019/BKMINDST_23022019163705_CreditRatingreplyletterBKM230219_036.pdf", "size_bytes": 581744, "date": "Feb 23, 2019", "sort_date": 20190223, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (Credit Ratingreplyletter BKM230219)" }, { "year": "2019", "filename": "BKMINDST_15022019145147_changeinKMP_112.pdf", "path": "assets/pdf/Announcements/2019/BKMINDST_15022019145147_changeinKMP_112.pdf", "size_bytes": 425302, "date": "Feb 15, 2019", "sort_date": 20190215, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (changein KMP)" }, { "year": "2019", "filename": "BKMINDST_15022019175215_BKMLETTERF_213.pdf", "path": "assets/pdf/Announcements/2019/BKMINDST_15022019175215_BKMLETTERF_213.pdf", "size_bytes": 1509967, "date": "Feb 15, 2019", "sort_date": 20190215, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (BKMLETTERF)" }, { "year": "2019", "filename": "BKMINDST_14022019151302_BKMoutcome14022019_183.pdf", "path": "assets/pdf/Announcements/2019/BKMINDST_14022019151302_BKMoutcome14022019_183.pdf", "size_bytes": 3557027, "date": "Feb 14, 2019", "sort_date": 20190214, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2019", "filename": "BKMINDST_14022019153800_BKMoutcome14022019Appt_204.pdf", "path": "assets/pdf/Announcements/2019/BKMINDST_14022019153800_BKMoutcome14022019Appt_204.pdf", "size_bytes": 990645, "date": "Feb 14, 2019", "sort_date": 20190214, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2019", "filename": "BKMINDST_13022019125304_NSE_CLARIFICATION_101.pdf", "path": "assets/pdf/Announcements/2019/BKMINDST_13022019125304_NSE_CLARIFICATION_101.pdf", "size_bytes": 422828, "date": "Feb 13, 2019", "sort_date": 20190213, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (NSE CLARIFICATION)" }, { "year": "2019", "filename": "BKMINDST_07022019145740_SENewspaperPublicationBKM31122018F_133.pdf", "path": "assets/pdf/Announcements/2019/BKMINDST_07022019145740_SENewspaperPublicationBKM31122018F_133.pdf", "size_bytes": 392852, "date": "Feb 07, 2019", "sort_date": 20190207, "category": "Newspaper Publications", "title": "Intimation of Newspaper Publication of Financial Results / Notices" }, { "year": "2019", "filename": "BKMINDST_06022019160343_TradingWindowClosureBKM140219_256.pdf", "path": "assets/pdf/Announcements/2019/BKMINDST_06022019160343_TradingWindowClosureBKM140219_256.pdf", "size_bytes": 41301, "date": "Feb 06, 2019", "sort_date": 20190206, "category": "Trading Window Closure", "title": "Intimation of Closure of Trading Window for Prohibition of Insider Trading" }, { "year": "2019", "filename": "BKMINDST_31012019133924_ResignationLetter_BKM_CS_124.pdf", "path": "assets/pdf/Announcements/2019/BKMINDST_31012019133924_ResignationLetter_BKM_CS_124.pdf", "size_bytes": 228238, "date": "Jan 31, 2019", "sort_date": 20190131, "category": "KMP & Executive Changes", "title": "Intimation of Resignation of Company Secretary & Compliance Officer" }, { "year": "2019", "filename": "BKMINDST_10012019181158_BKM54531122018_199.pdf", "path": "assets/pdf/Announcements/2019/BKMINDST_10012019181158_BKM54531122018_199.pdf", "size_bytes": 396180, "date": "Jan 10, 2019", "sort_date": 20190110, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (BKM54531122018)" }, { "year": "2019", "filename": "listcontract3_2662019181832_RPT_DTLS_368.pdf", "path": "assets/pdf/Announcements/2019/listcontract3_2662019181832_RPT_DTLS_368.pdf", "size_bytes": 1891794, "date": "FY 2019", "sort_date": 20190101, "category": "Related Party Transactions", "title": "Disclosure of Related Party Transactions under Regulation 23(9)" }, { "year": "2018", "filename": "BKMINDST_27122018185848_BKMBMOutcome27122018_150.pdf", "path": "assets/pdf/Announcements/2018/BKMINDST_27122018185848_BKMBMOutcome27122018_150.pdf", "size_bytes": 175761, "date": "Dec 27, 2018", "sort_date": 20181227, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2018", "filename": "zrizvi_21122018155327_REPLYNSE_108.pdf", "path": "assets/pdf/Announcements/2018/zrizvi_21122018155327_REPLYNSE_108.pdf", "size_bytes": 432461, "date": "Dec 21, 2018", "sort_date": 20181221, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (REPLYNSE)" }, { "year": "2018", "filename": "BKMINDST_15122018130552_REG30BKM151218_018.pdf", "path": "assets/pdf/Announcements/2018/BKMINDST_15122018130552_REG30BKM151218_018.pdf", "size_bytes": 294136, "date": "Dec 15, 2018", "sort_date": 20181215, "category": "SEBI Reg 30 Disclosures", "title": "Disclosure under Regulation 30 of SEBI (LODR) Regulations" }, { "year": "2018", "filename": "BKMINDST_15112018194942_20181115192751_352.pdf", "path": "assets/pdf/Announcements/2018/BKMINDST_15112018194942_20181115192751_352.pdf", "size_bytes": 1049188, "date": "Nov 15, 2018", "sort_date": 20181115, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (20181115192751)" }, { "year": "2018", "filename": "BKMINDST_13112018151025_BKMOUTCOME30092018_591.pdf", "path": "assets/pdf/Announcements/2018/BKMINDST_13112018151025_BKMOUTCOME30092018_591.pdf", "size_bytes": 4730718, "date": "Nov 13, 2018", "sort_date": 20181113, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2018", "filename": "BKMINDST_13112018152110_BKMAppointmentCFO_603.pdf", "path": "assets/pdf/Announcements/2018/BKMINDST_13112018152110_BKMAppointmentCFO_603.pdf", "size_bytes": 4737141, "date": "Nov 13, 2018", "sort_date": 20181113, "category": "KMP & Executive Changes", "title": "Intimation of Appointment of Chief Financial Officer (CFO)" }, { "year": "2018", "filename": "BKMINDST_13112018153822_BKMregdoffc_619.pdf", "path": "assets/pdf/Announcements/2018/BKMINDST_13112018153822_BKMregdoffc_619.pdf", "size_bytes": 4741609, "date": "Nov 13, 2018", "sort_date": 20181113, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (BK Mregdoffc)" }, { "year": "2018", "filename": "BKMINDST_03112018132301_IntimationofNewspaperPublication_964.pdf", "path": "assets/pdf/Announcements/2018/BKMINDST_03112018132301_IntimationofNewspaperPublication_964.pdf", "size_bytes": 662186, "date": "Nov 03, 2018", "sort_date": 20181103, "category": "Newspaper Publications", "title": "Intimation of Newspaper Publication of Financial Results / Notices" }, { "year": "2018", "filename": "BKMINDST_02112018165917_NoticetoSE_564.pdf", "path": "assets/pdf/Announcements/2018/BKMINDST_02112018165917_NoticetoSE_564.pdf", "size_bytes": 261093, "date": "Nov 02, 2018", "sort_date": 20181102, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (Noticeto SE)" }, { "year": "2018", "filename": "BKMINDST_09102018125025_BKM54530092018_014.pdf", "path": "assets/pdf/Announcements/2018/BKMINDST_09102018125025_BKM54530092018_014.pdf", "size_bytes": 546118, "date": "Oct 09, 2018", "sort_date": 20181009, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (BKM54530092018)" }, { "year": "2018", "filename": "Result33BKM30092018.pdf", "path": "assets/pdf/Announcements/2018/Result33BKM30092018.pdf", "size_bytes": 4485960, "date": "Sep 30, 2018", "sort_date": 20180930, "category": "KMP & Executive Changes", "title": "Intimation of Resignation of Key Managerial Personnel" }, { "year": "2018", "filename": "BKMINDST_28092018185549_AGresignationReg30_585.pdf", "path": "assets/pdf/Announcements/2018/BKMINDST_28092018185549_AGresignationReg30_585.pdf", "size_bytes": 218715, "date": "Sep 28, 2018", "sort_date": 20180928, "category": "KMP & Executive Changes", "title": "Intimation of Resignation of Key Managerial Personnel" }, { "year": "2018", "filename": "BKMINDST_17092018182446_ResubmissionScutinizersReport_178 (1).pdf", "path": "assets/pdf/Announcements/2018/BKMINDST_17092018182446_ResubmissionScutinizersReport_178 (1).pdf", "size_bytes": 2608737, "date": "Sep 17, 2018", "sort_date": 20180917, "category": "KMP & Executive Changes", "title": "Intimation of Resignation of Key Managerial Personnel" }, { "year": "2018", "filename": "BKMINDST_17092018182446_ResubmissionScutinizersReport_178.pdf", "path": "assets/pdf/Announcements/2018/BKMINDST_17092018182446_ResubmissionScutinizersReport_178.pdf", "size_bytes": 2608737, "date": "Sep 17, 2018", "sort_date": 20180917, "category": "KMP & Executive Changes", "title": "Intimation of Resignation of Key Managerial Personnel" }, { "year": "2018", "filename": "BKMINDST_08092018171322_ProceedingsBKM07092018_097.pdf", "path": "assets/pdf/Announcements/2018/BKMINDST_08092018171322_ProceedingsBKM07092018_097.pdf", "size_bytes": 1213262, "date": "Sep 08, 2018", "sort_date": 20180908, "category": "General Meetings & AGM", "title": "Proceedings and Voting Results of Annual General Meeting (AGM)" }, { "year": "2018", "filename": "BKMINDST_08092018184505_OutcomeScrutinizersReport08092018_113.pdf", "path": "assets/pdf/Announcements/2018/BKMINDST_08092018184505_OutcomeScrutinizersReport08092018_113.pdf", "size_bytes": 3973470, "date": "Sep 08, 2018", "sort_date": 20180908, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2018", "filename": "BKMINDST_04092018183926_BKMReply04092018_464.pdf", "path": "assets/pdf/Announcements/2018/BKMINDST_04092018183926_BKMReply04092018_464.pdf", "size_bytes": 481115, "date": "Sep 04, 2018", "sort_date": 20180904, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (BKM Reply04092018)" }, { "year": "2018", "filename": "BKMReg3014082018.pdf", "path": "assets/pdf/Announcements/2018/BKMReg3014082018.pdf", "size_bytes": 198650, "date": "Aug 14, 2018", "sort_date": 20180814, "category": "SEBI Reg 30 Disclosures", "title": "Disclosure under Regulation 30 of SEBI (LODR) Regulations" }, { "year": "2018", "filename": "NoticeforClosureofTradingWindow14082018.pdf", "path": "assets/pdf/Announcements/2018/NoticeforClosureofTradingWindow14082018.pdf", "size_bytes": 248704, "date": "Aug 14, 2018", "sort_date": 20180814, "category": "Trading Window Closure", "title": "Intimation of Closure of Trading Window for Prohibition of Insider Trading" }, { "year": "2018", "filename": "OUTCOMEOFBMBKM14082018.pdf", "path": "assets/pdf/Announcements/2018/OUTCOMEOFBMBKM14082018.pdf", "size_bytes": 1640173, "date": "Aug 14, 2018", "sort_date": 20180814, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2018", "filename": "RESULTBKM14082018.pdf", "path": "assets/pdf/Announcements/2018/RESULTBKM14082018.pdf", "size_bytes": 1640173, "date": "Aug 14, 2018", "sort_date": 20180814, "category": "KMP & Executive Changes", "title": "Intimation of Resignation of Key Managerial Personnel" }, { "year": "2018", "filename": "BKM54530062018.pdf", "path": "assets/pdf/Announcements/2018/BKM54530062018.pdf", "size_bytes": 515110, "date": "Jun 30, 2018", "sort_date": 20180630, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (BKM54530062018)" }, { "year": "2018", "filename": "BKMSASTDisclosure31032018.pdf", "path": "assets/pdf/Announcements/2018/BKMSASTDisclosure31032018.pdf", "size_bytes": 840309, "date": "Mar 31, 2018", "sort_date": 20180331, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (BKMSAST Disclosure31032018)" }, { "year": "2018", "filename": "BKMBMOutcome12022018CFOAppointment.pdf", "path": "assets/pdf/Announcements/2018/BKMBMOutcome12022018CFOAppointment.pdf", "size_bytes": 5829684, "date": "Feb 12, 2018", "sort_date": 20180212, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting - Key Managerial Personnel (CFO) Changes" }, { "year": "2018", "filename": "BKMBMOutcome12022018CFOResignation.pdf", "path": "assets/pdf/Announcements/2018/BKMBMOutcome12022018CFOResignation.pdf", "size_bytes": 5825104, "date": "Feb 12, 2018", "sort_date": 20180212, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting - Key Managerial Personnel (CFO) Changes" }, { "year": "2018", "filename": "BKMINDST(1).pdf", "path": "assets/pdf/Announcements/2018/BKMINDST(1).pdf", "size_bytes": 3110416, "date": "FY 2018", "sort_date": 20180101, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (BKMINDST)" }, { "year": "2018", "filename": "BKMINDST.pdf", "path": "assets/pdf/Announcements/2018/BKMINDST.pdf", "size_bytes": 3110416, "date": "FY 2018", "sort_date": 20180101, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (BKMINDST)" }, { "year": "2018", "filename": "BKMLODRReg30disclosure.pdf", "path": "assets/pdf/Announcements/2018/BKMLODRReg30disclosure.pdf", "size_bytes": 226448, "date": "FY 2018", "sort_date": 20180101, "category": "SEBI Reg 30 Disclosures", "title": "Disclosure under Regulation 30 of SEBI (LODR) Regulations" }, { "year": "2018", "filename": "BKMNoticeDespatchIntimation(1).pdf", "path": "assets/pdf/Announcements/2018/BKMNoticeDespatchIntimation(1).pdf", "size_bytes": 3442336, "date": "FY 2018", "sort_date": 20180101, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (BKM Notice Despatch Intimation)" }, { "year": "2018", "filename": "BKMNoticeDespatchIntimation.pdf", "path": "assets/pdf/Announcements/2018/BKMNoticeDespatchIntimation.pdf", "size_bytes": 3442336, "date": "FY 2018", "sort_date": 20180101, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (BKM Notice Despatch Intimation)" }, { "year": "2018", "filename": "BKMReg30512022018.pdf", "path": "assets/pdf/Announcements/2018/BKMReg30512022018.pdf", "size_bytes": 3205702, "date": "FY 2018", "sort_date": 20180101, "category": "SEBI Reg 30 Disclosures", "title": "Disclosure under Regulation 30 of SEBI (LODR) Regulations" }, { "year": "2018", "filename": "BKMRevisedBookClosureNSE(1).pdf", "path": "assets/pdf/Announcements/2018/BKMRevisedBookClosureNSE(1).pdf", "size_bytes": 276952, "date": "FY 2018", "sort_date": 20180101, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (BKM Revised Book Closure NSE)" }, { "year": "2018", "filename": "BKMRevisedBookClosureNSE.pdf", "path": "assets/pdf/Announcements/2018/BKMRevisedBookClosureNSE.pdf", "size_bytes": 281752, "date": "FY 2018", "sort_date": 20180101, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (BKM Revised Book Closure NSE)" }, { "year": "2018", "filename": "LettertoSENewspaperPublication.pdf", "path": "assets/pdf/Announcements/2018/LettertoSENewspaperPublication.pdf", "size_bytes": 598204, "date": "FY 2018", "sort_date": 20180101, "category": "Newspaper Publications", "title": "Intimation of Newspaper Publication of Financial Results / Notices" }, { "year": "2018", "filename": "SKSresignationdisctonSE.pdf", "path": "assets/pdf/Announcements/2018/SKSresignationdisctonSE.pdf", "size_bytes": 210851, "date": "FY 2018", "sort_date": 20180101, "category": "KMP & Executive Changes", "title": "Intimation of Resignation of Key Managerial Personnel" }, { "year": "2018", "filename": "notice.pdf", "path": "assets/pdf/Announcements/2018/notice.pdf", "size_bytes": 443441, "date": "FY 2018", "sort_date": 20180101, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (notice)" }, { "year": "2017", "filename": "Reg30BKM13122017.pdf", "path": "assets/pdf/Announcements/2017/Reg30BKM13122017.pdf", "size_bytes": 318096, "date": "Dec 13, 2017", "sort_date": 20171213, "category": "SEBI Reg 30 Disclosures", "title": "Disclosure under Regulation 30 of SEBI (LODR) Regulations" }, { "year": "2017", "filename": "BKMoutcome141117(1).pdf", "path": "assets/pdf/Announcements/2017/BKMoutcome141117(1).pdf", "size_bytes": 403502, "date": "Nov 14, 2017", "sort_date": 20171114, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2017", "filename": "BKMoutcome141117.pdf", "path": "assets/pdf/Announcements/2017/BKMoutcome141117.pdf", "size_bytes": 403502, "date": "Nov 14, 2017", "sort_date": 20171114, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2017", "filename": "UAQFRBKM30092017(1).pdf", "path": "assets/pdf/Announcements/2017/UAQFRBKM30092017(1).pdf", "size_bytes": 2990294, "date": "Sep 30, 2017", "sort_date": 20170930, "category": "Financial Results", "title": "Submissions of Financial Results & Auditor Review Report" }, { "year": "2017", "filename": "UAQFRBKM30092017.pdf", "path": "assets/pdf/Announcements/2017/UAQFRBKM30092017.pdf", "size_bytes": 2990294, "date": "Sep 30, 2017", "sort_date": 20170930, "category": "Financial Results", "title": "Submissions of Financial Results & Auditor Review Report" }, { "year": "2017", "filename": "MILOutcome09092017(1).pdf", "path": "assets/pdf/Announcements/2017/MILOutcome09092017(1).pdf", "size_bytes": 1782331, "date": "Sep 09, 2017", "sort_date": 20170909, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2017", "filename": "MILOutcome09092017.pdf", "path": "assets/pdf/Announcements/2017/MILOutcome09092017.pdf", "size_bytes": 1782331, "date": "Sep 09, 2017", "sort_date": 20170909, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2017", "filename": "MILBMOutcome16082017(1).pdf", "path": "assets/pdf/Announcements/2017/MILBMOutcome16082017(1).pdf", "size_bytes": 974083, "date": "Aug 16, 2017", "sort_date": 20170816, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2017", "filename": "MILBMOutcome16082017(2).pdf", "path": "assets/pdf/Announcements/2017/MILBMOutcome16082017(2).pdf", "size_bytes": 974083, "date": "Aug 16, 2017", "sort_date": 20170816, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2017", "filename": "MILBMOutcome16082017.pdf", "path": "assets/pdf/Announcements/2017/MILBMOutcome16082017.pdf", "size_bytes": 974083, "date": "Aug 16, 2017", "sort_date": 20170816, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2017", "filename": "Resultmilmarchnse14042017.pdf", "path": "assets/pdf/Announcements/2017/Resultmilmarchnse14042017.pdf", "size_bytes": 3005901, "date": "Apr 14, 2017", "sort_date": 20170414, "category": "KMP & Executive Changes", "title": "Intimation of Resignation of Key Managerial Personnel" }, { "year": "2017", "filename": "outcomemilmarchnse14042017(1).pdf", "path": "assets/pdf/Announcements/2017/outcomemilmarchnse14042017(1).pdf", "size_bytes": 3005901, "date": "Apr 14, 2017", "sort_date": 20170414, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2017", "filename": "outcomemilmarchnse14042017.pdf", "path": "assets/pdf/Announcements/2017/outcomemilmarchnse14042017.pdf", "size_bytes": 3005901, "date": "Apr 14, 2017", "sort_date": 20170414, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2017", "filename": "Reg30ManaksiaNSESubsidiaryCo20012017.pdf", "path": "assets/pdf/Announcements/2017/Reg30ManaksiaNSESubsidiaryCo20012017.pdf", "size_bytes": 577439, "date": "Jan 20, 2017", "sort_date": 20170120, "category": "SEBI Reg 30 Disclosures", "title": "Disclosure under Regulation 30 of SEBI (LODR) Regulations" }, { "year": "2017", "filename": "01.pdf", "path": "assets/pdf/Announcements/2017/01.pdf", "size_bytes": 345056, "date": "FY 2017", "sort_date": 20170101, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (01)" }, { "year": "2017", "filename": "129794_vivro.pdf", "path": "assets/pdf/Announcements/2017/129794_vivro.pdf", "size_bytes": 724427, "date": "FY 2017", "sort_date": 20170101, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (vivro)" }, { "year": "2017", "filename": "BKA_MIL.pdf", "path": "assets/pdf/Announcements/2017/BKA_MIL.pdf", "size_bytes": 399341, "date": "FY 2017", "sort_date": 20170101, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (BKA MIL)" }, { "year": "2017", "filename": "FinancialResultmarch2017_NSE.pdf", "path": "assets/pdf/Announcements/2017/FinancialResultmarch2017_NSE.pdf", "size_bytes": 3005901, "date": "FY 2017", "sort_date": 20170101, "category": "KMP & Executive Changes", "title": "Intimation of Resignation of Key Managerial Personnel" }, { "year": "2017", "filename": "MANASKSAI.pdf", "path": "assets/pdf/Announcements/2017/MANASKSAI.pdf", "size_bytes": 252567, "date": "FY 2017", "sort_date": 20170101, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (MANASKSAI)" }, { "year": "2017", "filename": "MANSIKSAI.pdf", "path": "assets/pdf/Announcements/2017/MANSIKSAI.pdf", "size_bytes": 1675309, "date": "FY 2017", "sort_date": 20170101, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (MANSIKSAI)" }, { "year": "2017", "filename": "MILAGMNoticeDespatch.pdf", "path": "assets/pdf/Announcements/2017/MILAGMNoticeDespatch.pdf", "size_bytes": 1265908, "date": "FY 2017", "sort_date": 20170101, "category": "General Meetings & AGM", "title": "Proceedings and Voting Results of Annual General Meeting (AGM)" }, { "year": "2017", "filename": "MILAddressChange.pdf", "path": "assets/pdf/Announcements/2017/MILAddressChange.pdf", "size_bytes": 1788498, "date": "FY 2017", "sort_date": 20170101, "category": "KMP & Executive Changes", "title": "Intimation of Resignation of Key Managerial Personnel" }, { "year": "2017", "filename": "MILAnnualReportSubmission.pdf", "path": "assets/pdf/Announcements/2017/MILAnnualReportSubmission.pdf", "size_bytes": 1226763, "date": "FY 2017", "sort_date": 20170101, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (MIL Annual Report Submission)" }, { "year": "2017", "filename": "MILBMNoticetoSE.pdf", "path": "assets/pdf/Announcements/2017/MILBMNoticetoSE.pdf", "size_bytes": 225004, "date": "FY 2017", "sort_date": 20170101, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (MILBM Noticeto SE)" }, { "year": "2017", "filename": "MILOutcomeNSE.pdf", "path": "assets/pdf/Announcements/2017/MILOutcomeNSE.pdf", "size_bytes": 2204308, "date": "FY 2017", "sort_date": 20170101, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }, { "year": "2017", "filename": "MILProceedingofAGM17.pdf", "path": "assets/pdf/Announcements/2017/MILProceedingofAGM17.pdf", "size_bytes": 2182954, "date": "FY 2017", "sort_date": 20170101, "category": "General Meetings & AGM", "title": "Proceedings and Voting Results of Annual General Meeting (AGM)" }, { "year": "2017", "filename": "NoticetoSE.pdf", "path": "assets/pdf/Announcements/2017/NoticetoSE.pdf", "size_bytes": 231070, "date": "FY 2017", "sort_date": 20170101, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (Noticeto SE)" }, { "year": "2017", "filename": "NoticetoSEfortradingwindow.pdf", "path": "assets/pdf/Announcements/2017/NoticetoSEfortradingwindow.pdf", "size_bytes": 223771, "date": "FY 2017", "sort_date": 20170101, "category": "Trading Window Closure", "title": "Intimation of Closure of Trading Window for Prohibition of Insider Trading" }, { "year": "2017", "filename": "REPLYTONSEBriefprofileMIL.pdf", "path": "assets/pdf/Announcements/2017/REPLYTONSEBriefprofileMIL.pdf", "size_bytes": 1604993, "date": "FY 2017", "sort_date": 20170101, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (REPLYTONSE Briefprofile MIL)" }, { "year": "2017", "filename": "ScrutinizersReportMILNSE.pdf", "path": "assets/pdf/Announcements/2017/ScrutinizersReportMILNSE.pdf", "size_bytes": 3078499, "date": "FY 2017", "sort_date": 20170101, "category": "Exchange Announcements", "title": "Stock Exchange Intimation (Scrutinizers Report MILNSE)" }, { "year": "2017", "filename": "outcomemilmarch2017NSE.pdf", "path": "assets/pdf/Announcements/2017/outcomemilmarch2017NSE.pdf", "size_bytes": 780828, "date": "FY 2017", "sort_date": 20170101, "category": "Board Meeting Outcome", "title": "Outcome of Board Meeting & Submissions to Stock Exchanges" }];
+
+        let currentYear = 'ALL';
+        let currentCategory = 'ALL';
+        let searchQuery = '';
+        let displayLimit = 20;
+
+        const tbody = document.getElementById('annTbody');
+        const resultsCount = document.getElementById('resultsCount');
+        const noResults = document.getElementById('noResults');
+        const loadMoreContainer = document.getElementById('loadMoreContainer');
+        const btnLoadMore = document.getElementById('btnLoadMore');
+        const searchInput = document.getElementById('annSearch');
+        const categorySelect = document.getElementById('annCategory');
+        const yearTabsContainer = document.getElementById('yearTabs');
+
+        function filterData() {
+            return ANNOUNCEMENTS_DATA.filter(item => {
+                if (currentYear !== 'ALL' && item.year !== currentYear) return false;
+                if (currentCategory !== 'ALL' && !item.category.toLowerCase().includes(currentCategory.toLowerCase())) return false;
+                if (searchQuery) {
+                    const q = searchQuery.toLowerCase();
+                    const titleMatch = item.title.toLowerCase().includes(q);
+                    const fileMatch = item.filename.toLowerCase().includes(q);
+                    const dateMatch = item.date.toLowerCase().includes(q);
+                    const yearMatch = item.year.includes(q);
+                    const catMatch = item.category.toLowerCase().includes(q);
+                    if (!titleMatch && !fileMatch && !dateMatch && !yearMatch && !catMatch) return false;
+                }
+                return true;
+            });
+        }
+
+        function escapeHtml(str) {
+            if (typeof str !== 'string') return '';
+            return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#x27;');
+        }
+
+        function renderTable() {
+            const filtered = filterData();
+            const slice = filtered.slice(0, displayLimit);
+
+            resultsCount.textContent = `Showing ${slice.length} of ${filtered.length} Disclosures`;
+
+            if (filtered.length === 0) {
+                tbody.innerHTML = '';
+                noResults.style.display = 'block';
+                loadMoreContainer.style.display = 'none';
+                return;
+            }
+
+            noResults.style.display = 'none';
+
+            let html = '';
+            slice.forEach(item => {
+                const safeDate = escapeHtml(item.date);
+                const safeCategory = escapeHtml(item.category);
+                const safeTitle = escapeHtml(item.title);
+                const safePath = encodeURI(item.path);
+                const safeFilename = escapeHtml(item.filename);
+
+                html += `
+                    <tr>
+                        <td style="font-weight: 600; color: #1e293b;">${safeDate}</td>
+                        <td><span class="cat-badge">${safeCategory}</span></td>
+                        <td style="font-weight: 500; color: #0f172a; line-height: 1.5;">${safeTitle}</td>
+                        <td style="font-weight: 600; color: #475569;"><i class="fas fa-building-columns" style="color: var(--secondary-color); margin-right: 4px;"></i> NSE & BSE</td>
+                        <td style="text-align: center;">
+                            <a href="${safePath}" target="_blank" class="btn-pdf" title="${safeFilename}">
+                                <i class="fas fa-file-pdf"></i> View PDF
+                            </a>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            tbody.innerHTML = html;
+
+            if (displayLimit < filtered.length) {
+                loadMoreContainer.style.display = 'block';
+            } else {
+                loadMoreContainer.style.display = 'none';
+            }
+        }
+
+        searchInput.addEventListener('input', (e) => {
+            searchQuery = (e.target.value || '').trim().slice(0, 100);
+            displayLimit = 20;
+            renderTable();
+        });
+
+        categorySelect.addEventListener('change', (e) => {
+            currentCategory = e.target.value;
+            displayLimit = 20;
+            renderTable();
+        });
+
+        yearTabsContainer.addEventListener('click', (e) => {
+            if (e.target.classList.contains('year-tab')) {
+                document.querySelectorAll('.year-tab').forEach(tab => tab.classList.remove('active'));
+                e.target.classList.add('active');
+                currentYear = e.target.getAttribute('data-year');
+                displayLimit = 20;
+                renderTable();
+            }
+        });
+
+        btnLoadMore.addEventListener('click', () => {
+            displayLimit += 25;
+            renderTable();
+        });
+
+        // Animated Count from 0 on page load.
+        function animateCounter(el, target, duration = 1400, suffix = '+') {
+            if (!el) return;
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const easeOut = 1 - Math.pow(1 - progress, 3);
+                const current = Math.floor(easeOut * target);
+                el.textContent = current + suffix;
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                } else {
+                    el.textContent = target + suffix;
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        const counterEl = document.getElementById('filingsCounter');
+        const targetCount = (typeof ANNOUNCEMENTS_DATA !== 'undefined' && ANNOUNCEMENTS_DATA.length) ? ANNOUNCEMENTS_DATA.length : 318;
+        if (counterEl) {
+            animateCounter(counterEl, targetCount);
+        }
+
+        renderTable();
+    </script>
+</body>
+
+</html>

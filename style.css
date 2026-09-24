@@ -100,26 +100,30 @@ img {
 
 .btn-primary {
     background-color: var(--secondary-color);
-    color: var(--white);
+    color: var(--white) !important;
+    border-color: var(--secondary-color);
 }
 
 .btn-primary:hover {
-    background-color: var(--primary-color);
-    border-color: var(--primary-color);
+    background-color: #0b4fa2;
+    border-color: #0b4fa2;
     transform: translateY(-2px);
-    color: var(--white);
+    color: var(--white) !important;
+    box-shadow: 0 6px 18px rgba(19, 101, 196, 0.3);
 }
 
 .btn-outline {
     background-color: transparent;
-    border-color: var(--white);
-    color: var(--white);
+    border: 2px solid var(--secondary-color);
+    color: var(--secondary-color) !important;
 }
 
 .btn-outline:hover {
-    background-color: var(--white);
-    color: var(--primary-color);
+    background-color: var(--secondary-color) !important;
+    border-color: var(--secondary-color) !important;
+    color: var(--white) !important;
     transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(19, 101, 196, 0.25);
 }
 
 .btn-outline-white {
@@ -626,6 +630,7 @@ p, span, a, li, label, .biz-metric-label {
     position: relative;
     overflow: hidden;
     background-color: var(--primary-color);
+    padding: 0 !important;
 }
 
 .hero-slider {
@@ -644,14 +649,16 @@ p, span, a, li, label, .biz-metric-label {
     background-position: center;
     background-repeat: no-repeat;
     opacity: 0;
+    visibility: hidden;
     z-index: 1;
     display: flex;
     align-items: center;
-    transition: opacity 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94), visibility 0.7s;
 }
 
 .slide.active {
     opacity: 1;
+    visibility: visible;
     z-index: 2;
 }
 
@@ -3823,7 +3830,7 @@ p, span, a, li, label, .biz-metric-label {
 
 /* Careers Hero Section */
 .careers-hero-banner {
-    background: linear-gradient(135deg, rgba(13, 13, 57, 0.92) 0%, rgba(19, 101, 196, 0.85) 100%), url('assets/careers_bg.png');
+    background: linear-gradient(135deg, rgba(11, 19, 43, 0.88) 0%, rgba(20, 32, 58, 0.65) 100%), url('assets/careers_bg.png');
     background-size: cover;
     background-position: center;
     color: var(--white);
@@ -4114,218 +4121,160 @@ p, span, a, li, label, .biz-metric-label {
     color: var(--primary-color);
 }
 
-/* --- PRECISION ENGINEERING SECTION --- */
+/* --- PRECISION ENGINEERING SECTION (ALTERNATING SPLIT ROWS) --- */
 .precision-section {
-    padding: 50px 0;
-    background-color: #fafbfc;
+    padding: 60px 0;
+    background-color: #f8fafc;
 }
 .precision-header {
     text-align: left;
-    margin-bottom: 30px;
-    max-width: 600px;
+    margin-bottom: 40px;
+    max-width: 1000px;
 }
 .precision-title {
-    font-size: 2.5rem;
+    font-size: 2.6rem;
     color: var(--primary-color);
     font-weight: 700;
-    line-height: 1.2;
-    margin-bottom: 20px;
+    line-height: 1.25;
+    margin-bottom: 14px;
 }
 .precision-desc {
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     color: var(--muted-text);
     line-height: 1.6;
+    max-width: 900px;
 }
 
-.precision-grid {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    gap: 15px;
-}
-
-.precision-card {
-    border-radius: 4px;
-    overflow: hidden;
-    position: relative;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
-    border: 1px solid rgba(0,0,0,0.06);
-    transition: transform 0.3s ease;
-}
-.precision-card:hover {
-    transform: translateY(-5px);
-}
-
-.large-card {
-    grid-column: span 8;
-    min-height: 350px;
-}
-.small-card {
-    grid-column: span 4;
-    padding: 40px;
+.precision-split-container {
     display: flex;
     flex-direction: column;
+    gap: 32px;
 }
 
-.eco-printing-card {
-    background-size: cover;
-    background-position: center;
-    color: var(--white);
+.precision-split-row {
     display: flex;
-    align-items: flex-end;
-    padding: 40px;
-}
-.eco-printing-card .card-content {
-    max-width: 500px;
-}
-.card-badge {
-    display: inline-block;
-    background: rgba(255,255,255,0.2);
-    backdrop-filter: blur(5px);
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    margin-bottom: 15px;
-}
-.eco-printing-card h3 {
-    font-size: 2rem;
-    margin-bottom: 10px;
-}
-.eco-printing-card p {
-    font-size: 1rem;
-    color: rgba(255,255,255,0.9);
-}
-
-.net-zero-card {
+    align-items: stretch;
     background: var(--white);
-    color: var(--dark-text);
-}
-.card-icon {
-    width: 50px;
-    height: 50px;
-    background: #eef6ff;
-    color: var(--secondary-color);
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    margin-bottom: 25px;
-}
-.net-zero-card h3 {
-    font-size: 1.4rem;
-    color: var(--primary-color);
-    margin-bottom: 15px;
-}
-.net-zero-card p {
-    color: var(--muted-text);
-    margin-bottom: auto;
-    line-height: 1.6;
-}
-.card-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    color: var(--secondary-color);
-    font-weight: 600;
-    margin-top: 25px;
-}
-.card-link i { font-size: 0.85rem; }
-
-.financial-card {
-    background: var(--primary-color);
-    color: var(--white);
-}
-.financial-card h3 {
-    font-size: 1.4rem;
-    margin-bottom: 15px;
-}
-.financial-card p {
-    color: rgba(255,255,255,0.8);
-    margin-bottom: 30px;
-    font-size: 0.95rem;
-}
-.financial-stats { margin-bottom: auto; }
-.stat-row { margin-bottom: 15px; }
-.stat-header {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.85rem;
-    font-weight: 600;
-    margin-bottom: 8px;
-}
-.progress-bar {
-    width: 100%;
-    height: 6px;
-    background: rgba(255,255,255,0.2);
-    border-radius: 3px;
+    border-radius: 12px;
     overflow: hidden;
+    box-shadow: 0 4px 20px rgba(13, 13, 57, 0.04);
+    border: 1px solid rgba(226, 232, 240, 0.9);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    min-height: 380px;
 }
-.progress {
-    height: 100%;
-    background: var(--accent-color);
-}
-.white-link { color: var(--white); }
 
-.careers-card {
-    background: var(--white);
+.precision-split-row:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 35px rgba(13, 13, 57, 0.08);
 }
-.card-split {
-    display: flex;
-    height: 100%;
-}
-.split-content {
-    flex: 1;
-    padding: 40px;
+
+.precision-split-content {
+    flex: 1.15;
+    padding: 45px 48px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
 }
-.split-content h3 {
-    font-size: 2rem;
+
+.precision-split-media {
+    flex: 0.85;
+    position: relative;
+    overflow: hidden;
+    min-height: 320px;
+}
+
+.precision-split-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
+}
+
+.precision-split-row:hover .precision-split-img {
+    transform: scale(1.03);
+}
+
+.precision-split-title {
+    font-size: 1.85rem;
     color: var(--primary-color);
-    margin-bottom: 15px;
+    font-weight: 700;
+    margin: 12px 0 14px 0;
+    line-height: 1.3;
 }
-.split-content p {
+
+.precision-split-desc {
+    font-size: 1.02rem;
     color: var(--muted-text);
-    margin-bottom: 25px;
-    line-height: 1.6;
+    line-height: 1.65;
+    margin-bottom: 22px;
 }
-.split-image {
-    flex: 1;
-    background-size: cover;
-    background-position: center;
+
+.precision-stat-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 26px;
 }
+
+.stat-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #f1f5f9;
+    color: var(--primary-color);
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 50px;
+    border: 1px solid rgba(203, 213, 225, 0.7);
+}
+
+.stat-pill i {
+    color: var(--secondary-color);
+}
+
+.precision-split-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
 .card-badge.outline {
     background: transparent;
-    border: 1px solid #ddd;
-    color: var(--muted-text);
-}
-.btn-outline {
-    border: 1px solid var(--border-color);
-    color: var(--primary-color);
-    background: transparent;
-    padding: 10px 24px;
-    display: inline-block;
-    border-radius: 4px;
+    border: 1px solid #cbd5e1;
+    color: var(--secondary-color);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.82rem;
     font-weight: 600;
-}
-.btn-outline:hover {
-    background: var(--primary-color);
-    color: var(--white);
 }
 
 @media (max-width: 991px) {
-    .large-card, .small-card {
-        grid-column: span 12;
+    .precision-split-row,
+    .precision-split-row.reverse {
+        flex-direction: column !important;
     }
-    .card-split {
-        flex-direction: column;
+    .precision-split-media {
+        min-height: 260px;
+        order: 2;
     }
-    .split-image {
-        min-height: 250px;
+    .precision-split-row.reverse .precision-split-media {
+        order: 2;
     }
+    .precision-split-content {
+        padding: 30px 24px;
+        order: 1;
+    }
+    .precision-title {
+        font-size: 2.1rem;
+    }
+}
     .hero-title {
         font-size: 2.2rem;
     }
@@ -6610,8 +6559,13 @@ p, span, a, li, label, .biz-metric-label {
     100% { transform: scale(1.5); opacity: 0; }
 }
 
-/* Contact Form Split Box Styles */
-.form-split-box { display: flex; flex-direction: row; background: var(--white); border-radius: 16px; overflow: hidden; border: 1px solid #e2e8f0; box-shadow: 0 10px 30px rgba(0,0,0,0.06); }
+/* Contact Section & Form Split Box Styles */
+.contact-section {
+    padding: 70px 0 140px 0;
+    background: #f8fafc;
+    scroll-margin-top: 80px;
+}
+.form-split-box { display: flex; flex-direction: row; background: var(--white); border-radius: 16px; overflow: hidden; border: 1px solid #e2e8f0; box-shadow: 0 10px 30px rgba(0,0,0,0.06); scroll-margin-top: 100px; }
 .form-split-left { flex: 1; background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%); padding: 50px 40px; color: var(--white); display: flex; flex-direction: column; justify-content: center; }
 .form-split-left h3 { font-size: 1.8rem; margin-bottom: 15px; color: var(--white); }
 .form-split-left p { font-size: 1.05rem; opacity: 0.9; line-height: 1.6; margin-bottom: 30px; }

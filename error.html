@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Unavailable | BKM Industries Limited</title>
+    <meta name="description" content="The requested page is temporarily unavailable or under scheduled maintenance.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .error-section {
+            padding: 80px 20px 100px 20px;
+            background: #f8fafc;
+            text-align: center;
+            min-height: 75vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .error-card {
+            max-width: 620px;
+            width: 100%;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 28px;
+            padding: 48px 36px 42px 36px;
+            box-shadow: 0 16px 45px rgba(15, 23, 42, 0.07);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            text-align: center;
+        }
+        .error-icon-box {
+            width: 78px;
+            height: 78px;
+            border-radius: 50%;
+            background: #fef2f2;
+            color: #dc2626;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            margin: 0 auto 26px auto;
+        }
+        .error-title {
+            font-size: 2.1rem;
+            color: #0f172a;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+        .error-subtitle {
+            font-size: 1.02rem;
+            color: #64748b;
+            line-height: 1.65;
+            max-width: 520px;
+            margin: 0 auto 32px auto;
+            font-weight: 400;
+        }
+        .error-actions {
+            display: flex;
+            gap: 14px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .btn-error-primary {
+            background-color: #0f52ba;
+            color: #ffffff;
+            padding: 11px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.2s ease, transform 0.15s ease;
+        }
+        .btn-error-primary:hover {
+            background-color: #0b3d8f;
+            transform: translateY(-1px);
+            color: #ffffff;
+        }
+        .btn-error-secondary {
+            background-color: #ffffff;
+            color: #0f52ba;
+            border: 1.5px solid #0f52ba;
+            padding: 9.5px 22px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
+        }
+        .btn-error-secondary:hover {
+            background-color: #f0f7ff;
+            transform: translateY(-1px);
+            color: #0b3d8f;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TOP TICKER BAR -->
+    <div class="top-bar">
+        <div class="container top-bar-container">
+            <div class="stock-ticker">
+                <span class="ticker-label">NSE: BKMIND</span>
+                <span class="ticker-price">₹12.45 <i class="fas fa-caret-up"></i> (+1.8%)</span>
+                <span class="ticker-sep">|</span>
+                <span class="ticker-label">BSE: 539043</span>
+                <span class="ticker-price">₹12.40 <i class="fas fa-caret-up"></i> (+1.5%)</span>
+            </div>
+            <div class="top-nav-links">
+                <a href="investors.html">Investors</a>
+                <a href="index.html#media">Media</a>
+                <a href="index.html#contact">Contact</a>
+                <div class="lang-selector">
+                    <i class="fas fa-globe"></i> English <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN HEADER -->
+    <header class="main-header">
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <img src="assets/logo.png" alt="BKM Industries Limited" class="logo-img">
+            </a>
+            
+            <nav class="nav-menu" id="navMenu">
+                <ul>
+                    <li class="dropdown">
+                        <a href="about.html" class="nav-link">Who We Are <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-content">
+                            <div class="dropdown-grid">
+                                <div>
+                                    <h4>WHO WE ARE</h4>
+                                    <a href="about.html">About Us</a>
+                                    <a href="founders-journey.html">Our Journey & History</a>
+                                </div>
+                                <div>
+                                    <h4>GOVERNANCE & ACCOLADES</h4>
+                                    <a href="leadership.html">Leadership</a>
+                                    <a href="awards-recognition.html">Awards & Recognition</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="businesses-overview.html" class="nav-link">Our Businesses <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-content">
+                            <div class="dropdown-grid">
+                                <div>
+                                    <h4>OUR BUSINESSES</h4>
+                                    <a href="businesses-overview.html">Overview</a>
+                                    <a href="tin-cans.html">Tin Cans</a>
+                                </div>
+                                <div>
+                                    <h4>SPECIALTY CLOSURES</h4>
+                                    <a href="ropp-closures.html">ROPP Caps</a>
+                                    <a href="crown-caps.html">Metal Crown Caps</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li><a href="esg.html" class="nav-link">ESG & Sustainability</a></li>
+                    <li class="dropdown">
+                        <a href="investors.html" class="nav-link active">Investors <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-content">
+                            <div class="dropdown-grid">
+                                <div>
+                                    <h4>FINANCIALS & REPORTS</h4>
+                                    <a href="investors.html">Overview</a>
+                                    <a href="investor-results-reports.html">Results & Reports</a>
+                                    <a href="investor-presentation.html">Investor Presentation</a>
+                                    <a href="investor-shareholder-info.html">Shareholder Info</a>
+                                    <a href="investor-corporate-governance.html">Corporate Governance</a>
+                                </div>
+                                <div>
+                                    <h4>FILINGS & DISCLOSURES</h4>
+                                    <a href="investor-sec-filings.html">SEC Filings</a>
+                                    <a href="investor-stock-exchange-announcements.html">Stock Exchange Announcements</a>
+                                    <a href="investor-sebi-disclosures.html">SEBI Disclosures</a>
+                                    <a href="investor-corporate-calendar.html">Corporate Calendar</a>
+                                    <a href="investor-contact.html">Contact Us</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li><a href="careers.html" class="nav-link">Careers</a></li>
+                    <li><a href="index.html#media" class="nav-link">Media</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-right">
+                <a href="index.html#contact" class="btn btn-primary btn-header">Get In Touch</a>
+                <button class="mobile-toggle" id="mobileToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ERROR SECTION -->
+    <section class="error-section">
+        <div class="container">
+            <div class="error-card">
+                <div class="error-icon-box">
+                    <i class="fas fa-triangle-exclamation"></i>
+                </div>
+                <h1 class="error-title">Page Temporarily Unavailable</h1>
+                <p class="error-subtitle">
+                    The requested SEBI Disclosures page is currently undergoing scheduled maintenance or is temporarily restricted. Please check back later or visit our main Investor Relations section.
+                </p>
+                <div class="error-actions">
+                    <a href="investors.html" class="btn-error-primary"><i class="fas fa-arrow-left"></i> Return to Investors</a>
+                    <a href="index.html" class="btn-error-secondary"><i class="fas fa-home"></i> Return to Home Page</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-top grid grid-4">
+                <div class="footer-col">
+                    <a href="index.html" class="logo footer-logo">
+                        <img src="assets/logo.png" alt="BKM Industries Limited" class="logo-img">
+                    </a>
+                    <p class="footer-about">BKM Industries Limited (formerly Manaksia Industries Limited) is India's premier industrial packaging, shipbuilding, and custom software company.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="about.html">Who We Are</a></li>
+                        <li><a href="founders-journey.html">Our Journey & History</a></li>
+                        <li><a href="leadership.html">Leadership</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="investors.html">Investors</a></li>
+                        <li><a href="investor-contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Our Businesses</h4>
+                    <ul>
+                        <li><a href="businesses-overview.html">Overview</a></li>
+                        <li><a href="tin-cans.html">Tin Cans</a></li>
+                        <li><a href="ropp-closures.html">ROPP Caps</a></li>
+                        <li><a href="crown-caps.html">Metal Crown Caps</a></li>
+                        <li><a href="esg.html">ESG & Sustainability</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Registered Office</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> 2A, Ganesh Chandra Avenue, 2nd Floor, Room No. 11, Kolkata – 700 013</p>
+                    <p><i class="fas fa-envelope"></i> <a href="mailto:info@bkmindustries.in" style="color: inherit;">info@bkmindustries.in</a></p>
+                    <p><i class="fas fa-phone"></i> +91 33 2289 0000</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 BKM Industries Limited. All Rights Reserved. Listed on NSE (BKMIND) & BSE (539043).</p>
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <a href="terms.html">Terms of Use</a>
+                    <a href="#">Disclaimer</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <div class="scroll-to-top" id="scrollToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>

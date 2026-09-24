@@ -1,0 +1,165 @@
+[
+  {
+    "query": {
+      "fullName": "Test User",
+      "email": "test@example.com",
+      "folioNo": "",
+      "category": "General Inquiry",
+      "message": "Valid inquiry message here",
+      "clientIp": "127.0.0.1",
+      "time": "23/9/2026, 3:22:47 pm IST"
+    }
+  },
+  {
+    "query": {
+      "fullName": "&lt;script&gt;alert(&quot;XSS&quot;)&lt;&#x2F;script&gt;",
+      "email": "test@example.com",
+      "folioNo": "&lt;svg onload=alert(1)&gt;",
+      "category": "Dividend Query",
+      "message": "&quot;&gt;&lt;img src=x onerror=alert(&quot;XSS&quot;)&gt;",
+      "clientIp": "127.0.0.1",
+      "time": "23/9/2026, 3:22:47 pm IST"
+    }
+  },
+  {
+    "query": {
+      "fullName": "Ananya Sharma",
+      "email": "ananya@example.com",
+      "folioNo": "IN30012810",
+      "category": "Dividend Query",
+      "message": "Inquiry regarding dividend dispatch",
+      "clientIp": "127.0.0.1",
+      "time": "23/9/2026, 3:22:47 pm IST"
+    }
+  },
+  {
+    "query": {
+      "fullName": "Test User",
+      "email": "test@example.com",
+      "folioNo": "",
+      "category": "<script>evilCategory</script>",
+      "message": "Valid inquiry message here",
+      "time": "23/9/2026, 3:22:22 pm IST"
+    }
+  },
+  {
+    "query": {
+      "fullName": "Test User",
+      "email": "test@example.com",
+      "folioNo": "",
+      "category": "Dividend Query",
+      "message": "hi",
+      "time": "23/9/2026, 3:22:22 pm IST"
+    }
+  },
+  {
+    "query": {
+      "fullName": "Test User",
+      "email": "not-an-email-at-all",
+      "folioNo": "",
+      "category": "Dividend Query",
+      "message": "Legitimate message content",
+      "time": "23/9/2026, 3:22:22 pm IST"
+    }
+  },
+  {
+    "query": {
+      "fullName": "<script>alert(\"XSS\")</script>",
+      "email": "test@example.com",
+      "folioNo": "<svg onload=alert(1)>",
+      "category": "Dividend Query",
+      "message": "\"><img src=x onerror=alert(\"XSS\")>",
+      "time": "23/9/2026, 3:22:22 pm IST"
+    }
+  },
+  {
+    "query": {
+      "fullName": "Ananya Sharma",
+      "email": "ananya@example.com",
+      "folioNo": "IN30012810",
+      "category": "Dividend Query",
+      "message": "Inquiry regarding dividend dispatch",
+      "time": "23/9/2026, 3:22:22 pm IST"
+    }
+  },
+  {
+    "query": {
+      "fullName": "wd",
+      "email": "dpo@bkmindustries.in",
+      "folioNo": "wqd",
+      "category": "Dividend Query",
+      "message": "wdq",
+      "time": "23/9/2026, 3:02:56 pm IST"
+    }
+  },
+  {
+    "query": {
+      "fullName": "Test User",
+      "email": "test@example.com",
+      "folioNo": "",
+      "category": "General Inquiry",
+      "message": "",
+      "time": "23/9/2026, 12:45:56 pm IST"
+    }
+  },
+  {
+    "query": {
+      "fullName": "Test User",
+      "email": "test@example.com",
+      "folioNo": "",
+      "category": "General Inquiry",
+      "message": "",
+      "time": "23/9/2026, 12:35:18 pm IST"
+    }
+  },
+  {
+    "query": {
+      "fullName": "Priya Sengupta",
+      "email": "priya.sengupta@example.com",
+      "folioNo": "DP55443322",
+      "category": "Financial Results & Reports",
+      "message": "Testing automated submission and inline confirmation.",
+      "time": "10/09/2026, 12:26:08 pm IST"
+    }
+  },
+  {
+    "query": {
+      "fullName": "Yash Prajapati",
+      "email": "dpo@bkmindustries.in",
+      "folioNo": "3243534",
+      "category": "Dividend Query",
+      "message": "123",
+      "time": "10/09/2026, 11:58:12 am IST"
+    }
+  },
+  {
+    "query": {
+      "fullName": "Vikram Malhotra",
+      "email": "vikram.m@investor.in",
+      "folioNo": "9918237461",
+      "category": "Dividend Query",
+      "message": "Inquiring about FY26 interim dividend payout date.",
+      "time": "10/09/2026, 11:07:32 am IST"
+    }
+  },
+  {
+    "query": {
+      "fullName": "Sunita Singhania",
+      "email": "sunita.singhania@example.com",
+      "folioNo": "12081600029381",
+      "category": "Share Transfer",
+      "message": "Transmission of shares inquiry.",
+      "time": "10/09/2026, 11:05:40 am IST"
+    }
+  },
+  {
+    "query": {
+      "fullName": "Ramesh Kumar Sharma",
+      "email": "ramesh.sharma@example.com",
+      "folioNo": "IN300128994821",
+      "category": "Dividend Query",
+      "message": "Requesting status of unpaid dividend for FY 2024-25.",
+      "time": "10/09/2026, 10:57:52 am IST"
+    }
+  }
+]

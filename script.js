@@ -12,7 +12,7 @@ function initGoogleAnalytics() {
     document.head.appendChild(gaScript);
 
     window.dataLayer = window.dataLayer || [];
-    function gtag(){ dataLayer.push(arguments); }
+    function gtag() { dataLayer.push(arguments); }
     window.gtag = gtag;
 
     gtag('js', new Date());
@@ -26,12 +26,13 @@ document.addEventListener('DOMContentLoaded', () => {
     initLanguageSelector();
     loadGoogleTranslateScript();
     initPDFAnalyticsTracking();
-    
+    initInvestorQueryForm();
+
     // ==========================================
     // 1. HEADER SCROLL EFFECT
     // ==========================================
     const header = document.querySelector('.main-header');
-    
+
     window.addEventListener('scroll', () => {
         if (window.scrollY > 50) {
             header.style.padding = '10px 0';
@@ -47,14 +48,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================
     const mobileToggle = document.getElementById('mobileToggle');
     const mobileMenu = document.getElementById('mobileMenu');
-    
+
     if (mobileToggle && mobileMenu) {
         const toggleIcon = mobileToggle.querySelector('i');
 
         mobileToggle.addEventListener('click', () => {
             mobileMenu.classList.toggle('open');
             const isOpen = mobileMenu.classList.contains('open');
-            
+
             // Swap hamburger and times icon
             if (isOpen) {
                 toggleIcon.classList.remove('fa-bars');
@@ -160,7 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const duration = 2000; // 2 seconds
             const stepTime = Math.max(Math.floor(duration / target), 15);
             let current = 0;
-            
+
             const timer = setInterval(() => {
                 current += Math.ceil(target / (duration / stepTime));
                 if (current >= target) {
@@ -205,16 +206,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================
     const heroSlider = document.getElementById('heroSlider');
     const heroContents = document.querySelectorAll('.slide-content');
-    
+
     window.addEventListener('scroll', () => {
         if (!heroSlider) return;
         const scrollY = window.scrollY;
-        
+
         // Only run if we are near the top (optimization)
         if (scrollY < window.innerHeight) {
-            // Parallax the background slightly
-            heroSlider.style.transform = `translateY(${scrollY * 0.4}px)`;
-            
             // Fade and scale down the text content
             heroContents.forEach(content => {
                 const opacity = Math.max(1 - (scrollY / 500), 0);
@@ -230,7 +228,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 6. SCROLL REVEAL ANIMATIONS
     // ==========================================
     const revealElements = document.querySelectorAll('.reveal-on-scroll');
-    
+
     if ('IntersectionObserver' in window && revealElements.length > 0) {
         const revealObserver = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
@@ -261,17 +259,26 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener('DOMContentLoaded', () => {
     const mapElement = document.getElementById('bkm-map');
     if (mapElement && typeof L !== 'undefined') {
-        // Initialize the map centered on India
-        const map = L.map('bkm-map', {
-            zoomControl: false, // Keep it clean visually
-            scrollWheelZoom: false // Prevent scrolling past the map from getting trapped
-        }).setView([21.1458, 79.0882], 4.4); // Center of India
+        // India geographical boundary
+        const indiaBounds = L.latLngBounds(
+            L.latLng(7.5, 68.0),  // South-West (Kanyakumari / Gujarat)
+            L.latLng(35.5, 96.5)  // North-East (Kashmir / Arunachal)
+        );
 
-        // Add a clean, premium Light tile layer (CartoDB Positron) matching the aesthetic
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-            subdomains: 'abcd',
-            maxZoom: 20
+        // Initialize the map framed strictly on India
+        const map = L.map('bkm-map', {
+            zoomControl: false,
+            scrollWheelZoom: false,
+            minZoom: 4.8,
+            maxZoom: 18,
+            maxBounds: L.latLngBounds(L.latLng(5.0, 62.0), L.latLng(38.0, 102.0)),
+            maxBoundsViscosity: 1.0
+        }).fitBounds(indiaBounds, { padding: [10, 10] });
+
+        // Clean, minimalist Light Gray map layer without terrain or visual clutter (100% free, no API key required)
+        L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+            attribution: '&copy; <a href="https://www.esri.com/">Esri</a>, DeLorme, NAVTEQ',
+            maxZoom: 16
         }).addTo(map);
 
         // Define our custom pulsing icon HTML to preserve existing marker styling
@@ -311,8 +318,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Dynamically plot all markers using geographic coordinates (Y=lat, X=lng)
         locations.forEach(loc => {
-            L.marker([loc.latitude, loc.longitude], { 
-                icon: createCustomIcon(loc.name) 
+            L.marker([loc.latitude, loc.longitude], {
+                icon: createCustomIcon(loc.name)
             }).addTo(map);
         });
     }
@@ -349,42 +356,42 @@ async function fetchAnnouncements() {
     // We are using Moneycontrol's Business News RSS feed as a free, reliable proxy to demonstrate this.
     // In production, replace this URL with the specific RSS feed for BKM Industries.
     const rssFeedUrl = 'https://www.moneycontrol.com/rss/business.xml';
-    
+
     // rss2json is a free API that converts XML RSS feeds into easy-to-use JSON
     const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssFeedUrl)}`;
 
     try {
         const response = await fetch(apiUrl);
         const data = await response.json();
-        
+
         if (data.status === 'ok' && data.items.length > 0) {
             // Get the latest 4 news items
             const topNews = data.items.slice(0, 4);
-            
+
             // Loop through all tracks and update them
             // We duplicate the items so the CSS seamless scrolling works perfectly without breaking
             announcementTracks.forEach(track => {
                 track.innerHTML = ''; // Clear existing fallback content
-                
+
                 // We create the elements twice for the seamless scrolling effect
                 for (let i = 0; i < 2; i++) {
                     topNews.forEach(item => {
                         const span = document.createElement('span');
                         span.className = 'announcement-item';
-                        
+
                         const strong = document.createElement('strong');
                         strong.textContent = 'LIVE NEWS';
                         span.appendChild(strong);
                         span.appendChild(document.createTextNode(': '));
-                        
+
                         const a = document.createElement('a');
-                        a.href = item.link; 
+                        a.href = item.link;
                         a.target = '_blank';
                         a.style.color = 'inherit';
                         a.style.textDecoration = 'underline';
                         a.textContent = item.title;
                         span.appendChild(a);
-                        
+
                         track.appendChild(span);
                     });
                 }
@@ -441,11 +448,11 @@ function initMiniMapBadge() {
         // Click handler to smooth scroll to map section on home page
         mapBadge.addEventListener('click', (e) => {
             e.preventDefault();
-            const targetSection = document.getElementById('contact');
+            const targetSection = document.getElementById('presence');
             if (targetSection && (isHomePage || window.location.pathname.includes('index.html'))) {
                 targetSection.scrollIntoView({ behavior: 'smooth' });
             } else {
-                window.location.href = 'index.html#contact';
+                window.location.href = 'index.html#presence';
             }
         });
 
@@ -557,7 +564,7 @@ function loadGoogleTranslateScript() {
     gtContainer.style.display = 'none';
     document.body.appendChild(gtContainer);
 
-    window.googleTranslateElementInit = function() {
+    window.googleTranslateElementInit = function () {
         new google.translate.TranslateElement({
             pageLanguage: 'en',
             includedLanguages: 'en,hi',
@@ -575,7 +582,7 @@ function loadGoogleTranslateScript() {
 // AUTOMATIC PDF, LEAD & CONTACT GA4 TRACKING
 // ==========================================
 function initPDFAnalyticsTracking() {
-    document.addEventListener('click', function(e) {
+    document.addEventListener('click', function (e) {
         const link = e.target.closest('a');
         if (!link) return;
         const href = link.getAttribute('href') || '';
@@ -592,7 +599,7 @@ function initPDFAnalyticsTracking() {
                 pdfName = match[1].split('/').pop();
             }
         }
-        
+
         if (pdfName && typeof window.gtag === 'function') {
             window.gtag('event', 'file_download', {
                 'file_name': decodeURIComponent(pdfName),
@@ -647,7 +654,7 @@ function initPDFAnalyticsTracking() {
     });
 
     // 5. Contact Form Submission Tracking
-    document.addEventListener('submit', function(e) {
+    document.addEventListener('submit', function (e) {
         const form = e.target;
         if (form && typeof window.gtag === 'function') {
             window.gtag('event', 'generate_lead', {
@@ -660,5 +667,235 @@ function initPDFAnalyticsTracking() {
                 'page_location': window.location.href
             });
         }
+    });
+}
+
+// ==========================================
+// PRECISE SMOOTH SCROLL & CAREER SELECTION FOR #CONTACT
+// ==========================================
+function scrollToContact() {
+    const contactElem = document.getElementById('contact');
+    if (contactElem) {
+        contactElem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+}
+
+function selectCareerCategoryAndScroll(e) {
+    if (e && e.preventDefault) {
+        e.preventDefault();
+    }
+    const catSelect = document.getElementById('queryCategory');
+    if (catSelect) {
+        catSelect.value = 'Career Query';
+        catSelect.dispatchEvent(new Event('change'));
+    }
+    scrollToContact();
+    if (window.history && window.history.pushState) {
+        window.history.pushState(null, null, '#contact');
+    }
+    setTimeout(() => {
+        if (catSelect) {
+            catSelect.focus();
+            catSelect.style.transition = 'box-shadow 0.3s ease, border-color 0.3s ease';
+            catSelect.style.borderColor = 'var(--secondary-color, #1365C4)';
+            catSelect.style.boxShadow = '0 0 0 4px rgba(19, 101, 196, 0.3)';
+            setTimeout(() => {
+                catSelect.style.borderColor = '';
+                catSelect.style.boxShadow = '';
+            }, 2000);
+        }
+    }, 450);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Dynamic placeholder on category change
+    const catSelect = document.getElementById('queryCategory');
+    const msgTextarea = document.getElementById('queryMessage');
+    if (catSelect && msgTextarea) {
+        catSelect.addEventListener('change', () => {
+            if (catSelect.value === 'Career Query') {
+                msgTextarea.placeholder = 'Please mention your background, role of interest, qualification, or career inquiry...';
+            } else {
+                msgTextarea.placeholder = 'Please state your inquiry...';
+            }
+        });
+    }
+
+    // Handle in-page links to #contact
+    document.querySelectorAll('a[href$="#contact"], a[href*="#contact"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const href = this.getAttribute('href');
+            const isHome = window.location.pathname.endsWith('index.html') || window.location.pathname === '/' || window.location.pathname === '';
+            const isCareerBtn = this.id === 'btnExploreCareers' || this.textContent.trim().toLowerCase().includes('explore career');
+            
+            if (isHome && (href === '#contact' || href.endsWith('/#contact') || href.endsWith('index.html#contact'))) {
+                e.preventDefault();
+                if (isCareerBtn) {
+                    selectCareerCategoryAndScroll(e);
+                } else {
+                    scrollToContact();
+                    if (window.history && window.history.pushState) {
+                        window.history.pushState(null, null, '#contact');
+                    }
+                }
+            }
+        });
+    });
+
+    // Handle initial direct load with #contact or career hash
+    if (window.location.hash === '#contact-careers' || window.location.hash.includes('career')) {
+        setTimeout(() => selectCareerCategoryAndScroll(), 300);
+    } else if (window.location.hash === '#contact') {
+        setTimeout(scrollToContact, 300);
+    }
+});
+
+// ==========================================
+// CLIENT-SIDE SANITIZATION & SECURITY UTILITIES
+// ==========================================
+function escapeClientHtml(str) {
+    if (typeof str !== 'string') return '';
+    return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#x27;')
+        .replace(/\//g, '&#x2F;');
+}
+
+function sanitizeClientInput(str, maxLength = 255) {
+    if (typeof str !== 'string') return '';
+    // Strip control characters & null bytes (prevent injection attacks)
+    const cleaned = str.replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, '').trim();
+    return cleaned.slice(0, maxLength);
+}
+
+// ==========================================
+// INVESTOR QUERY FORM SUBMISSION TO JSON FILE
+// ==========================================
+function initInvestorQueryForm() {
+    const form = document.getElementById('investorQueryForm');
+    if (!form) return;
+
+    const submitBtn = document.getElementById('btnSubmitQuery') || form.querySelector('button[type="submit"]');
+
+    form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+
+        const fullNameInput = document.getElementById('queryFullName') || form.querySelector('input[name="fullName"]');
+        const emailInput = document.getElementById('queryEmail') || form.querySelector('input[name="email"]');
+        const folioInput = document.getElementById('queryFolio') || form.querySelector('input[name="folioNo"]');
+        const categoryInput = document.getElementById('queryCategory') || form.querySelector('select[name="category"]');
+        const messageInput = document.getElementById('queryMessage') || form.querySelector('textarea[name="message"]');
+
+        const fullName = sanitizeClientInput(fullNameInput ? fullNameInput.value : '', 100);
+        const email = sanitizeClientInput(emailInput ? emailInput.value : '', 254);
+        const folioNo = sanitizeClientInput(folioInput ? folioInput.value : '', 50);
+        const rawCategory = sanitizeClientInput(categoryInput ? categoryInput.value : '', 100);
+        const message = sanitizeClientInput(messageInput ? messageInput.value : '', 2000);
+
+        const allowedCategories = [
+            'Dividend Query',
+            'Demat / Share Transfer',
+            'Financial Results & Reports',
+            'Institutional Investor Inquiry',
+            'Career Query',
+            'Other Inquiry',
+            'General Inquiry'
+        ];
+        const category = allowedCategories.includes(rawCategory) ? rawCategory : 'General Inquiry';
+
+        if (!fullName || fullName.length < 2) {
+            alert('Please enter a valid Full Name (minimum 2 characters).');
+            if (fullNameInput) fullNameInput.focus();
+            return;
+        }
+
+        const emailPattern = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
+        if (!email || !emailPattern.test(email)) {
+            alert('Please enter a valid email address (e.g., name@domain.com).');
+            if (emailInput) emailInput.focus();
+            return;
+        }
+
+        if (!message || message.length < 5) {
+            alert('Please enter a message containing at least 5 characters.');
+            if (messageInput) messageInput.focus();
+            return;
+        }
+
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting...';
+        }
+
+        const payload = {
+            fullName,
+            email,
+            folioNo,
+            category,
+            message
+        };
+
+        // Post to server with JSON Content-Type
+        let serverSuccess = false;
+        try {
+            const res = await fetch('/api/investor-query', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            if (res.ok) {
+                serverSuccess = true;
+            } else if (res.status === 429) {
+                alert('Too many requests submitted. Please wait a minute before submitting again.');
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Submit Investor Query';
+                }
+                return;
+            }
+        } catch (err) {
+            // Local fallback if accessed via file:// or offline
+        }
+
+        // Persist sanitized & escaped record in localStorage
+        try {
+            const queryRecord = {
+                query: {
+                    fullName: escapeClientHtml(fullName),
+                    email: escapeClientHtml(email),
+                    folioNo: escapeClientHtml(folioNo),
+                    category: escapeClientHtml(category),
+                    message: escapeClientHtml(message),
+                    time: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', timeZoneName: 'short' })
+                }
+            };
+            const existing = JSON.parse(localStorage.getItem('investor_queries') || '[]');
+            const list = Array.isArray(existing) ? existing : [];
+            list.unshift(queryRecord);
+            // Cap at 100 entries in localStorage
+            if (list.length > 100) list.length = 100;
+            localStorage.setItem('investor_queries', JSON.stringify(list, null, 2));
+        } catch (storageErr) {
+            // Non-blocking
+        }
+
+        if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Submit Investor Query';
+        }
+
+        // Show inline confirmation message
+        const successBox = document.getElementById('querySuccessAlert');
+        if (successBox) {
+            successBox.style.display = 'flex';
+            setTimeout(() => {
+                successBox.style.display = 'none';
+            }, 6000);
+        }
+
+        form.reset();
     });
 }
